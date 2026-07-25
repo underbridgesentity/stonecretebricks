@@ -50,8 +50,8 @@ export const COMPANY = {
   ),
 
   /** Where the plant is and where the trucks reach. */
-  region: assumed("Gauteng", "not stated in the profile, confirm with the client"),
-  suburb: pending<string>("plant suburb, for the hero line and local SEO"),
+  region: confirmed("Limpopo", "client, 25 July 2026"),
+  suburb: confirmed("Polokwane", "client, 25 July 2026"),
 
   phone: confirmed("084 290 4671", "client, 25 July 2026"),
   /** Digits only, international format without the plus, for wa.me links. */
@@ -59,11 +59,15 @@ export const COMPANY = {
   email: assumed("info@stonecretebricks.co.za", "domain is registered, confirm the mailbox exists"),
 
   address: {
-    street: pending<string>("plant and yard street address"),
-    suburb: pending<string>("suburb"),
-    city: pending<string>("city"),
-    province: assumed("Gauteng", "confirm with the client"),
-    postalCode: pending<string>("postal code"),
+    /* Street and postal code are still outstanding, but they are no longer
+       blocking: the site can honestly say Polokwane, Limpopo everywhere it
+       matters. They are needed before a Google Business Profile pin exists
+       and before a thirty tonne truck can find the right gate. */
+    street: pending<string>("street address, for the map pin and delivery directions", false),
+    suburb: pending<string>("suburb within Polokwane, if the yard is in one", false),
+    city: confirmed("Polokwane", "client, 25 July 2026"),
+    province: confirmed("Limpopo", "client, 25 July 2026"),
+    postalCode: pending<string>("postal code", false),
     country: confirmed("South Africa", "company profile"),
   },
 
@@ -108,12 +112,18 @@ export function telLink(): string | null {
   return `tel:${phone.replace(/\s/g, "")}`;
 }
 
-/** The single-line address, skipping any part we do not have yet. */
+/**
+ * The single-line address, skipping any part we do not have yet.
+ *
+ * Two parts is enough to be useful and honest: "Polokwane, Limpopo" tells a
+ * buyer what they need to know about delivery range even before the street
+ * address exists. Below that it returns null and the UI shows a pending marker.
+ */
 export function addressLine(): string | null {
   const a = COMPANY.address;
   const parts = [a.street.value, a.suburb.value, a.city.value, a.province.value, a.postalCode.value];
   const present = parts.filter((p): p is string => Boolean(p));
-  return present.length >= 3 ? present.join(", ") : null;
+  return present.length >= 2 ? present.join(", ") : null;
 }
 
 /** Every outstanding fact, for the audit script and the build guard. */
@@ -158,12 +168,32 @@ export const NAV = [
  */
 export const DELIVERY_ZONES = assumed(
   [
-    { zone: "Zone 1", radius: "Within 25 km of the plant", minimum: "1 load", lead: "2 to 3 working days" },
-    { zone: "Zone 2", radius: "25 to 60 km", minimum: "1 load", lead: "3 to 5 working days" },
-    { zone: "Zone 3", radius: "60 to 120 km", minimum: "2 loads", lead: "5 to 7 working days" },
-    { zone: "Outside these areas", radius: "Anywhere in South Africa", minimum: "By arrangement", lead: "On quotation" },
+    {
+      zone: "Zone 1",
+      radius: "Polokwane and within 25 km",
+      minimum: "1 load",
+      lead: "2 to 3 working days",
+    },
+    {
+      zone: "Zone 2",
+      radius: "25 to 60 km, including Mankweng and Seshego",
+      minimum: "1 load",
+      lead: "3 to 5 working days",
+    },
+    {
+      zone: "Zone 3",
+      radius: "60 to 150 km, including Mokopane, Lebowakgomo and Tzaneen",
+      minimum: "2 loads",
+      lead: "5 to 7 working days",
+    },
+    {
+      zone: "Outside these areas",
+      radius: "Elsewhere in Limpopo and further afield",
+      minimum: "By arrangement",
+      lead: "On quotation",
+    },
   ],
-  "zones depend on the plant location, which is still outstanding",
+  "radii and the named towns are sensible defaults from a Polokwane plant, confirm the real reach and charges",
 );
 
 /** The five steps a batch goes through. Details are outstanding. */

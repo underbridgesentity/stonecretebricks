@@ -28,12 +28,13 @@ const sans = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  /* The city leads, not the province: "bricks Polokwane" is what a buyer
+     actually types. The province carries the delivery-range signal instead. */
   title: {
-    default: `Stonecrete Bricks, concrete bricks and blocks in ${COMPANY.region.value}`,
+    default: `Stonecrete Bricks, concrete bricks and blocks in ${COMPANY.suburb.value}`,
     template: "%s | Stonecrete Bricks",
   },
-  description:
-    "Concrete stock bricks, maxi bricks, hollow blocks and pavers, manufactured to SANS 1215 and SANS 1058. Specifications, coverage and lead times published. Delivered to site.",
+  description: `Concrete stock bricks, maxi bricks, hollow blocks and pavers, manufactured in ${COMPANY.suburb.value} to SANS 1215 and SANS 1058. Specifications, coverage and lead times published. Delivered to site across ${COMPANY.region.value}.`,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
