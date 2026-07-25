@@ -48,8 +48,8 @@ export function Hero() {
           className="animate-set flex items-center gap-4 text-datum uppercase text-limestone/70"
           style={{ animationDelay: "80ms" }}
         >
-          <span aria-hidden className="inline-block h-px w-8 bg-oxide" />
-          Concrete masonry, manufactured in {COMPANY.region.value}
+          <span aria-hidden className="inline-block h-px w-8 shrink-0 bg-oxide" />
+          Manufactured in {COMPANY.region.value}
         </p>
 
         <h1
