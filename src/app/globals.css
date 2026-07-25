@@ -1,0 +1,410 @@
+@import "tailwindcss";
+
+/*
+ * Stonecrete Bricks tokens. Source of truth: docs/design-system.md.
+ * Five brand colours, one isometric constant, zero radius.
+ * Never hardcode hex in a component: everything routes through these.
+ */
+
+:root {
+  /* ---- Layer 1: raw ramp. The five locked brand colours. */
+  --graphite: #1a1a1a;
+  --oxide: #d35a2a;
+  --umber: #4a2f24;
+  --limestone: #f2efea;
+  --cement: #8e8e8e;
+
+  /* Derived, never invented: mixes of the five, so the palette stays closed.
+     Ratios are measured, see docs/design-system.md section 2. */
+  --limestone-2: color-mix(in srgb, var(--limestone) 92%, var(--graphite));
+  --graphite-2: color-mix(in srgb, var(--graphite) 92%, var(--limestone));
+  --oxide-lift: color-mix(in srgb, var(--oxide) 88%, var(--limestone));
+
+  /* Fired Oxide as a fill BEHIND SMALL TEXT.
+     Limestone on pure --oxide is 3.48:1, which clears the 3:1 non-text floor
+     but fails AA for anything under 24px. Buttons carry 12px type, so they use
+     this instead: 80% oxide over graphite, 4.71:1, still unmistakably the
+     brand orange. Pure --oxide stays for bars, rules, the mark and display
+     type, where 3:1 is the bar that applies. */
+  --oxide-deep: color-mix(in srgb, var(--oxide) 80%, var(--graphite));
+
+  /* ---- The isometric constant. Every angled move on the site reads this.
+     32.36 degrees, measured off the logo master, not the textbook 30.
+     Mirrors ISO_ANGLE in src/lib/iso.ts. Change both or neither. */
+  --iso-tan: 0.634;
+  --iso-x: 12px;
+  --iso-y: 7.61px; /* iso-x * iso-tan */
+
+  /* ---- The wall. 12 columns of 112px. Stretcher = 6, closer = 3. */
+  --wall: 1344px;
+  --course: 5.5rem;
+  --joint: 1px;
+  --header-h: 4.5rem;
+
+  /* ---- Motion. House doctrine: 120 hover, 200 reveal, 300 sheet. */
+  --dur-hover: 120ms;
+  --dur-reveal: 200ms;
+  --dur-sheet: 300ms;
+  --dur-set: 520ms; /* the one entrance longer than a reveal: a brick being set */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* ---- Layer 2: semantics. Limestone ground is the default. */
+  --ground: var(--limestone);
+  --ground-2: var(--limestone-2);
+  --face-top: var(--oxide); /* the lit face of the mark */
+  --face-side: var(--graphite); /* the extruded face */
+  --ink: var(--graphite);
+  --ink-secondary: color-mix(in srgb, var(--graphite) 68%, var(--limestone)); /* 5.65:1 */
+  --ink-accent: var(--umber); /* 10.63:1, the only small accent text on light */
+  --line: color-mix(in srgb, var(--graphite) 22%, var(--limestone));
+  --line-strong: var(--graphite);
+  --focus: var(--oxide); /* 3.48:1, clears the non-text 3:1 floor */
+  --on-oxide: var(--limestone);
+}
+
+/*
+ * The burnt course. Real facebrick walls carry darker header courses;
+ * ours carry inverted sections. Scope with data-ground on any subtree root.
+ */
+[data-ground="graphite"] {
+  --ground: var(--graphite);
+  --ground-2: var(--graphite-2);
+  --face-side: var(--cement);
+  --ink: var(--limestone);
+  --ink-secondary: var(--cement); /* 5.32:1 on graphite */
+  --ink-accent: var(--oxide-lift); /* 5.07:1 on graphite */
+  --line: color-mix(in srgb, var(--limestone) 20%, var(--graphite));
+  --line-strong: var(--cement);
+}
+
+/*
+ * There is deliberately no [data-ground="oxide"].
+ *
+ * No text colour clears AA on a pure oxide field: limestone reaches 3.48:1 and
+ * graphite only 4.36:1, both short of 4.5 for body copy. Rather than ship a
+ * ground that is a trap, oxide stays structural, exactly as the design system
+ * says: bars, rules, fills and the mark. Sections that need to shout invert to
+ * graphite and carry oxide as pattern.
+ */
+
+@theme inline {
+  /* Colour utilities: bg-ground, text-ink, border-line, bg-face-top, ... */
+  --color-*: initial;
+  --color-ground: var(--ground);
+  --color-ground-2: var(--ground-2);
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-accent: var(--ink-accent);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-face-top: var(--face-top);
+  --color-face-side: var(--face-side);
+  --color-focus: var(--focus);
+  --color-on-oxide: var(--on-oxide);
+  /* The five, for brand surfaces that must not follow the ground. */
+  --color-graphite: var(--graphite);
+  --color-oxide: var(--oxide);
+  --color-oxide-deep: var(--oxide-deep);
+  --color-oxide-lift: var(--oxide-lift);
+  --color-umber: var(--umber);
+  --color-limestone: var(--limestone);
+  --color-cement: var(--cement);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-sans-face), system-ui, -apple-system, Arial, sans-serif;
+
+  /* Two weights exist. Wiping the ramp means font-semibold emits nothing,
+     so a stray copy-pasted class fails loudly instead of synthesising. */
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-extrabold: 800;
+
+  /* Type. Industrial display: much larger and tighter than a SaaS app.
+     Display styles render uppercase on the component, markup stays sentence case. */
+  --text-*: initial;
+
+  /* Sized so "Strength in / every brick" sets on two lines in a seven column
+     stretcher. Larger and it fragments into four, which eats the whole fold. */
+  --text-mega: clamp(2.75rem, 7.5vw, 6.25rem);
+  --text-mega--line-height: 0.86;
+  --text-mega--font-weight: 800;
+  --text-mega--letter-spacing: -0.04em;
+
+  --text-display: clamp(2rem, 4.4vw, 3.5rem);
+  --text-display--line-height: 0.94;
+  --text-display--font-weight: 800;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-h1: clamp(2rem, 4.5vw, 3.25rem);
+  --text-h1--line-height: 0.98;
+  --text-h1--font-weight: 800;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.5rem, 2.6vw, 2rem);
+  --text-h2--line-height: 1.06;
+  --text-h2--font-weight: 800;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 800;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+  --text-lead--font-weight: 400;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.45;
+
+  /* The datasheet register. The only place tracking opens up. */
+  --text-datum: 0.75rem;
+  --text-datum--line-height: 1;
+  --text-datum--font-weight: 400;
+  --text-datum--letter-spacing: 0.18em;
+
+  --text-datum-strong: 0.75rem;
+  --text-datum-strong--line-height: 1;
+  --text-datum-strong--font-weight: 800;
+  --text-datum-strong--letter-spacing: 0.18em;
+
+  /* Spec figures. Always tabular, see the base layer. */
+  --text-figure: clamp(1.75rem, 3.2vw, 2.75rem);
+  --text-figure--line-height: 1;
+  --text-figure--font-weight: 800;
+  --text-figure--letter-spacing: -0.02em;
+
+  /* Radius: none.
+     1. There is not one curve in the mark. Five polygons, mitred vertices.
+     2. A cast concrete unit has a sharp arris. A rounded arris is a defect,
+        and chipped stock is rejected stock. Rounding lies about the product.
+     3. The hard 30 degree face only reads as a face if the corners are
+        square; any radius turns the extrusion into a halo.
+     Wiping the ramp means rounded-lg emits nothing, which is the point. */
+  --radius-*: initial;
+  --radius-none: 0px;
+
+  --spacing: 0.25rem;
+  --default-transition-duration: var(--dur-hover);
+  --default-transition-timing-function: var(--ease-out);
+}
+
+/* ---------------------------------------------------------------------------
+ * Motion. Transitions for state, keyframes for arrival. No JS library.
+ * ------------------------------------------------------------------------- */
+
+/* The signature: a course line laid in from the left, the way a string line
+   is run before a course is set. */
+@keyframes course-lay {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* A module arriving along the isometric axis, down-left to seated.
+   8.9 / 14 = 0.634, one step at the mark's own angle. Not a vertical fade-up. */
+@keyframes course-set {
+  from {
+    opacity: 0;
+    transform: translate3d(-14px, 8.9px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The mark setting on load. Two beats, then stop. */
+@keyframes brick-set {
+  from {
+    opacity: 0;
+    transform: translate3d(-18px, 11.4px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll progress: a course of discrete units filling left to right. */
+@keyframes wall-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Counter-drift on the bond layers. Uses the independent `translate`
+   property so it can never collide with a `transform` set elsewhere.
+   2.2 / 3.46 = 0.634: the parallax runs on the isometric axis, not vertically. */
+@keyframes bond-drift-back {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -3.46% 2.2%;
+  }
+}
+
+@keyframes bond-drift-front {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 3.46% -2.2%;
+  }
+}
+
+/* Load-time arrivals. Ordinary animations, so these run in every browser. */
+@utility animate-set {
+  animation: course-set var(--dur-set) var(--ease-out) both;
+}
+@utility animate-brick-set {
+  animation: brick-set var(--dur-set) var(--ease-out) both;
+}
+
+/* Scroll-scrubbed arrivals. The authored state IS the resting state, so a
+   browser without scroll timelines simply renders the finished page. */
+@utility animate-course-lay {
+  transform-origin: left center;
+  @supports (animation-timeline: view()) {
+    animation: course-lay 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 8% entry 46%;
+  }
+}
+
+@utility animate-course-set {
+  @supports (animation-timeline: view()) {
+    animation: course-set 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 6% entry 44%;
+  }
+}
+
+@utility animate-bond-back {
+  @supports (animation-timeline: view()) {
+    animation: bond-drift-back 1ms linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+
+@utility animate-bond-front {
+  @supports (animation-timeline: view()) {
+    animation: bond-drift-front 1ms linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+
+/* Progress fill. Hidden entirely unless the browser can drive it, because a
+   half-drawn bar that never moves is worse than no bar. Gated on view()
+   rather than scroll(), since no engine has shipped one without the other. */
+@utility animate-wall-fill {
+  display: none;
+  @supports (animation-timeline: view()) {
+    display: block;
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: wall-fill 1ms linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0% 100%;
+  }
+}
+
+/* The extrusion. A hard face on the 30 degree axis, never a blur.
+   Fires on keyboard focus as well as hover, so it is not mouse-only.
+   The element moves half a step up-left while the face grows a full step
+   down-right, so the silhouette grows about its centre instead of sliding. */
+@utility extrude {
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) var(--ease-out),
+    background-color var(--dur-hover) var(--ease-out);
+  box-shadow: 0 0 0 0 var(--face-side);
+
+  &:hover,
+  &:focus-visible,
+  &:has(a:focus-visible) {
+    transform: translate3d(calc(var(--iso-x) * -0.5), calc(var(--iso-y) * -0.5), 0);
+    box-shadow: var(--iso-x) var(--iso-y) 0 0 var(--face-side);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    /* Reads --font-sans-face directly, which is what next/font defines on the
+       body element. @theme inline does not emit --font-sans onto :root, so
+       going through the theme variable here silently falls back. */
+    font-family: var(--font-sans-face), system-ui, -apple-system, Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every figure on the site aligns in a column. */
+  table,
+  time,
+  [data-figure] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 3px oxide ring, visible always, keyboard included. Clears 3:1 on both grounds. */
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--oxide);
+    color: var(--limestone);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      /* A scroll timeline ignores duration. Cut the timeline too, which
+         sends the animation to its `to` state on the document timeline. */
+      animation-timeline: auto !important;
+    }
+
+    /* Animations whose `to` state is a displacement must not snap to it. */
+    .animate-bond-back,
+    .animate-bond-front {
+      animation: none !important;
+      translate: none !important;
+    }
+
+    /* Decorative, carries no information the page does not already show. */
+    .animate-wall-fill {
+      display: none !important;
+    }
+  }
+}
