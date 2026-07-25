@@ -130,7 +130,7 @@ export default function AboutPage() {
 
             <Stretcher span="quarter">
               <dl className="flex flex-col">
-                <div className="flex items-baseline justify-between gap-4 border-t-2 border-line-strong py-3">
+                <div className="flex items-baseline justify-between gap-4 border-t border-line-strong py-3">
                   <dt className="text-datum uppercase text-ink-secondary">Registration</dt>
                   <dd>
                     <Pending>Reg number</Pending>

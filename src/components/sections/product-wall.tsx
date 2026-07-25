@@ -44,7 +44,7 @@ export function ProductBrick({ product, index }: { product: Product; index: numb
         src={product.image}
         alt={`${product.name}, a grey concrete unit photographed against a plain backdrop`}
         sizes="(min-width: 640px) 50vw, 100vw"
-        ratio="unit"
+        ratio="wide"
         className="extrude"
       />
 
@@ -57,13 +57,13 @@ export function ProductBrick({ product, index }: { product: Product; index: numb
 
       <p className="mt-3 max-w-sm text-body text-ink-secondary">{product.positioning}</p>
 
-      <span className="mt-5 inline-flex items-center gap-3 text-datum-strong uppercase text-ink">
+      <span className="mt-5 inline-flex items-center gap-2.5 text-datum-strong uppercase text-ink transition-colors group-hover:text-ink-accent">
         Specifications
-        <span
-          aria-hidden
-          className="inline-block h-px w-6 bg-oxide transition-all group-hover:w-10"
+        <Arrow
+          width={14}
+          height={14}
+          className="text-oxide transition-transform duration-[var(--dur-reveal)] group-hover:translate-x-1"
         />
-        <Arrow width={14} height={14} className="text-oxide" />
       </span>
     </Link>
   );

@@ -59,14 +59,14 @@ export default function DeliveryPage() {
             <table className="w-full min-w-[40rem] border-collapse text-left">
               <caption className="sr-only">Delivery zones, minimum loads and lead times</caption>
               <thead>
-                <tr className="border-b-2 border-line-strong">
-                  <th scope="col" className="py-4 pr-4 text-datum uppercase text-ink-secondary">
+                <tr className="border-b border-line-strong">
+                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Zone
                   </th>
-                  <th scope="col" className="py-4 pr-4 text-datum uppercase text-ink-secondary">
+                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Area
                   </th>
-                  <th scope="col" className="py-4 pr-4 text-datum uppercase text-ink-secondary">
+                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Minimum
                   </th>
                   <th scope="col" className="py-4 text-datum uppercase text-ink-secondary">

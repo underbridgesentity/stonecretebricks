@@ -21,8 +21,7 @@ export default function Error({
       <Wall>
         <Course>
           <Stretcher span="measure">
-            <p className="mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
-              <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
+            <p className="mb-7 text-datum uppercase text-ink-secondary">
               Something broke
             </p>
             <h1 className="text-display uppercase text-ink">That did not load.</h1>

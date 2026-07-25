@@ -45,10 +45,9 @@ export function Hero() {
 
       <Wall className="relative pb-16 pt-32 md:pb-24 md:pt-40">
         <p
-          className="animate-set flex items-center gap-4 text-datum uppercase text-limestone/70"
+          className="animate-set text-datum uppercase text-limestone/70"
           style={{ animationDelay: "80ms" }}
         >
-          <span aria-hidden className="inline-block h-px w-8 shrink-0 bg-oxide" />
           Manufactured in {COMPANY.region.value}
         </p>
 
@@ -78,12 +77,13 @@ export function Hero() {
 
           <Link
             href="/products"
-            className="group inline-flex items-center gap-3 text-datum-strong uppercase text-limestone transition-colors hover:text-oxide-lift"
+            className="group inline-flex items-center gap-2.5 text-datum-strong uppercase text-limestone transition-colors hover:text-oxide-lift"
           >
             See the range
-            <span
-              aria-hidden
-              className="inline-block h-px w-8 bg-limestone/50 transition-all group-hover:w-12 group-hover:bg-oxide"
+            <Arrow
+              width={16}
+              height={16}
+              className="transition-transform duration-[var(--dur-reveal)] group-hover:translate-x-1"
             />
           </Link>
         </div>

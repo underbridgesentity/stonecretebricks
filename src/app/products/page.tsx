@@ -72,8 +72,8 @@ export default function ProductsPage() {
                 Comparison of Stonecrete Bricks concrete products
               </caption>
               <thead>
-                <tr className="border-b-2 border-line-strong">
-                  <th scope="col" className="py-4 pr-4 text-datum uppercase text-ink-secondary">
+                <tr className="border-b border-line-strong">
+                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Specification
                   </th>
                   {PRODUCTS.map((p) => (
@@ -206,11 +206,11 @@ export default function ProductsPage() {
 function Row({ label, cells }: { label: string; cells: readonly string[] }) {
   return (
     <tr className="border-b border-line">
-      <th scope="row" className="py-4 pr-4 align-top text-small font-normal text-ink-secondary">
+      <th scope="row" className="py-5 pr-6 align-top text-small font-normal text-ink-secondary">
         {label}
       </th>
       {cells.map((cell, i) => (
-        <td key={i} className="py-4 pr-4 align-top text-body font-extrabold text-ink" data-figure>
+        <td key={i} className="py-5 pr-6 align-top text-body font-extrabold text-ink" data-figure>
           {cell}
         </td>
       ))}

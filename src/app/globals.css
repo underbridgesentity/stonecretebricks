@@ -336,11 +336,14 @@
    The element moves half a step up-left while the face grows a full step
    down-right, so the silhouette grows about its centre instead of sliding. */
 @utility extrude {
+  /* Reveal timing rather than hover timing. At 120ms the face snapped out and
+     read as a glitch; at 200ms it reads as a solid being lifted, which is the
+     point. Everything premium here is a little unhurried. */
   transition:
-    transform var(--dur-hover) var(--ease-out),
-    box-shadow var(--dur-hover) var(--ease-out),
-    border-color var(--dur-hover) var(--ease-out),
-    background-color var(--dur-hover) var(--ease-out);
+    transform var(--dur-reveal) var(--ease-out),
+    box-shadow var(--dur-reveal) var(--ease-out),
+    border-color var(--dur-reveal) var(--ease-out),
+    background-color var(--dur-reveal) var(--ease-out);
   box-shadow: 0 0 0 0 var(--face-side);
 
   &:hover,

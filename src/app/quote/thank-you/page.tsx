@@ -28,8 +28,7 @@ export default async function ThankYouPage({
       <Wall>
         <Course className="gap-y-10">
           <Stretcher span="measure">
-            <p className="animate-set mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
-              <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
+            <p className="animate-set mb-7 text-datum uppercase text-ink-secondary">
               Received
             </p>
 

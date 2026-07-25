@@ -42,13 +42,9 @@ export function SiteHeader() {
           ))}
           <Link
             href="/quote"
-            className="group inline-flex items-center gap-3 text-datum-strong uppercase text-limestone"
+            className="inline-flex h-10 items-center border border-limestone/30 px-5 text-datum-strong uppercase text-limestone transition-colors hover:border-oxide hover:bg-oxide-deep"
           >
             Get a quote
-            <span
-              aria-hidden
-              className="inline-block h-px w-6 bg-oxide transition-all group-hover:w-10"
-            />
           </Link>
         </nav>
 

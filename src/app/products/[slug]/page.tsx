@@ -64,7 +64,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <Course className="items-center gap-y-10">
             <Stretcher span="measure">
               <p className="animate-set mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
-                <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
                 <Link href="/products" className="hover:text-ink">
                   Products
                 </Link>
@@ -102,10 +101,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <Stretcher span="complement">
               <Photo
-                src={product.image.replace(".jpg", "-unit.jpg")}
+                src={product.image}
                 alt={`A ${product.name.toLowerCase().replace(/s$/, "")}, grey concrete, photographed against a plain backdrop`}
                 sizes="(min-width: 768px) 560px, 100vw"
-                ratio="unit"
+                ratio="wide"
                 priority
               />
             </Stretcher>

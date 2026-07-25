@@ -18,6 +18,9 @@ const ratios = {
   course: "aspect-[16/9]",
   /** 4:3, for product renders. */
   unit: "aspect-[4/3]",
+  /** 3:2. The product frame: auto-cropped so every unit fills the same
+      proportion of the frame, so the four read as one shoot. */
+  wide: "aspect-[3/2]",
   /** 3:4, for a tall editorial column. */
   portrait: "aspect-[3/4]",
   square: "aspect-square",
