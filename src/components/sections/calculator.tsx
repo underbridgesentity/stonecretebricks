@@ -148,7 +148,7 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
           className="mt-6 inline-flex h-12 items-center justify-center gap-2 bg-oxide-deep px-6 text-datum-strong uppercase text-limestone extrude"
         >
           Get a quote for this quantity
-          <Arrow width={18} height={18} />
+          <Arrow width={16} height={16} />
         </Link>
       </div>
     </div>

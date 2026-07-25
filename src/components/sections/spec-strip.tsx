@@ -1,70 +1,51 @@
-import { BondPattern } from "@/components/brand/bond-pattern";
-import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { Section, Split, Wall } from "@/components/ui/wall";
 
 /**
- * The positioning, stated plainly.
+ * The positioning, in three lines.
  *
- * Every competitor in this market hides dimensions, minimum order quantities,
- * delivery areas and lead times behind a phone call. Publishing them is a
- * defensible position on day one with zero track record, and it doubles as a
- * qualification filter that saves the sales team time.
- *
- * Inverted to graphite rather than flooded with oxide: no text colour clears
- * AA on a pure oxide field. Oxide does the shouting as a full-strength bond
- * band instead, which is its job in the system anyway.
+ * The first cut ran numbered cards with a bond-pattern band behind them, which
+ * was decoration standing in for substance. This is the same argument with the
+ * decoration removed: a statement, three plain claims, nothing else on screen.
  */
 
 const CLAIMS = [
   {
-    title: "Real specifications",
-    body: "Every dimension, strength class and coverage figure is on the product page, with the standard it was measured against.",
+    title: "Specifications, published",
+    body: "Every dimension, strength class and coverage figure sits on the product page, with the standard it was measured against.",
   },
   {
-    title: "Real quantities",
-    body: "Work out exactly how many units your wall needs, including wastage, pallets and loads, before you speak to anyone.",
+    title: "Quantities, before you call",
+    body: "Work out what your wall needs, including wastage, pallets and loads, without speaking to a salesperson first.",
   },
   {
-    title: "Real terms",
-    body: "Minimum orders, delivery areas and lead times are published. You will know whether we can help you before you call.",
+    title: "Terms, in the open",
+    body: "Minimum orders, delivery areas and lead times are stated. You will know whether we can help before you pick up the phone.",
   },
 ];
 
 export function SpecStrip() {
   return (
-    <section data-ground="graphite" className="relative overflow-hidden bg-ground py-16 md:py-24">
-      <BondPattern
-        courses={4}
-        density="open"
-        tone="oxide"
-        drift
-        className="absolute inset-x-0 top-0 h-28 opacity-90"
-      />
+    <Section ground="dark">
+      <Wall>
+        <Split label="Why us">
+          <h2 className="max-w-[22ch] text-display uppercase text-ink">
+            We publish what other suppliers make you phone for.
+          </h2>
+        </Split>
 
-      <Wall className="relative pt-16">
-        <Course bond="odd">
-          <Stretcher span="wide">
-            <h2 className="text-display uppercase text-ink">
-              We publish what other suppliers make you phone for.
-            </h2>
-          </Stretcher>
-        </Course>
-
-        <Course bond="odd" className="mt-14 gap-y-10">
-          {CLAIMS.map((claim, i) => (
-            <Stretcher key={claim.title} span="closer" className="animate-course-set">
-              <p className="text-datum uppercase text-ink-accent">
-                {String(i + 1).padStart(2, "0")}
-              </p>
+        <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-3">
+          {CLAIMS.map((claim) => (
+            <div key={claim.title} className="animate-course-set">
               <span
                 aria-hidden
-                className="mt-4 block h-px w-full origin-left bg-oxide animate-course-lay"
+                className="block h-px w-full origin-left bg-oxide animate-course-lay"
               />
-              <h3 className="mt-6 text-h2 uppercase text-ink">{claim.title}</h3>
-              <p className="mt-3 text-body text-ink-secondary">{claim.body}</p>
-            </Stretcher>
+              <h3 className="mt-7 text-h2 uppercase text-ink">{claim.title}</h3>
+              <p className="mt-4 text-body text-ink-secondary">{claim.body}</p>
+            </div>
           ))}
-        </Course>
+        </div>
       </Wall>
-    </section>
+    </Section>
   );
 }

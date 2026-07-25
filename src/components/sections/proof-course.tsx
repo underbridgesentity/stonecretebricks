@@ -1,81 +1,86 @@
-import { CourseRule } from "@/components/ui/course-rule";
+import Link from "next/link";
+
 import { Arrow } from "@/components/ui/glyph";
-import { Module } from "@/components/ui/module";
-import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { Photo } from "@/components/ui/photo";
+import { Course, Section, Stretcher, Wall } from "@/components/ui/wall";
 
 /**
  * Credibility for a business with no track record.
  *
- * The honest position is that the plant, the aggregates, the QC regime and the
- * capacity are all real and inspectable today, while a portfolio is not. So we
- * say the company is new, in plain words, and trade past-tense claims for
- * present-tense verifiable facts.
+ * The honest position is that the plant, the materials, the quality regime and
+ * the capacity are all real and inspectable today, while a portfolio is not.
+ * So we say the company is new, in plain words, and trade past-tense claims
+ * for present-tense verifiable ones.
  *
- * No invented client logos, no stock photos of other people's buildings, no
- * "20+ years combined experience", no fabricated tonnage counter. Those are
- * what make a site read as generated, and under the Consumer Protection Act
- * they are misleading representations.
+ * No invented client logos, no stock photographs of other people's buildings,
+ * no "20+ years combined experience", no fabricated tonnage counter.
  */
 
 const PROOF = [
   {
-    title: "Manufactured to SANS 1215",
-    body: "The standard for concrete masonry units, covering materials, dimensions, compressive strength, water absorption and density. Our pavers are made to SANS 1058, which is a different standard for good reason.",
+    title: "Made to SANS 1215",
+    body: "The standard for concrete masonry units. Our pavers are made to SANS 1058, which is a different standard for a good reason.",
     href: "/quality",
-    cta: "Standards and testing",
   },
   {
     title: "Independently tested",
-    body: "Crush test results from an independent laboratory, published with the lab name and the date. A dated certificate outranks any testimonial for a quantity surveyor or a municipal buyer.",
+    body: "Crush test results from an independent laboratory, published with the lab name and the date of test.",
     href: "/quality",
-    cta: "See the test regime",
   },
   {
-    title: "Come and inspect the plant",
-    body: "Most suppliers will not show you the yard. We will. Book a visit and watch a batch being mixed, pressed, cured and stacked before you place an order.",
+    title: "Open to inspection",
+    body: "Book a morning, come to the yard, and watch a batch mixed, pressed, cured and stacked before you order.",
     href: "/plant",
-    cta: "Book a plant visit",
   },
 ];
 
 export function ProofCourse() {
   return (
-    <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+    <Section divider>
       <Wall>
-        <CourseRule datum="04" label="Why trust a new supplier" tone="oxide" />
-
-        <Course bond="odd" className="mt-10 items-end gap-y-8">
-          <Stretcher span="header">
-            <h2 className="text-display uppercase text-ink">New company. Proven standards.</h2>
-          </Stretcher>
-          <Stretcher span="footer">
-            <p className="text-body text-ink-secondary">
+        <Course className="items-start">
+          <Stretcher span="half">
+            <p className="text-datum uppercase text-ink-secondary">A new supplier</p>
+            <h2 className="mt-6 max-w-[18ch] text-display uppercase text-ink">
+              New company. Proven standards.
+            </h2>
+            <p className="mt-7 max-w-md text-body text-ink-secondary">
               We do not have a twenty year history to sell you, so we will give you something more
               useful: the standard we manufacture to, the results that prove it, and an open
               invitation to come and watch us make them.
             </p>
+
+            <dl className="mt-12 flex flex-col">
+              {PROOF.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="group flex flex-col gap-2 border-t border-line py-6 transition-colors hover:border-oxide"
+                >
+                  <dt className="flex items-center justify-between gap-4 text-h3 uppercase text-ink">
+                    {item.title}
+                    <Arrow
+                      width={16}
+                      height={16}
+                      className="shrink-0 text-oxide transition-transform group-hover:translate-x-1"
+                    />
+                  </dt>
+                  <dd className="max-w-md text-small text-ink-secondary">{item.body}</dd>
+                </Link>
+              ))}
+            </dl>
+          </Stretcher>
+
+          <Stretcher span="half">
+            <Photo
+              src="/images/site/plant.jpg"
+              alt="Stacks of cured concrete units on pallets inside a manufacturing plant, lit by a shaft of daylight"
+              sizes="(min-width: 768px) 50vw, 100vw"
+              ratio="portrait"
+            />
           </Stretcher>
         </Course>
-
-        <Course bond="even" className="mt-12 gap-y-[var(--joint)]">
-          {PROOF.map((item) => (
-            <Stretcher key={item.title} span="closer">
-              <Module href={item.href} extrude reveal className="group flex h-full flex-col gap-4 p-6 md:p-8">
-                <h3 className="text-h3 uppercase text-ink">{item.title}</h3>
-                <p className="text-small text-ink-secondary">{item.body}</p>
-                <span className="mt-auto inline-flex items-center gap-2 pt-4 text-datum-strong uppercase text-ink-accent">
-                  {item.cta}
-                  <Arrow
-                    width={16}
-                    height={16}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </span>
-              </Module>
-            </Stretcher>
-          ))}
-        </Course>
       </Wall>
-    </section>
+    </Section>
   );
 }

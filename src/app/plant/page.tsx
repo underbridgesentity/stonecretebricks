@@ -29,7 +29,6 @@ export default function PlantPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Our plant"
         title="Come and watch us make them."
         lead="Most brick suppliers will not show you the yard. We will. This is where your order gets batched, pressed, cured and stacked, and you are welcome to stand and watch it happen before you place one."
@@ -43,11 +42,11 @@ export default function PlantPage() {
       />
 
       {/* Process */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="How a batch is made" />
 
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Five steps, in order.
           </h2>
 
@@ -69,12 +68,12 @@ export default function PlantPage() {
       </section>
 
       {/* Capacity */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Capacity" tone="oxide" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">What we can actually make.</h2>
               <p className="mt-6 max-w-xl text-body text-ink-secondary">
                 Running out of bricks stops a site, so the honest answer to &ldquo;can you supply
@@ -83,7 +82,7 @@ export default function PlantPage() {
               </p>
             </Stretcher>
 
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <dl className="flex flex-col">
                 {[
                   { label: "Units per day", key: "Daily output" },
@@ -108,12 +107,12 @@ export default function PlantPage() {
       </section>
 
       {/* HSE */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="Health, safety and environment" />
 
-          <Course bond="even" className="mt-10 gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Safe practice, responsible process.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 Concrete manufacture is dusty, heavy work with moving plant, so safe working
@@ -131,12 +130,12 @@ export default function PlantPage() {
       </section>
 
       {/* Visit */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="05" label="Book a visit" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">
                 Bring your quantity surveyor.
               </h2>

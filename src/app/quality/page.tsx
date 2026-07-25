@@ -36,18 +36,17 @@ export default function QualityPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Quality"
         title="Standards and testing."
         lead="Anyone can say their bricks are strong. Here is the standard each product is manufactured to, how it is tested, and what the results were."
       />
 
       {/* The standards */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="The standards that apply" />
 
-          <div className="mt-10 flex flex-col">
+          <div className="mt-12 flex flex-col">
             {STANDARDS.map((standard) => (
               <div
                 key={standard.code}
@@ -73,20 +72,20 @@ export default function QualityPage() {
       </section>
 
       {/* The SABS correction. The highest-credibility copy on the site. */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="A note on wording" tone="oxide" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">
                 &ldquo;SABS approved&rdquo; is not a specification.
               </h2>
             </Stretcher>
           </Course>
 
-          <Course bond="even" className="mt-8 gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-8 gap-y-8">
+            <Stretcher span="half">
               <p className="text-lead text-ink-secondary">
                 You will see the phrase used loosely across our industry, including in our own early
                 draft documents. It is worth being precise about it, because it is the difference
@@ -109,12 +108,12 @@ export default function QualityPage() {
       </section>
 
       {/* Test regime */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="What we test" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">How often, and what for.</h2>
               <p className="mt-6 max-w-xl text-body text-ink-secondary">
                 Sampling frequency and the measured results come from our own production records and
@@ -123,7 +122,7 @@ export default function QualityPage() {
               </p>
             </Stretcher>
 
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <ul className="flex flex-col">
                 {[
                   "Dimensions and dimensional tolerance",
@@ -148,11 +147,11 @@ export default function QualityPage() {
       </section>
 
       {/* Certificates and membership */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="05" label="Independent verification" />
 
-          <div className="mt-10 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             <Module className="flex flex-col gap-4 p-8">
               <h2 className="text-h2 uppercase text-ink">Test certificates</h2>
               <p className="text-body text-ink-secondary">

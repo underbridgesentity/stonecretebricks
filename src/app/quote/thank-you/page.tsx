@@ -24,10 +24,10 @@ export default async function ThankYouPage({
   );
 
   return (
-    <section className="border-b border-line py-20 md:py-28">
+    <section className="py-[var(--section)]">
       <Wall>
-        <Course bond="odd" className="gap-y-10">
-          <Stretcher span="header">
+        <Course className="gap-y-10">
+          <Stretcher span="measure">
             <p className="animate-set mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
               <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
               Received
@@ -77,7 +77,7 @@ export default async function ThankYouPage({
               )}
               <ButtonLink href="/products" variant="outline">
                 Back to products
-                <Arrow width={18} height={18} />
+                <Arrow width={16} height={16} />
               </ButtonLink>
             </div>
           </Stretcher>

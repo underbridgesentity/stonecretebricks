@@ -40,7 +40,6 @@ export default function AboutPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="About"
         title="Built on precision. Trusted for generations."
         lead="Stonecrete Bricks manufactures concrete bricks, blocks and pavers for residential, commercial, industrial and infrastructure work in South Africa. We are new, we say so plainly, and we have built the business around publishing the things our industry usually hides."
@@ -54,17 +53,17 @@ export default function AboutPage() {
       />
 
       {/* Why we started */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="Why we started" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">
                 Every building starts with the material.
               </h2>
             </Stretcher>
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <p className="text-body text-ink-secondary">
                 A wall is only as good as the units in it. Inconsistent dimensions cost a bricklayer
                 time and cost the client mortar. Units that have not cured properly fail under a
@@ -80,7 +79,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vision */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Our vision" tone="oxide" />
           <p className="mt-10 max-w-4xl text-display uppercase text-ink">
@@ -91,11 +90,11 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="What we hold ourselves to" />
 
-          <div className="mt-10 flex flex-col">
+          <div className="mt-12 flex flex-col">
             {MISSION.map((item, i) => (
               <div
                 key={item.ours}
@@ -112,12 +111,12 @@ export default function AboutPage() {
       </section>
 
       {/* The people */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="05" label="The people" />
 
-          <Course bond="even" className="mt-10 gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Who you will be dealing with.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 For a company with no trading history this matters more than it would for an
@@ -129,7 +128,7 @@ export default function AboutPage() {
               </div>
             </Stretcher>
 
-            <Stretcher span="closer">
+            <Stretcher span="quarter">
               <dl className="flex flex-col">
                 <div className="flex items-baseline justify-between gap-4 border-t-2 border-line-strong py-3">
                   <dt className="text-datum uppercase text-ink-secondary">Registration</dt>

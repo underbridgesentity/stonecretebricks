@@ -53,9 +53,9 @@ export const COMPANY = {
   region: assumed("Gauteng", "not stated in the profile, confirm with the client"),
   suburb: pending<string>("plant suburb, for the hero line and local SEO"),
 
-  phone: pending<string>("landline or mobile, formatted 011 123 4567"),
+  phone: confirmed("084 290 4671", "client, 25 July 2026"),
   /** Digits only, international format without the plus, for wa.me links. */
-  whatsapp: pending<string>("WhatsApp business number, digits only, e.g. 27821234567"),
+  whatsapp: confirmed("27842904671", "client, 25 July 2026. Confirm it is on WhatsApp Business"),
   email: assumed("info@stonecretebricks.co.za", "domain is registered, confirm the mailbox exists"),
 
   address: {

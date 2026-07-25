@@ -1,20 +1,33 @@
-# Stonecrete Bricks design system v0.1
+# Stonecrete Bricks design system v0.2
 
 This file outranks any summary of it. Tokens live in `src/app/globals.css`.
 
-## 1. The spine: the page is a running-bond wall
+## 1. The spine: restraint, photography, space
 
-The logo is two brick volumes in isometric projection, offset like a stepped bond. The site's layout grid **is** that bond, not a metaphor printed on a normal grid.
+v0.1 drove the whole page off a literal running-bond grid, offsetting every other course by three columns, and decorated sections with a brick-pattern band. In review it read as busy and generic rather than considered: the offset looked like inconsistent margins, the pattern looked like filler, and a 100px headline with 0.86 leading shouted where it should have spoken.
 
-12 columns, wall width 1344px, column 112px.
+v0.2 inverts the approach. **The presence comes from what is left out.**
 
-- A **stretcher** spans 6 columns. A **queen closer** spans 3.
-- **Odd course**: two stretchers, one seam at column 7.
-- **Even course**: closer, stretcher, closer. Seams at columns 4 and 10.
+- **One measure.** 1200px, twelve columns, wide gutters, no forced offsets. Asymmetry only where content asks for it.
+- **Space is the product.** `--section` runs `clamp(5rem, 11vw, 9rem)` and every section uses it, so the page has one cadence.
+- **Photography does the work.** Full-bleed monochrome architecture, printed large and lit to be read, not dimmed to a texture.
+- **Type is quiet.** The whole scale came down roughly 30% with materially more leading.
+- **Oxide is a scalpel.** A rule, an arrow, a button. Never a field, never a pattern.
 
-Stacked, the seams alternate 7 / 4-10 / 7 down the page. Nothing lines up vertically, by construction. That single fact is the whole look.
+**The brick pattern is retired.** Not "used sparingly", removed. `BondPattern` is deleted and must not come back.
 
-Below `md` the bond collapses to a **soldier course**: one column, full-width modules, hairline seams, no closers. Running bond needs width. Forcing it at 375px would be theatre.
+The brand geometry now lives where it is felt rather than diagrammed: the isometric hover extrusion, and the course rule that lays in from the left on scroll.
+
+## 1a. What was removed, and why it must stay removed
+
+| Removed | Why |
+|---|---|
+| `BondPattern` | Decoration standing in for substance. Read as filler on every surface it touched |
+| The bond offset grid | Did not read as a system, read as inconsistent margins, and left voids |
+| `ActionBar` (sticky mobile bar) | Ate a permanent strip of a small screen for an action already in the header |
+| `WallProgress` | A brick-masked progress bar is the same pattern by another name |
+| Section datum numbers (`01 /`) | Across a dozen sections a device stops reading as a system |
+| The home page calculator | Belongs on `/quote`, where someone has already decided to buy |
 
 ## 2. Colour
 
@@ -71,16 +84,20 @@ Montserrat, two weights only: 400 and 800. `--font-weight-*` is wiped, so a stra
 
 | Style | Size | Line | Tracking |
 |---|---|---|---|
-| Mega | `clamp(3.25rem, 12vw, 9.5rem)` | 0.84 | -0.045em |
-| Display | `clamp(2.5rem, 7vw, 5.5rem)` | 0.90 | -0.035em |
-| H1 | `clamp(2rem, 4.5vw, 3.25rem)` | 0.98 | -0.03em |
-| H2 | `clamp(1.5rem, 2.6vw, 2rem)` | 1.06 | -0.02em |
-| H3 | 1.125rem | 1.3 | -0.01em |
-| Lead | `clamp(1.125rem, 1.6vw, 1.375rem)` | 1.5 | 0 |
-| Body | 1.0625rem | 1.6 | 0 |
-| Small | 0.875rem | 1.45 | 0 |
-| Datum | 0.75rem | 1 | **+0.18em** |
-| Figure | `clamp(1.75rem, 3.2vw, 2.75rem)` | 1 | -0.02em |
+| Mega | `clamp(2.125rem, 4.4vw, 3.75rem)` | 1.04 | -0.028em |
+| Display | `clamp(1.625rem, 2.9vw, 2.375rem)` | 1.12 | -0.022em |
+| H1 | `clamp(1.5rem, 2.4vw, 2rem)` | 1.16 | -0.02em |
+| H2 | `clamp(1.1875rem, 1.6vw, 1.4375rem)` | 1.24 | -0.014em |
+| H3 | 1.0625rem | 1.38 | -0.008em |
+| Lead | `clamp(1.0625rem, 1.15vw, 1.1875rem)` | 1.62 | 0 |
+| Body | 1rem | 1.72 | 0 |
+| Small | 0.875rem | 1.62 | 0 |
+| Datum | 0.6875rem | 1 | **+0.16em** |
+| Figure | `clamp(1.375rem, 2.1vw, 1.75rem)` | 1.1 | -0.02em |
+
+The ceiling is 3.75rem. If a headline needs to be bigger to have impact, the problem is the space around it, not the point size.
+
+Constrain display lines with a character measure, not a pixel width: `max-w-[20ch]` on a heading keeps the rag right at any viewport.
 
 Display styles render uppercase via CSS. The markup stays sentence case so screen readers and search engines read natural case.
 

@@ -1,59 +1,94 @@
 import type { ReactNode } from "react";
 
 /**
- * The running bond. See docs/design-system.md section 1.
+ * Layout primitives.
  *
- * 12 columns of 112px inside a 1344px wall. A stretcher spans 6, a queen
- * closer spans 3. Odd courses run two stretchers with one seam at column 7.
- * Even courses run closer, stretcher, closer, with seams at 4 and 10.
+ * The first cut drove the whole page off a running-bond grid, offsetting every
+ * other course by three columns. In practice it did not read as a system, it
+ * read as inconsistent margins, and it left voids that made pages feel padded
+ * rather than composed. So the grid is now a calm editorial one: a single
+ * measure, generous margins, twelve columns, and asymmetry only where the
+ * content asks for it.
  *
- * Stacked, the seams alternate down the page and nothing lines up vertically.
- * That is the whole look, and it comes from the grid rather than from decoration.
- *
- * Below md the bond collapses to a soldier course: one column, full width.
- * Running bond needs width, and forcing it at 375px would be theatre.
+ * The brand geometry now lives where it is felt rather than diagrammed: the
+ * isometric hover extrusion and the course rule that lays in on scroll.
  */
 
 export function Wall({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[var(--wall)] px-6 md:px-8 ${className}`}>{children}</div>;
+  return (
+    <div className={`mx-auto w-full max-w-[var(--wall)] px-6 md:px-10 ${className}`}>{children}</div>
+  );
 }
 
-type Bond = "odd" | "even";
+const grounds = {
+  light: "",
+  dark: "bg-ground text-ink",
+} as const;
 
-export function Course({
-  bond = "odd",
+/**
+ * Vertical rhythm. Every section uses this, so the page has one cadence
+ * instead of a dozen ad hoc padding values. Space is most of the premium.
+ */
+export function Section({
+  ground = "light",
+  divider = false,
+  id,
   children,
   className = "",
 }: {
-  bond?: Bond;
+  ground?: keyof typeof grounds;
+  divider?: boolean;
+  id?: string;
   children: ReactNode;
   className?: string;
 }) {
   return (
-    <div className={`grid grid-cols-1 gap-[var(--joint)] md:grid-cols-12 ${className}`}>
-      {/* The queen closer that starts an even course. Empty on purpose: it is
-          what pushes the seam from column 7 to columns 4 and 10. */}
-      {bond === "even" ? <span aria-hidden className="hidden md:col-span-3 md:block" /> : null}
+    <section
+      id={id}
+      data-ground={ground === "dark" ? "graphite" : undefined}
+      className={`py-[var(--section)] ${grounds[ground]} ${
+        divider ? "border-t border-line" : ""
+      } ${className}`}
+    >
+      {children}
+    </section>
+  );
+}
+
+/** Twelve columns, no forced offset. Gutters are wide enough to read as space. */
+export function Course({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-12 ${className}`}>
       {children}
     </div>
   );
 }
 
 const spans = {
-  closer: "md:col-span-3",
-  stretcher: "md:col-span-6",
-  wide: "md:col-span-9",
+  quarter: "md:col-span-3",
+  third: "md:col-span-4",
+  half: "md:col-span-6",
+  /** The editorial measure. Roughly 70 characters at this scale. */
+  measure: "md:col-span-7",
+  /** Pairs with measure to fill the row. */
+  complement: "md:col-span-5",
+  twothirds: "md:col-span-8",
+  most: "md:col-span-9",
   full: "md:col-span-12",
-  /** Seven columns. The hero headline runs to the wall edge on this one. */
-  header: "md:col-span-7",
-  /** Five columns, the complement of header. */
-  footer: "md:col-span-5",
+  /** The complement of measure, for a trailing aside. */
+  aside: "md:col-span-4 md:col-start-9",
 } as const;
 
 type Span = keyof typeof spans;
 
 export function Stretcher({
-  span = "stretcher",
+  span = "half",
   children,
   className = "",
 }: {
@@ -62,4 +97,28 @@ export function Stretcher({
   className?: string;
 }) {
   return <div className={`min-w-0 ${spans[span]} ${className}`}>{children}</div>;
+}
+
+/**
+ * The house section opening: a small label in a narrow left column, the
+ * content in the measure beside it. One pattern, used everywhere, which is
+ * what makes a set of pages feel like one publication.
+ */
+export function Split({
+  label,
+  children,
+  className = "",
+}: {
+  label: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-12 ${className}`}>
+      <div className="md:col-span-3">
+        <p className="text-datum uppercase text-ink-secondary">{label}</p>
+      </div>
+      <div className="md:col-span-8">{children}</div>
+    </div>
+  );
 }

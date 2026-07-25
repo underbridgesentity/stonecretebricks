@@ -18,6 +18,8 @@ const ratios = {
   course: "aspect-[16/9]",
   /** 4:3, for product renders. */
   unit: "aspect-[4/3]",
+  /** 3:4, for a tall editorial column. */
+  portrait: "aspect-[3/4]",
   square: "aspect-square",
   /** Fills whatever the parent sets. Parent must have its own height. */
   fill: "h-full",

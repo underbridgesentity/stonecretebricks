@@ -30,16 +30,21 @@
 
   /* ---- The isometric constant. Every angled move on the site reads this.
      32.36 degrees, measured off the logo master, not the textbook 30.
-     Mirrors ISO_ANGLE in src/lib/iso.ts. Change both or neither. */
+     Mirrors ISO_ANGLE in src/lib/iso.ts. Change both or neither.
+     Kept small: a big hard offset reads as a novelty, a small one reads as
+     a machined edge, which is the whole point. */
   --iso-tan: 0.634;
-  --iso-x: 12px;
-  --iso-y: 7.61px; /* iso-x * iso-tan */
+  --iso-x: 7px;
+  --iso-y: 4.44px; /* iso-x * iso-tan */
 
-  /* ---- The wall. 12 columns of 112px. Stretcher = 6, closer = 3. */
-  --wall: 1344px;
-  --course: 5.5rem;
+  /* ---- Measure. Narrower than the old 1344 so the page has real margins
+     and text lines land near 70 characters instead of running the full width. */
+  --wall: 1200px;
   --joint: 1px;
-  --header-h: 4.5rem;
+  --header-h: 5rem;
+
+  /* ---- Vertical rhythm. Sections breathe: this is most of the premium. */
+  --section: clamp(5rem, 11vw, 9rem);
 
   /* ---- Motion. House doctrine: 120 hover, 200 reveal, 300 sheet. */
   --dur-hover: 120ms;
@@ -121,61 +126,64 @@
   --font-weight-normal: 400;
   --font-weight-extrabold: 800;
 
-  /* Type. Industrial display: much larger and tighter than a SaaS app.
+  /* Type.
+     Restraint reads as expensive. The first cut of this scale ran a 100px
+     headline with 0.86 leading, which shouts rather than speaks and left no
+     room to breathe. Everything below is roughly 30% smaller with materially
+     more leading. The presence now comes from the space around the type and
+     from the photography, not from the point size.
      Display styles render uppercase on the component, markup stays sentence case. */
   --text-*: initial;
 
-  /* Sized so "Strength in / every brick" sets on two lines in a seven column
-     stretcher. Larger and it fragments into four, which eats the whole fold. */
-  --text-mega: clamp(2.75rem, 7.5vw, 6.25rem);
-  --text-mega--line-height: 0.86;
+  --text-mega: clamp(2.125rem, 4.4vw, 3.75rem);
+  --text-mega--line-height: 1.04;
   --text-mega--font-weight: 800;
-  --text-mega--letter-spacing: -0.04em;
+  --text-mega--letter-spacing: -0.028em;
 
-  --text-display: clamp(2rem, 4.4vw, 3.5rem);
-  --text-display--line-height: 0.94;
+  --text-display: clamp(1.625rem, 2.9vw, 2.375rem);
+  --text-display--line-height: 1.12;
   --text-display--font-weight: 800;
-  --text-display--letter-spacing: -0.03em;
+  --text-display--letter-spacing: -0.022em;
 
-  --text-h1: clamp(2rem, 4.5vw, 3.25rem);
-  --text-h1--line-height: 0.98;
+  --text-h1: clamp(1.5rem, 2.4vw, 2rem);
+  --text-h1--line-height: 1.16;
   --text-h1--font-weight: 800;
-  --text-h1--letter-spacing: -0.03em;
+  --text-h1--letter-spacing: -0.02em;
 
-  --text-h2: clamp(1.5rem, 2.6vw, 2rem);
-  --text-h2--line-height: 1.06;
+  --text-h2: clamp(1.1875rem, 1.6vw, 1.4375rem);
+  --text-h2--line-height: 1.24;
   --text-h2--font-weight: 800;
-  --text-h2--letter-spacing: -0.02em;
+  --text-h2--letter-spacing: -0.014em;
 
-  --text-h3: 1.125rem;
-  --text-h3--line-height: 1.3;
+  --text-h3: 1.0625rem;
+  --text-h3--line-height: 1.38;
   --text-h3--font-weight: 800;
-  --text-h3--letter-spacing: -0.01em;
+  --text-h3--letter-spacing: -0.008em;
 
-  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
-  --text-lead--line-height: 1.5;
+  --text-lead: clamp(1.0625rem, 1.15vw, 1.1875rem);
+  --text-lead--line-height: 1.62;
   --text-lead--font-weight: 400;
 
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.72;
 
   --text-small: 0.875rem;
-  --text-small--line-height: 1.45;
+  --text-small--line-height: 1.62;
 
   /* The datasheet register. The only place tracking opens up. */
-  --text-datum: 0.75rem;
+  --text-datum: 0.6875rem;
   --text-datum--line-height: 1;
   --text-datum--font-weight: 400;
-  --text-datum--letter-spacing: 0.18em;
+  --text-datum--letter-spacing: 0.16em;
 
-  --text-datum-strong: 0.75rem;
+  --text-datum-strong: 0.6875rem;
   --text-datum-strong--line-height: 1;
   --text-datum-strong--font-weight: 800;
-  --text-datum-strong--letter-spacing: 0.18em;
+  --text-datum-strong--letter-spacing: 0.16em;
 
   /* Spec figures. Always tabular, see the base layer. */
-  --text-figure: clamp(1.75rem, 3.2vw, 2.75rem);
-  --text-figure--line-height: 1;
+  --text-figure: clamp(1.375rem, 2.1vw, 1.75rem);
+  --text-figure--line-height: 1.1;
   --text-figure--font-weight: 800;
   --text-figure--letter-spacing: -0.02em;
 

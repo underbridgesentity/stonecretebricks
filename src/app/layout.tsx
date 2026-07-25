@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
-import { ActionBar } from "@/components/shell/action-bar";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { SkipLink } from "@/components/shell/skip-link";
@@ -55,11 +54,8 @@ export default function RootLayout({
         <OrganisationSchema />
         <SkipLink />
         <SiteHeader />
-        <main id="main" className="pb-16 lg:pb-0">
-          {children}
-        </main>
+        <main id="main">{children}</main>
         <SiteFooter />
-        <ActionBar />
       </body>
     </html>
   );

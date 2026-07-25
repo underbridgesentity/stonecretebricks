@@ -17,10 +17,10 @@ export default function Error({
   }, [error]);
 
   return (
-    <section className="border-b border-line py-20 md:py-28">
+    <section className="py-[var(--section)]">
       <Wall>
-        <Course bond="odd">
-          <Stretcher span="header">
+        <Course>
+          <Stretcher span="measure">
             <p className="mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
               <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
               Something broke

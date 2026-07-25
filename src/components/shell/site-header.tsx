@@ -1,47 +1,59 @@
 import Link from "next/link";
 
 import { Lockup } from "@/components/brand/wordmark";
-import { ButtonLink } from "@/components/ui/button";
-import { WallProgress } from "@/components/ui/wall-progress";
 import { NAV } from "@/data/company";
 
 import { MobileNav } from "./mobile-nav";
 
 /**
- * Course zero. Flush-left lockup, right-aligned nav, sitting on the first
- * course line of the wall.
+ * Graphite site-wide.
  *
- * No blur, no floating pill, no backdrop filter. Its bottom hairline is a real
- * structural edge, not a decoration.
+ * A light bar above a dark photographic hero cuts a hard band across the top
+ * of the page. Carrying the dark through the header instead lets the hero run
+ * straight out of it, and it gives every inner page the same anchored top.
+ *
+ * No blur, no floating pill, no shrink-on-scroll. It is a plate, and it stays
+ * a plate.
  */
 export function SiteHeader() {
   return (
-    <>
-      <header className="sticky top-0 z-40 border-b border-line bg-ground">
-        <div className="mx-auto flex h-[var(--header-h)] w-full max-w-[var(--wall)] items-center justify-between gap-6 px-6 md:px-8">
-          <Link href="/" className="text-[1.25rem] text-ink" aria-label="Stonecrete Bricks, home">
-            <Lockup orientation="horizontal" />
+    <header
+      data-ground="graphite"
+      className="sticky top-0 z-40 border-b border-limestone/10 bg-graphite"
+    >
+      <div className="mx-auto flex h-[var(--header-h)] w-full max-w-[var(--wall)] items-center justify-between gap-8 px-6 md:px-10">
+        <Link
+          href="/"
+          className="text-[1.0625rem] text-limestone"
+          aria-label="Stonecrete Bricks, home"
+        >
+          <Lockup orientation="horizontal" variant="on-dark" />
+        </Link>
+
+        <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-datum uppercase text-limestone/65 transition-colors hover:text-limestone"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/quote"
+            className="group inline-flex items-center gap-3 text-datum-strong uppercase text-limestone"
+          >
+            Get a quote
+            <span
+              aria-hidden
+              className="inline-block h-px w-6 bg-oxide transition-all group-hover:w-10"
+            />
           </Link>
+        </nav>
 
-          <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-datum-strong uppercase text-ink-secondary transition-colors hover:text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <ButtonLink href="/quote" variant="oxide" className="h-11">
-              Get a quote
-            </ButtonLink>
-          </nav>
-
-          <MobileNav />
-        </div>
-      </header>
-      <WallProgress />
-    </>
+        <MobileNav />
+      </div>
+    </header>
   );
 }

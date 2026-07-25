@@ -18,11 +18,13 @@ import { brick, VIEW_H, VIEW_W } from "@/lib/iso";
 const LOWER = brick(0, 0, 0);
 const UPPER = brick(0, 1, 1);
 
-type Faces = "colour" | "mono" | "inverse";
+type Faces = "colour" | "on-dark" | "mono" | "inverse";
 
 /** Top and end faces catch the light. Long sides are the extrusion. */
 const faces: Record<Faces, { lit: string; dark: string; litOpacity?: number; darkOpacity?: number }> = {
   colour: { lit: "var(--oxide)", dark: "var(--graphite)" },
+  /** Graphite sides vanish on a graphite ground, so they lift to cement. */
+  "on-dark": { lit: "var(--oxide)", dark: "var(--cement)" },
   mono: { lit: "currentColor", dark: "currentColor", darkOpacity: 0.62 },
   inverse: { lit: "var(--limestone)", dark: "var(--cement)" },
 };

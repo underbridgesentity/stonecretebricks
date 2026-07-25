@@ -1,27 +1,46 @@
-import { AudienceCourse } from "@/components/sections/audience-course";
-import { Calculator } from "@/components/sections/calculator";
 import { Hero } from "@/components/sections/hero";
 import { ProductWall } from "@/components/sections/product-wall";
 import { ProofCourse } from "@/components/sections/proof-course";
 import { QuoteCta } from "@/components/sections/quote-cta";
 import { SpecStrip } from "@/components/sections/spec-strip";
-import { ButtonLink } from "@/components/ui/button";
-import { CourseRule } from "@/components/ui/course-rule";
-import { Arrow } from "@/components/ui/glyph";
 import { Photo } from "@/components/ui/photo";
-import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { Section, Split, Wall } from "@/components/ui/wall";
 import { COMPANY } from "@/data/company";
 
+/**
+ * Five sections.
+ *
+ * The first cut ran eight, including a live calculator, a five-tile audience
+ * grid and a delivery block. It was a lot of page for a first impression, and
+ * the density is what made it feel like a template rather than a brand. The
+ * calculator now lives on the quote page, where someone has already decided to
+ * buy, and the rest is one clear line of argument: what we make, why us, why
+ * trust a new supplier, and how to ask.
+ */
 export default function Home() {
   return (
     <>
       <Hero />
 
-      {/* Course three: the photograph, deliberately below the fold so the
-          largest contentful paint is text. */}
+      {/* One statement, alone on the page. Space is the point. */}
+      <Section>
+        <Wall>
+          <Split label="Stonecrete Bricks">
+            <p className="max-w-[26ch] text-mega uppercase text-ink">
+              Every building starts with the material.
+            </p>
+            <p className="mt-10 max-w-xl text-lead text-ink-secondary">
+              A wall is only as good as the units in it. Inconsistent dimensions cost a bricklayer
+              time and cost the client mortar. Units that have not cured properly fail under a
+              trowel and fail under load. Solving that, consistently, is the whole business.
+            </p>
+          </Split>
+        </Wall>
+      </Section>
+
       <Photo
-        src="/images/site/wall.jpg"
-        alt="A newly built grey concrete block wall in raking late afternoon light, every course joint reading as a shadow line"
+        src="/images/site/masonry.jpg"
+        alt="Raking light across a precisely laid concrete block wall, every mortar joint reading as a sharp shadow line"
         sizes="100vw"
         ratio="brick"
       />
@@ -30,69 +49,11 @@ export default function Home() {
 
       <SpecStrip />
 
-      {/* Calculator */}
-      <section className="border-b border-line py-16 md:py-24">
-        <Wall>
-          <CourseRule datum="02" label="Work out your quantities" />
-
-          <Course bond="odd" className="mt-10 items-end gap-y-8">
-            <Stretcher span="header">
-              <h2 className="text-display uppercase text-ink">
-                How many bricks does your wall need?
-              </h2>
-            </Stretcher>
-            <Stretcher span="footer">
-              <p className="text-body text-ink-secondary">
-                Enter the length and height. We give you the unit count, the wastage allowance, the
-                pallet count and the number of loads. Then we turn it into a quote.
-              </p>
-            </Stretcher>
-          </Course>
-        </Wall>
-
-        <Wall className="mt-12">
-          <Calculator compact />
-        </Wall>
-      </section>
-
-      <AudienceCourse />
-
       <ProofCourse />
 
-      {/* Delivery */}
-      <section className="border-b border-line py-16 md:py-24">
-        <Wall>
-          <CourseRule datum="05" label="Getting it to site" />
-
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
-              <h2 className="text-display uppercase text-ink">We deliver to site.</h2>
-              <p className="mt-6 max-w-xl text-lead text-ink-secondary">
-                Site deliveries, scheduled drops and long term supply agreements across{" "}
-                {COMPANY.region.value}. Tell us the address and the date, and the cost and the lead
-                time come back in the same quote.
-              </p>
-              <div className="mt-8">
-                <ButtonLink href="/delivery" variant="outline">
-                  Delivery areas and lead times
-                  <Arrow width={18} height={18} />
-                </ButtonLink>
-              </div>
-            </Stretcher>
-
-            <Stretcher span="footer">
-              <Photo
-                src="/images/site/yard.jpg"
-                alt="Stacks of grey cement bricks on pallets in a manufacturing yard"
-                sizes="(min-width: 768px) 560px, 100vw"
-                ratio="course"
-              />
-            </Stretcher>
-          </Course>
-        </Wall>
-      </section>
-
-      <QuoteCta />
+      <QuoteCta
+        body={`Send the quantity, the site address and the date you need it. A price, a lead time and a delivery cost come back together, within ${COMPANY.responseHours.value} business hours.`}
+      />
     </>
   );
 }

@@ -30,7 +30,6 @@ export default async function QuotePage({
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Get a quote"
         title="Tell us what you are building."
         lead={`Send the quantity, the site address and the date you need it. We come back with a price, a lead time and a delivery cost, within ${COMPANY.responseHours.value} business hours.`}
@@ -63,10 +62,10 @@ export default async function QuotePage({
       />
 
       {/* Calculator, so the quantity in the form is a real one. */}
-      <section id="calculator" className="scroll-mt-24 border-b border-line py-16 md:py-24">
+      <section id="calculator" className="scroll-mt-28 border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="Not sure how many" />
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Work it out first.
           </h2>
           <p className="mt-6 max-w-xl text-body text-ink-secondary">
@@ -80,18 +79,18 @@ export default async function QuotePage({
       </section>
 
       {/* The form */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Your enquiry" />
         </Wall>
 
         <Wall className="mt-10">
-          <Course bond="odd" className="gap-y-12">
-            <Stretcher span="header">
+          <Course className="gap-y-12">
+            <Stretcher span="measure">
               <EnquiryForm defaultProduct={product} defaultQuantity={quantity} />
             </Stretcher>
 
-            <Stretcher span="footer" className="md:pl-8">
+            <Stretcher span="complement" className="md:pl-8">
               <div className="sticky top-28 flex flex-col gap-6 border border-line p-6 md:p-8">
                 <h2 className="text-h3 uppercase text-ink">What happens next</h2>
                 <ol className="flex flex-col gap-4">

@@ -38,11 +38,13 @@ export function Wordmark({
 export function Lockup({
   orientation = "horizontal",
   descriptor = true,
+  variant = "colour",
   set = false,
   className = "",
 }: {
   orientation?: "horizontal" | "stacked";
   descriptor?: boolean;
+  variant?: "colour" | "on-dark";
   set?: boolean;
   className?: string;
 }) {
@@ -55,7 +57,7 @@ export function Lockup({
       } ${className}`}
     >
       <Monogram
-        variant="colour"
+        variant={variant}
         set={set}
         className={stacked ? "h-[2.1em] w-auto" : "h-[1.55em] w-auto"}
       />

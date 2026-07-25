@@ -24,18 +24,17 @@ export default function ContactPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Contact"
         title="Talk to us."
         lead="We answer WhatsApp fastest. For a formal quotation use the quote form instead, so we get the quantities right first time."
       />
 
       {/* Channels */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="How to reach us" />
 
-          <div className="mt-10 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2 lg:grid-cols-4">
             <Channel
               icon={<Whatsapp width={22} height={22} />}
               label="WhatsApp"
@@ -72,12 +71,12 @@ export default function ContactPage() {
       </section>
 
       {/* Hours */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Trading hours" tone="oxide" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">Open on Saturday.</h2>
               <p className="mt-6 max-w-xl text-body text-ink-secondary">
                 Trade buys on a Saturday morning, so the yard is open for collections. Deliveries
@@ -85,7 +84,7 @@ export default function ContactPage() {
               </p>
             </Stretcher>
 
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <dl className="flex flex-col">
                 {hours.map((row) => (
                   <div
@@ -105,12 +104,12 @@ export default function ContactPage() {
       </section>
 
       {/* Directions */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="Finding us" />
 
-          <Course bond="even" className="mt-10 gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Directions, including for a truck.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 Delivery vehicles and visitors use separate gates. If you are collecting with a

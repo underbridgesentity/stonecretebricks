@@ -1,14 +1,12 @@
-import { BondPattern } from "@/components/brand/bond-pattern";
 import { ButtonLink } from "@/components/ui/button";
 import { Arrow, Phone, Whatsapp } from "@/components/ui/glyph";
-import { Pending } from "@/components/ui/pending";
-import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { Course, Section, Stretcher, Wall } from "@/components/ui/wall";
 import { COMPANY, telLink, whatsappLink } from "@/data/company";
 
-/** The closing course. Three lanes, chosen by how ready the buyer is. */
+/** The closing course. One statement, three ways to act, nothing else. */
 export function QuoteCta({
   heading = "Tell us what you are building.",
-  body = "Send us the quantity, the site address and the date you need it. We will come back with a price, a lead time and a delivery cost.",
+  body = "Send the quantity, the site address and the date you need it. A price, a lead time and a delivery cost come back together.",
 }: {
   heading?: string;
   body?: string;
@@ -19,53 +17,51 @@ export function QuoteCta({
   );
 
   return (
-    <section data-ground="graphite" className="relative overflow-hidden bg-ground py-16 md:py-24">
-      <BondPattern
-        courses={5}
-        density="tight"
-        tone="oxide"
-        drift
-        className="absolute inset-x-0 bottom-0 h-40 opacity-30"
-      />
-
-      <Wall className="relative">
-        <Course bond="odd" className="items-end gap-y-8">
-          <Stretcher span="header">
-            <h2 className="text-display uppercase text-ink">{heading}</h2>
-            <p className="mt-6 max-w-xl text-lead text-ink-secondary">{body}</p>
+    <Section ground="dark">
+      <Wall>
+        <Course className="items-end">
+          <Stretcher span="measure">
+            <h2 className="max-w-[18ch] text-display uppercase text-ink">{heading}</h2>
+            <p className="mt-7 max-w-md text-lead text-ink-secondary">{body}</p>
           </Stretcher>
 
-          <Stretcher span="footer" className="flex flex-col gap-3">
-            <ButtonLink href="/quote" variant="oxide" className="w-full">
-              Get a quote
-              <Arrow width={18} height={18} />
-            </ButtonLink>
-
-            {wa ? (
-              <ButtonLink href={wa} variant="outline" className="w-full">
-                <Whatsapp width={18} height={18} />
-                WhatsApp us
+          <Stretcher span="quarter" className="md:col-start-10">
+            <div className="flex flex-col gap-6">
+              <ButtonLink href="/quote" variant="oxide">
+                Request a quote
+                <Arrow width={16} height={16} />
               </ButtonLink>
-            ) : (
-              <Pending>WhatsApp number</Pending>
-            )}
 
-            {tel ? (
-              <ButtonLink href={tel} variant="outline" className="w-full">
-                <Phone width={18} height={18} />
-                Call {COMPANY.phone.value}
-              </ButtonLink>
-            ) : (
-              <Pending>Phone number</Pending>
-            )}
+              <div className="flex flex-col gap-4">
+                {wa ? (
+                  <a
+                    href={wa}
+                    className="group inline-flex items-center gap-3 text-datum-strong uppercase text-ink transition-colors hover:text-ink-accent"
+                  >
+                    <Whatsapp width={16} height={16} className="text-oxide" />
+                    WhatsApp us
+                  </a>
+                ) : null}
 
-            <p className="mt-2 text-small text-ink-secondary">
-              We answer WhatsApp fastest. For a formal quotation use the form, so we get the
-              quantities right first time.
-            </p>
+                {tel ? (
+                  <a
+                    href={tel}
+                    className="group inline-flex items-center gap-3 text-datum-strong uppercase text-ink transition-colors hover:text-ink-accent"
+                  >
+                    <Phone width={16} height={16} className="text-oxide" />
+                    {COMPANY.phone.value}
+                  </a>
+                ) : null}
+              </div>
+
+              <p className="text-small text-ink-secondary">
+                WhatsApp is answered fastest. Use the form for a formal quotation, so the quantities
+                are right first time.
+              </p>
+            </div>
           </Stretcher>
         </Course>
       </Wall>
-    </section>
+    </Section>
   );
 }

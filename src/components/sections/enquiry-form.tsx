@@ -218,7 +218,7 @@ export function EnquiryForm({
 
         <Button type="submit" variant="oxide" disabled={pending} className="self-start">
           {pending ? "Sending" : "Send quote request"}
-          <Arrow width={18} height={18} />
+          <Arrow width={16} height={16} />
         </Button>
       </div>
     </form>

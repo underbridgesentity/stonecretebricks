@@ -5,10 +5,10 @@ import { PRODUCTS } from "@/data/products";
 
 export default function NotFound() {
   return (
-    <section className="border-b border-line py-20 md:py-28">
+    <section className="py-[var(--section)]">
       <Wall>
-        <Course bond="odd" className="gap-y-10">
-          <Stretcher span="header">
+        <Course className="gap-y-10">
+          <Stretcher span="measure">
             <p className="mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
               <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
               404
@@ -21,7 +21,7 @@ export default function NotFound() {
             <div className="mt-10 flex flex-wrap gap-3">
               <ButtonLink href="/products" variant="oxide">
                 Products
-                <Arrow width={18} height={18} />
+                <Arrow width={16} height={16} />
               </ButtonLink>
               <ButtonLink href="/quote" variant="outline">
                 Get a quote
@@ -29,7 +29,7 @@ export default function NotFound() {
             </div>
           </Stretcher>
 
-          <Stretcher span="footer">
+          <Stretcher span="complement">
             <ul className="flex flex-col">
               {PRODUCTS.map((p) => (
                 <li key={p.slug}>
@@ -38,7 +38,7 @@ export default function NotFound() {
                     className="flex items-center justify-between gap-4 border-b border-line py-4 text-h3 uppercase text-ink transition-colors hover:text-ink-accent"
                   >
                     {p.name}
-                    <Arrow width={18} height={18} />
+                    <Arrow width={16} height={16} />
                   </a>
                 </li>
               ))}

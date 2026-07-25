@@ -46,28 +46,27 @@ export default function ProductsPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Products"
         title="Concrete bricks, blocks and pavers."
-        lead="Four standard products, plus custom units on request. Every specification below is derived from the unit size, not estimated, and every figure the client has not yet confirmed against a test certificate is marked."
+        lead="Four standard products, plus custom units on request. Every coverage and pallet figure below is derived from the unit size rather than estimated, and anything still awaiting a test certificate is marked."
         aside={
-          <ButtonLink href="/quote" variant="oxide" className="w-full">
-            Get a quote
-            <Arrow width={18} height={18} />
+          <ButtonLink href="/quote" variant="oxide">
+            Request a quote
+            <Arrow width={16} height={16} />
           </ButtonLink>
         }
       />
 
       {/* Comparison table. The money page for an undecided buyer. */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="Side by side" />
 
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Everything on one table.
           </h2>
 
-          <div className="mt-10 w-full overflow-x-auto">
+          <div className="mt-12 w-full overflow-x-auto">
             <table className="w-full min-w-[46rem] border-collapse text-left">
               <caption className="sr-only">
                 Comparison of Stonecrete Bricks concrete products
@@ -132,39 +131,30 @@ export default function ProductsPage() {
       </section>
 
       {/* The four, in running bond. */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="The range" />
         </Wall>
 
-        <Wall className="mt-10">
-          <Course bond="odd" className="gap-y-[var(--joint)]">
-            {PRODUCTS.slice(0, 2).map((product, i) => (
-              <Stretcher key={product.slug} span={i === 0 ? "header" : "footer"}>
-                <ProductBrick product={product} index={i} />
-              </Stretcher>
+        <Wall className="mt-14">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2">
+            {PRODUCTS.map((product, i) => (
+              <ProductBrick key={product.slug} product={product} index={i} />
             ))}
-          </Course>
-          <Course bond="odd" className="mt-[var(--joint)] gap-y-[var(--joint)]">
-            {PRODUCTS.slice(2, 4).map((product, i) => (
-              <Stretcher key={product.slug} span={i === 0 ? "footer" : "header"}>
-                <ProductBrick product={product} index={i + 2} />
-              </Stretcher>
-            ))}
-          </Course>
+          </div>
         </Wall>
       </section>
 
       {/* Which one do I need */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="Not sure which one" />
 
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Three questions and you will know.
           </h2>
 
-          <div className="mt-10 flex flex-col">
+          <div className="mt-12 flex flex-col">
             {ROUTES.map((route, i) => (
               <Link
                 key={route.slug}
@@ -188,10 +178,10 @@ export default function ProductsPage() {
       </section>
 
       {/* Custom */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <Course bond="even" className="items-end gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="items-end gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Custom concrete products.</h2>
               <p className="mt-5 max-w-xl text-body text-ink-secondary">
                 Non-standard sizes, bespoke moulds and purpose-made units for a specific detail.
@@ -199,8 +189,8 @@ export default function ProductsPage() {
                 what the tooling costs and what the minimum run is.
               </p>
             </Stretcher>
-            <Stretcher span="closer">
-              <ButtonLink href="/quote?product=custom" variant="outline" className="w-full">
+            <Stretcher span="quarter">
+              <ButtonLink href="/quote?product=custom" variant="outline">
                 Enquire about custom units
               </ButtonLink>
             </Stretcher>

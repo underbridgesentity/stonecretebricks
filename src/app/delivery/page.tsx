@@ -41,22 +41,21 @@ export default function DeliveryPage() {
   return (
     <>
       <PageHead
-        datum="01"
         eyebrow="Delivery"
         title="Delivery and lead times."
         lead={`Here is where we deliver, what the minimum load is and how long it takes. If your site sits outside these areas, ask us anyway: we would rather quote it than turn it away.`}
       />
 
       {/* Zones */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="Where we deliver" />
 
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Zones, minimums and lead times.
           </h2>
 
-          <div className="mt-10 w-full overflow-x-auto">
+          <div className="mt-12 w-full overflow-x-auto">
             <table className="w-full min-w-[40rem] border-collapse text-left">
               <caption className="sr-only">Delivery zones, minimum loads and lead times</caption>
               <thead>
@@ -108,12 +107,12 @@ export default function DeliveryPage() {
       </section>
 
       {/* Loads */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="What fits on a load" tone="oxide" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">One load, in units.</h2>
               <p className="mt-6 max-w-xl text-body text-ink-secondary">
                 Loads are limited by mass, not by volume, so a load of hollow blocks carries far
@@ -122,7 +121,7 @@ export default function DeliveryPage() {
               </p>
             </Stretcher>
 
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <dl className="flex flex-col">
                 {PRODUCTS.map((p) => (
                   <div
@@ -143,11 +142,11 @@ export default function DeliveryPage() {
       </section>
 
       {/* Site requirements */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="What you need on site" />
 
-          <div className="mt-10 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             {SITE_REQUIREMENTS.map((req) => (
               <Module key={req.title} reveal className="flex flex-col gap-3 p-6 md:p-8">
                 <h3 className="text-h3 uppercase text-ink">{req.title}</h3>
@@ -159,12 +158,12 @@ export default function DeliveryPage() {
       </section>
 
       {/* Breakage policy. Nobody publishes this. */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="05" label="If something goes wrong" />
 
-          <Course bond="even" className="mt-10 gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Breakage and shortages.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 Some breakage is normal in transit and a small allowance is built into every load.

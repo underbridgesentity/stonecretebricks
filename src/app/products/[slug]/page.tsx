@@ -61,8 +61,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Hero */}
       <section className="border-b border-line pb-14 pt-12 md:pb-16 md:pt-16">
         <Wall>
-          <Course bond="odd" className="items-center gap-y-10">
-            <Stretcher span="header">
+          <Course className="items-center gap-y-10">
+            <Stretcher span="measure">
               <p className="animate-set mb-7 flex items-center gap-3 text-datum uppercase text-ink-secondary">
                 <span aria-hidden className="inline-block h-px w-10 bg-oxide" />
                 <Link href="/products" className="hover:text-ink">
@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               >
                 <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide">
                   Get a quote
-                  <Arrow width={18} height={18} />
+                  <Arrow width={16} height={16} />
                 </ButtonLink>
                 <ButtonLink href="/quote#calculator" variant="outline">
                   Calculate quantity
@@ -100,7 +100,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             </Stretcher>
 
-            <Stretcher span="footer">
+            <Stretcher span="complement">
               <Photo
                 src={product.image.replace(".jpg", "-unit.jpg")}
                 alt={`A ${product.name.toLowerCase().replace(/s$/, "")}, grey concrete, photographed against a plain backdrop`}
@@ -114,16 +114,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Specification */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="01" label="Specification" />
 
-          <Course bond="odd" className="mt-10 gap-y-12">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 gap-y-12">
+            <Stretcher span="half">
               <SpecTable rows={specRows(product)} caption={`${product.name} to ${product.standard}`} />
             </Stretcher>
 
-            <Stretcher span="footer" className="md:pl-8">
+            <Stretcher span="complement" className="md:pl-8">
               <h2 className="text-h3 uppercase text-ink">Coverage, with the working</h2>
               <p className="mt-4 text-body text-ink-secondary">{showWorking(product)}</p>
 
@@ -160,12 +160,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Applications */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="What it is for" />
 
-          <Course bond="odd" className="mt-10 gap-y-10">
-            <Stretcher span="header">
+          <Course className="mt-12 gap-y-10">
+            <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">Where it goes.</h2>
               <ul className="mt-8 flex flex-wrap gap-[var(--joint)]">
                 {product.suitableFor.map((use) => (
@@ -183,11 +183,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Features */}
-      <section data-ground="graphite" className="bg-ground py-16 md:py-24">
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Why builders choose it" tone="oxide" />
 
-          <h2 className="mt-10 max-w-3xl text-display uppercase text-ink">
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Four reasons, spelled out.
           </h2>
 
@@ -210,12 +210,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Ordering */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="04" label="Ordering" />
 
-          <Course bond="even" className="mt-10 items-end gap-y-8">
-            <Stretcher span="stretcher">
+          <Course className="mt-12 items-end gap-y-8">
+            <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">How to buy it.</h2>
               <dl className="mt-8 flex flex-col">
                 <CoverageRow
@@ -229,10 +229,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <CoverageRow label="Delivery" value={COMPANY.region.value ?? "On request"} />
               </dl>
             </Stretcher>
-            <Stretcher span="closer">
-              <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide" className="w-full">
+            <Stretcher span="quarter">
+              <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide">
                 Get a quote
-                <Arrow width={18} height={18} />
+                <Arrow width={16} height={16} />
               </ButtonLink>
             </Stretcher>
           </Course>
@@ -240,10 +240,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Related */}
-      <section className="border-b border-line py-16 md:py-24">
+      <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="05" label="The rest of the range" />
-          <div className="mt-10 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-3">
             {others.map((other) => (
               <Link
                 key={other.slug}
