@@ -41,11 +41,11 @@ export default async function QuotePage({
           </h2>
           <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
             Enter your wall and we give you the unit count, the wastage allowance, the pallets and
-            the loads. Then carry that straight into the form below.
+            the loads. Then carry it straight into the enquiry form.
           </p>
         </Wall>
         <Wall className="mt-10">
-          <Calculator />
+          <Calculator defaultProduct={product} />
         </Wall>
       </section>
   );

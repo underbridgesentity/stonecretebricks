@@ -156,7 +156,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Faster construction",
         expanded:
-          "A square metre of single skin takes 33 maxis where stock bricks take 52, so a team lays the same area with a third fewer units to handle and place.",
+          "A square metre of single skin takes 33.3 maxis where stock bricks take 51.9, so a team lays the same area with a third fewer units to handle and place.",
       },
       {
         label: "Reduced mortar consumption",
@@ -166,7 +166,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Excellent structural performance",
         expanded:
-          "A 140 mm unit gives a single skin wall that carries load without a second leaf, which is why it dominates subsidised and affordable housing.",
+          "A 140 mm unit gives a single skin wall that carries load without a second leaf, which is why it dominates subsidised and affordable housing. Like our stock brick it is a nominal 7.0 MPa, so for the lower storey of a double storey, where SANS 10400-K calls for 10 MPa, ask us first.",
       },
       {
         label: "Cheaper once labour is counted",
@@ -229,7 +229,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Improved thermal performance",
         expanded:
-          "The voids break the conductive path through the wall, so the building holds temperature better than a solid single skin.",
+          "The voids break the conductive path through the wall, so the building holds temperature better than a solid single skin. At a nominal 3.5 MPa it clears the single-storey floor; the lower storey of a double storey calls for 7.0 MPa hollow, so tell us the storey count when you enquire.",
       },
       {
         label: "Cores take reinforcement",
@@ -301,7 +301,7 @@ export const PRODUCTS: readonly Product[] = [
     seo: {
       title: "Concrete paving bricks in Polokwane",
       description:
-        "Concrete paving bricks manufactured in Polokwane to SANS 1058. Coverage per square metre, pallet quantities and coverage published. Delivered across Limpopo.",
+        "Concrete paving bricks manufactured in Polokwane to SANS 1058. Coverage per square metre and pallet quantities published. Delivered across Limpopo.",
     },
   },
 ];

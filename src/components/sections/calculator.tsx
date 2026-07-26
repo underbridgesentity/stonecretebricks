@@ -23,8 +23,16 @@ import { PRODUCTS, unitsPerSquareMetre } from "@/data/products";
 
 type Opening = { id: number; width: string; height: string };
 
-export function Calculator({ compact = false }: { compact?: boolean }) {
-  const [slug, setSlug] = useState(PRODUCTS[0]?.slug ?? "");
+export function Calculator({
+  compact = false,
+  defaultProduct,
+}: {
+  compact?: boolean;
+  /** Keeps the calculator in step with a product arriving in the query string. */
+  defaultProduct?: string;
+}) {
+  const initial = PRODUCTS.find((p) => p.slug === defaultProduct)?.slug;
+  const [slug, setSlug] = useState(initial ?? PRODUCTS[0]?.slug ?? "");
   const [length, setLength] = useState("10");
   const [height, setHeight] = useState("2.4");
   const [skin, setSkin] = useState<"single" | "double">("single");
@@ -61,6 +69,10 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
   const totals = result;
   const paving = unit.calculatorMode === "paving";
   const empty = totals.netArea <= 0;
+  const grossArea = (Number.parseFloat(length) || 0) * (Number.parseFloat(height) || 0);
+  // Openings can swallow the whole wall, which is a different problem from
+  // having entered nothing, and needs a different message.
+  const overDeducted = empty && grossArea > 0;
 
   /**
    * Hand the result to the form instead of navigating.
@@ -76,16 +88,23 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
     const form = document.getElementById("enquiry");
     if (!form) return;
 
+    /*
+     * Clear the others first. The quantity applies to one product, so leaving
+     * a previously checked chip in place submitted two products against a
+     * single figure.
+     */
+    for (const other of form.querySelectorAll<HTMLInputElement>('input[name="products"]')) {
+      if (other.value !== unit.slug && other.checked) other.click();
+    }
     const chip = form.querySelector<HTMLInputElement>(
       `input[name="products"][value="${unit.slug}"]`,
     );
     if (chip && !chip.checked) chip.click();
 
+    // Uncontrolled inputs, so assigning value is sufficient and is what React
+    // reads back on submit. No synthetic event is needed or fired.
     const qty = form.querySelector<HTMLInputElement>("#quantity");
-    if (qty) {
-      qty.value = String(totals.orderUnits);
-      qty.dispatchEvent(new Event("input", { bubbles: true }));
-    }
+    if (qty) qty.value = String(totals.orderUnits);
 
     const unitSelect = form.querySelector<HTMLSelectElement>("#quantityUnit");
     if (unitSelect) unitSelect.value = "units";
@@ -95,11 +114,10 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
       notes.value = `Calculated for ${number(totals.netArea, 1)} m² of ${
         paving ? "paving" : `${skin} skin wall`
       }.`;
-      notes.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
     setCarried(
-      `${number(totals.orderUnits)} ${unit.name.toLowerCase()} carried into the form below.`,
+      `${number(totals.orderUnits)} ${unit.name.toLowerCase()} carried into the enquiry form.`,
     );
     form.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -241,11 +259,16 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
         {empty ? (
           <div className="flex flex-1 flex-col justify-center py-10">
             <p className="text-h2 uppercase text-ink">
-              {paving ? "Enter your area" : "Enter your wall"}
+              {overDeducted
+                ? "Your openings fill the wall"
+                : paving
+                  ? "Enter your area"
+                  : "Enter your wall"}
             </p>
             <p className="mt-4 max-w-[30ch] text-body text-ink-secondary">
-              Put a length and a {paving ? "width" : "height"} in metres on the left and we will
-              work out the units, the wastage, the pallets and the loads.
+              {overDeducted
+                ? "The doors and windows you have added come to the whole wall area, so there is nothing left to build. Check those measurements."
+                : `Put a length and a ${paving ? "width" : "height"} in metres on the left and we will work out the units, the wastage, the pallets and the loads.`}
             </p>
           </div>
         ) : (

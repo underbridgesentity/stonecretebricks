@@ -70,7 +70,7 @@ export default function ProductsPage() {
           <CourseRule datum="04" label="Not sure which one" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
-            Three questions and you will know.
+            Four questions and you will know.
           </h2>
 
           <div className="mt-12 flex flex-col">

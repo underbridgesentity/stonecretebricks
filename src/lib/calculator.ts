@@ -90,13 +90,15 @@ function finish(
    *
    * A pallet is smaller than the MOQ for three of the four products (stock
    * 500 per pallet against a 1 000 minimum, maxi 250 against 500, hollow 90
-   * against 200). Rounding to whole pallets alone therefore returned an order
+   * against 180). Rounding to whole pallets alone therefore returned an order
    * below the minimum printed on the comparison table two clicks away. On a
    * site whose entire argument is "we publish real minimum orders", the
    * calculator contradicting the spec table is the worst possible bug.
    */
   const minimumUnits = minimumInUnits(product);
-  const orderUnits = Math.max(palletsNeeded * perPallet, minimumUnits);
+  // Nothing to build means nothing to order. Without this, a zero area still
+  // returned a full minimum order and a load to carry it.
+  const orderUnits = netArea > 0 ? Math.max(palletsNeeded * perPallet, minimumUnits) : 0;
   const pallets = perPallet > 0 ? Math.ceil(orderUnits / perPallet) : 0;
 
   return {
