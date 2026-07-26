@@ -73,39 +73,41 @@ export default function QualityPage() {
         </Wall>
       </section>
 
-      {/* The SABS correction. The highest-credibility copy on the site. */}
-      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
+      {/*
+        The SABS correction. The highest-credibility copy on the site, and the
+        second and last oxide field. See docs/design-system.md 2b: two fields,
+        both carrying a sentence a competitor would not write. No hairline
+        inside, and every text colour is a literal full limestone, because
+        --ink-secondary does not survive on this ground.
+      */}
+      <section className="bg-oxide-deep pb-[var(--section-tight)] pt-[var(--section)] text-limestone">
         <Wall>
-          <CourseRule label="A note on wording" tone="oxide" />
+          <p className="text-datum uppercase text-limestone">A note on wording</p>
 
-          <Course className="mt-12 gap-y-10">
-            <Stretcher span="measure">
-              <h2 className="text-display uppercase text-ink">
-                &ldquo;SABS approved&rdquo; is not a specification.
-              </h2>
-            </Stretcher>
-          </Course>
+          <h2 className="mt-8 max-w-[18ch] text-mega uppercase text-limestone">
+            &ldquo;SABS approved&rdquo; is not a specification.
+          </h2>
 
-          <Course className="mt-8 gap-y-8">
-            <Stretcher span="half">
-              <p className="text-lead text-ink-secondary">
-                You will see the phrase used loosely across our industry, including in our own early
-                draft documents. It is worth being precise about it, because it is the difference
-                between a claim and a fact.
-              </p>
-              <p className="mt-6 text-body text-ink-secondary">
+          <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-12">
+            <p className="max-w-[45ch] text-lead text-limestone md:col-span-6">
+              You will see the phrase used loosely across our industry, including in our own early
+              draft documents. It is worth being precise about it, because it is the difference
+              between a claim and a fact.
+            </p>
+            <div className="md:col-span-5 md:col-start-8">
+              <p className="max-w-[45ch] text-body text-limestone">
                 SABS is the South African Bureau of Standards, the body. SANS is the standard the
                 body publishes. A product is not &ldquo;SABS approved&rdquo; in any general sense: it
                 either complies with a specific SANS standard or it does not, and complying is
                 something a test certificate demonstrates.
               </p>
-              <p className="mt-6 text-body text-ink">
+              <p className="mt-6 max-w-[45ch] text-body text-limestone">
                 So we will tell you which SANS standard each product is manufactured to, and we will
                 show you the certificate. If a supplier will not name the standard, that is worth
                 noticing.
               </p>
-            </Stretcher>
-          </Course>
+            </div>
+          </div>
         </Wall>
       </section>
 
@@ -149,7 +151,7 @@ export default function QualityPage() {
       </section>
 
       {/* Certificates and membership */}
-      <section className="border-t border-line py-[var(--section)]">
+      <section className="border-t border-line py-[var(--section-tight)]">
         <Wall>
           <CourseRule label="Independent verification" />
 

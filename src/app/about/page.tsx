@@ -53,7 +53,7 @@ export default function AboutPage() {
       />
 
       {/* Why we started */}
-      <section className="border-t border-line py-[var(--section)]">
+      <section className="border-t border-line py-[var(--section-tight)]">
         <Wall>
           <CourseRule label="Why we started" />
 
@@ -82,7 +82,11 @@ export default function AboutPage() {
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule label="Our vision" tone="oxide" />
-          <p className="mt-10 max-w-[22ch] text-display uppercase text-ink">
+          {/* The one display line on the site set in weight 400, sentence case.
+              Two weights exist and only one was ever used for headings, which
+              left the system with a single register at seven sizes. A sentence
+              with subordinate clauses is exactly where the quiet one belongs. */}
+          <p className="mt-10 max-w-[36ch] text-display font-normal text-ink">
             To be the supplier a contractor phones first, because the specification is published,
             the load arrives on the day, and the certificate is in the file.
           </p>

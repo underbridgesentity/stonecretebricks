@@ -104,7 +104,7 @@ export default function ContactPage() {
       </section>
 
       {/* Directions */}
-      <section className="border-t border-line py-[var(--section)]">
+      <section className="border-t border-line py-[var(--section-tight)]">
         <Wall>
           <CourseRule label="Finding us" />
 

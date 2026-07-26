@@ -165,7 +165,7 @@ export default function DeliveryPage() {
       </section>
 
       {/* Breakage policy. Nobody publishes this. */}
-      <section className="border-t border-line py-[var(--section)]">
+      <section className="border-t border-line py-[var(--section-tight)]">
         <Wall>
           <CourseRule label="If something goes wrong" />
 

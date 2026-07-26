@@ -54,8 +54,9 @@ export default function ProductsPage() {
         </Wall>
       </section>
 
-      {/* Comparison table. The money page for an undecided buyer. */}
-      <section className="border-t border-line py-[var(--section)]">
+      {/* Comparison table. The money page for an undecided buyer, and the one
+          tonal event on a page that was otherwise four limestone bands deep. */}
+      <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule label="Side by side" />
 

@@ -33,24 +33,6 @@ export default function PlantPage() {
         lead="Most brick suppliers will not show you the yard. We will. This is where your order gets batched, pressed, cured and stacked, and you are welcome to stand and watch it happen before you place one."
       />
 
-      {/* No photograph here on purpose. This page invites the reader to come
-          and inspect the yard, and illustrating that invitation with a stock
-          factory interior is exactly the kind of borrowed credibility the rest
-          of the site refuses. A Pending marker is more honest, and it is the
-          same device used for every other fact the client owes us. */}
-      <Wall className="pt-[var(--section-tight)]">
-        <div className="border border-line bg-ground-2 px-6 py-14 text-center md:py-20">
-          <p className="text-h3 uppercase text-ink">Photography of the yard</p>
-          <p className="mx-auto mt-3 max-w-[42ch] text-body text-ink-secondary">
-            We would rather show you nothing than show you someone else&rsquo;s plant. Real
-            photographs go here once the first batches are running.
-          </p>
-          <div className="mt-6 inline-block">
-            <Pending>Plant and yard photography</Pending>
-          </div>
-        </div>
-      </Wall>
-
       {/* Process */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
@@ -66,7 +48,11 @@ export default function PlantPage() {
                 key={stage.step}
                 className="animate-course-set flex flex-col gap-4 border-t border-line py-8 md:flex-row md:gap-12"
               >
-                <p className="text-datum uppercase text-ink-secondary md:w-16 md:shrink-0">
+                <p
+                  aria-hidden
+                  data-figure
+                  className="text-figure text-ink-secondary md:w-20 md:shrink-0"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="text-h2 uppercase text-ink md:w-72 md:shrink-0">{stage.step}</h3>
@@ -163,6 +149,18 @@ export default function PlantPage() {
                   </>
                 )}
               </p>
+
+              {/* We would rather show you nothing than show you someone else's
+                  plant, so there is no photograph on this page until there is
+                  a real one. Stated here as a line, not as a band: the absence
+                  should not be more prominent than any fact. */}
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
+                There are no photographs on this page yet. We would rather show you nothing than
+                show you someone else&rsquo;s plant.
+              </p>
+              <div className="mt-4">
+                <Pending>Plant and yard photography</Pending>
+              </div>
             </Stretcher>
           </Course>
         </Wall>

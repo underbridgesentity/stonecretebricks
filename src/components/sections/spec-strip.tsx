@@ -20,8 +20,8 @@ import { Wall } from "@/components/ui/wall";
  * even text-limestone/95 drops to 4.41 and fails. The first draft of this
  * section used /80 and /85 for the eyebrow and body, which is the same mistake
  * the hero made over its photograph. Full limestone or nothing. The only
- * modifier below is on a 1px rule, where the 3:1 non-text floor applies and
- * /70 is the lowest that clears it.
+ * And no hairlines: a rule inside a mass is the mass admitting it is still an
+ * ordinary section. Ground and space do the separating.
  */
 
 const CLAIMS = [
@@ -41,16 +41,16 @@ const CLAIMS = [
 
 export function SpecStrip() {
   return (
-    <section className="bg-oxide-deep py-[var(--section)] text-limestone">
+    <section className="bg-oxide-deep pb-[var(--section-tight)] pt-[var(--section)] text-limestone">
       <Wall>
         <p className="text-datum uppercase text-limestone">Why us</p>
         <h2 className="mt-8 max-w-[16ch] text-mega uppercase text-limestone">
           We publish what other suppliers make you phone for.
         </h2>
 
-        <dl className="mt-20 grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-3">
+        <dl className="mt-12 grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-3">
           {CLAIMS.map((claim) => (
-            <div key={claim.title} className="animate-course-set border-t border-limestone/70 pt-8">
+            <div key={claim.title} className="animate-course-set">
               <dt className="text-h2 uppercase text-limestone">{claim.title}</dt>
               <dd className="mt-4 max-w-[42ch] text-body text-limestone">{claim.body}</dd>
             </div>

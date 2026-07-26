@@ -12,7 +12,7 @@ v0.2 inverts the approach. **The presence comes from what is left out.**
 - **Space is the product.** `--section` runs `clamp(5rem, 11vw, 9rem)` and every section uses it, so the page has one cadence.
 - **Photography does the work.** Full-bleed monochrome architecture, printed large and lit to be read, not dimmed to a texture.
 - **Type is quiet.** The whole scale came down roughly 30% with materially more leading.
-- **Oxide is a scalpel.** A rule, an arrow, a button. Never a field, never a pattern.
+- **Oxide is a scalpel, twice a mass.** Rules, arrows, buttons and marks everywhere. Then exactly two full oxide fields on the whole site, and never a pattern. See section 2b.
 
 **The brick pattern is retired.** Not "used sparingly", removed. `BondPattern` is deleted and must not come back.
 
@@ -78,7 +78,7 @@ Exactly three text colours per ground, all AA at any size. **There is no tertiar
 
 No text colour clears AA on a pure Fired Oxide field: Limestone reaches 3.48:1 and Graphite only 4.36:1, both short of the 4.5 body-copy floor. So `[data-ground="oxide"]` does not exist. A ground that cannot legally carry a paragraph is a trap, not a token.
 
-Sections that need to shout invert to Graphite and carry Oxide as a full-strength bond band instead. That is Oxide doing its actual job in the system.
+Sections that need to shout invert to Graphite. Two sections on the whole site go further and become an oxide field. See 2b.
 
 ### `--oxide-deep`, and when to use it
 
@@ -90,7 +90,21 @@ Use plain `--oxide` for everything non-text or large: pattern bars, hairlines, t
 
 Limestone is the default ground. `[data-ground="graphite"]` on any subtree inverts it, the way a real facebrick wall carries darker header courses.
 
-Oxide is **structural**: mark faces, pattern bars, fills, rules, progress. Never a tint, never a wash, never body text.
+Oxide is **structural**: mark faces, rules, fills, the focus ring. Never a tint, never a wash, never body text on pure oxide.
+
+### 2b. The oxide field
+
+An earlier version of this document said oxide must never be a field. That was wrong, and it produced a site whose brand colour appeared only in slivers under 3px wide. A colour that is never a mass is a colour nobody remembers.
+
+**Exactly two sections on the site are an oxide field**, and both carry the sentences a competitor could not have written: the home page proposition, and the standards correction on `/quality`. Two is a decision. One reads as a home page trick; three is a pattern, and patterns are retired here.
+
+Rules for a field:
+
+- **`--oxide-deep`, never `--oxide`.** Limestone on deep is 4.71:1 and carries body copy. Pure oxide is 3.48:1 and cannot.
+- **No opacity modifier on text, at all.** 4.71 leaves 0.21 of headroom, so even `text-limestone/95` drops to 4.41 and fails. Full limestone or nothing. `--ink-secondary` does not exist on this ground, so a field has one text colour and loses the primary/secondary distinction. That is the price.
+- **No hairlines inside it.** A rule inside a mass is the mass admitting it is still an ordinary section.
+- **Tighter than its neighbours.** A field that breathes exactly like every other section is a slab. Use `--section-tight` on its trailing edge.
+- It is not a `data-ground`, so anything nested that uses `text-ink` or `border-line` will render light-ground values on orange. Put literal colours in it.
 
 ## 3. Type
 
