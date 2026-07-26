@@ -14,19 +14,13 @@ import { Monogram } from "./monogram";
  * scales as a unit.
  */
 
-export function Wordmark({
-  descriptor = true,
-  className = "",
-}: {
-  descriptor?: boolean;
-  className?: string;
-}) {
+export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex flex-col leading-none ${className}`}>
       <span className="text-[1em] font-extrabold uppercase tracking-[0.012em]">Stonecrete</span>
-      {descriptor ? (
-        <span className="text-[0.58em] font-normal uppercase tracking-[0.19em]">Bricks</span>
-      ) : null}
+      {/* Never optional. Bare "Stonecrete" is a different company in
+          Johannesburg, so the descriptor is not a prop. See docs/brand.md. */}
+      <span className="text-[0.58em] font-normal uppercase tracking-[0.19em]">Bricks</span>
     </span>
   );
 }
@@ -37,13 +31,11 @@ export function Wordmark({
  */
 export function Lockup({
   orientation = "horizontal",
-  descriptor = true,
   variant = "colour",
   set = false,
   className = "",
 }: {
   orientation?: "horizontal" | "stacked";
-  descriptor?: boolean;
   variant?: "colour" | "on-dark";
   set?: boolean;
   className?: string;
@@ -61,7 +53,7 @@ export function Lockup({
         set={set}
         className={stacked ? "h-[2.1em] w-auto" : "h-[1.55em] w-auto"}
       />
-      <Wordmark descriptor={descriptor} className={stacked ? "items-center" : ""} />
+      <Wordmark className={stacked ? "items-center" : ""} />
     </span>
   );
 }

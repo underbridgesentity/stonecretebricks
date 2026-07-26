@@ -19,49 +19,20 @@ export const metadata: Metadata = {
 export default async function QuotePage({
   searchParams,
 }: {
-  searchParams: Promise<{ product?: string; quantity?: string }>;
+  searchParams: Promise<{ product?: string; quantity?: string; projectType?: string }>;
 }) {
-  const { product, quantity } = await searchParams;
-  const tel = telLink();
-  const wa = whatsappLink(
-    "Hi Stonecrete Bricks, I need a price on bricks.\n\nProduct: \nQuantity: \nSite address: \nDate needed: ",
-  );
+  const { product, quantity, projectType } = await searchParams;
 
-  return (
-    <>
-      <PageHead
-        eyebrow="Get a quote"
-        title="Tell us what you are building."
-        lead={`Send the quantity, the site address and the date you need it. We come back with a price, a lead time and a delivery cost, within ${COMPANY.responseHours.value} business hours.`}
-        aside={
-          <div className="flex flex-col gap-3">
-            {wa ? (
-              <a
-                href={wa}
-                className="inline-flex h-12 items-center justify-center gap-2 border border-line-strong px-6 text-datum-strong uppercase text-ink transition-colors hover:bg-ink hover:text-ground"
-              >
-                <Whatsapp width={18} height={18} />
-                WhatsApp instead
-              </a>
-            ) : (
-              <Pending>WhatsApp number</Pending>
-            )}
-            {tel ? (
-              <a
-                href={tel}
-                className="inline-flex h-12 items-center justify-center gap-2 border border-line-strong px-6 text-datum-strong uppercase text-ink transition-colors hover:bg-ink hover:text-ground"
-              >
-                <Phone width={18} height={18} />
-                Call us
-              </a>
-            ) : (
-              <Pending>Phone number</Pending>
-            )}
-          </div>
-        }
-      />
+  /*
+   * Someone arriving from a product page has already chosen, so the calculator
+   * is 1 000px of scrolling between them and the form. Lead with the form in
+   * that case and drop the calculator below it. The calculator only needs to
+   * come first for a visitor who has not decided yet.
+   */
+  const decided = Boolean(product);
 
-      {/* Calculator, so the quantity in the form is a real one. */}
+  /* Carried as a value so a decided buyer meets the form first. */
+  const calculatorSection = (
       <section id="calculator" className="scroll-mt-28 border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="02" label="Not sure how many" />
@@ -77,8 +48,9 @@ export default async function QuotePage({
           <Calculator />
         </Wall>
       </section>
+  );
 
-      {/* The form */}
+  const formSection = (
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Your enquiry" />
@@ -87,7 +59,11 @@ export default async function QuotePage({
         <Wall className="mt-10">
           <Course className="gap-y-12">
             <Stretcher span="measure">
-              <EnquiryForm defaultProduct={product} defaultQuantity={quantity} />
+              <EnquiryForm
+                defaultProduct={product}
+                defaultQuantity={quantity}
+                defaultProjectType={projectType}
+              />
             </Stretcher>
 
             <Stretcher span="complement" className="md:pl-8">
@@ -123,6 +99,57 @@ export default async function QuotePage({
           </Course>
         </Wall>
       </section>
+  );
+  const tel = telLink();
+  const wa = whatsappLink(
+    "Hi Stonecrete Bricks, I need a price on bricks.\n\nProduct: \nQuantity: \nSite address: \nDate needed: ",
+  );
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Get a quote"
+        title="Tell us what you are building."
+        lead={`Send the quantity, the suburb and the date you need it. We come back with a price, a lead time and a delivery cost, within ${COMPANY.responseHours.value} business hours.`}
+        aside={
+          <div className="flex flex-col gap-3">
+            {wa ? (
+              <a
+                href={wa}
+                className="inline-flex h-12 items-center justify-center gap-2 border border-line-strong px-6 text-datum-strong uppercase text-ink transition-colors hover:bg-ink hover:text-ground"
+              >
+                <Whatsapp width={18} height={18} />
+                WhatsApp instead
+              </a>
+            ) : (
+              <Pending>WhatsApp number</Pending>
+            )}
+            {tel ? (
+              <a
+                href={tel}
+                className="inline-flex h-12 items-center justify-center gap-2 border border-line-strong px-6 text-datum-strong uppercase text-ink transition-colors hover:bg-ink hover:text-ground"
+              >
+                <Phone width={18} height={18} />
+                Call us
+              </a>
+            ) : (
+              <Pending>Phone number</Pending>
+            )}
+          </div>
+        }
+      />
+
+      {decided ? (
+        <>
+          {formSection}
+          {calculatorSection}
+        </>
+      ) : (
+        <>
+          {calculatorSection}
+          {formSection}
+        </>
+      )}
     </>
   );
 }

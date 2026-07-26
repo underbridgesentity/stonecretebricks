@@ -23,7 +23,7 @@ export default function NotFound() {
                 <Arrow width={16} height={16} />
               </ButtonLink>
               <ButtonLink href="/quote" variant="outline">
-                Get a quote
+                Request a quote
               </ButtonLink>
             </div>
           </Stretcher>

@@ -22,9 +22,11 @@ import { PRODUCTS } from "@/data/products";
 export function EnquiryForm({
   defaultProduct,
   defaultQuantity,
+  defaultProjectType,
 }: {
   defaultProduct?: string;
   defaultQuantity?: string;
+  defaultProjectType?: string;
 }) {
   const [state, action, pending] = useActionState<EnquiryState, FormData>(submitEnquiry, {});
   const errors = state.errors ?? {};
@@ -180,7 +182,7 @@ export function EnquiryForm({
             <TextInput id="needed" name="needed" type="date" defaultValue={state.values?.needed} />
           </Field>
           <Field label="What are you building?" htmlFor="projectType">
-            <Select id="projectType" name="projectType" defaultValue="">
+            <Select id="projectType" name="projectType" defaultValue={defaultProjectType ?? ""}>
               <option value="">Choose one, if you know</option>
               <option value="house">House or extension</option>
               <option value="boundary-wall">Boundary wall</option>

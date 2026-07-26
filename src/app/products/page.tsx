@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHead } from "@/components/sections/page-head";
+import { CoverageTable } from "@/components/sections/calculator";
 import { ProductBrick } from "@/components/sections/product-wall";
 import { QuoteCta } from "@/components/sections/quote-cta";
 import { ButtonLink } from "@/components/ui/button";
 import { CourseRule } from "@/components/ui/course-rule";
 import { Arrow } from "@/components/ui/glyph";
 import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { minimumInUnits } from "@/lib/calculator";
 import { number } from "@/lib/format";
 import {
   formatDimensions,
@@ -27,7 +29,12 @@ export const metadata: Metadata = {
 const ROUTES = [
   {
     question: "Building a house or a boundary wall?",
-    answer: "Stock bricks for general work, maxi bricks if you want the walls up faster.",
+    answer: "Stock bricks. The default unit for general walling, and the cheapest per square metre.",
+    slug: "stock-bricks",
+  },
+  {
+    question: "Want the same walls up faster?",
+    answer: "Maxi bricks. A third fewer units to lay, and less mortar to mix and carry.",
     slug: "maxi-bricks",
   },
   {
@@ -56,94 +63,6 @@ export default function ProductsPage() {
           </ButtonLink>
         }
       />
-
-      {/* Comparison table. The money page for an undecided buyer. */}
-      <section className="border-t border-line py-[var(--section)]">
-        <Wall>
-          <CourseRule datum="02" label="Side by side" />
-
-          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
-            Everything on one table.
-          </h2>
-
-          <div className="mt-12 w-full overflow-x-auto">
-            <table className="w-full min-w-[46rem] border-collapse text-left">
-              <caption className="sr-only">
-                Comparison of Stonecrete Bricks concrete products
-              </caption>
-              <thead>
-                <tr className="border-b border-line-strong">
-                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
-                    Specification
-                  </th>
-                  {PRODUCTS.map((p) => (
-                    <th key={p.slug} scope="col" className="py-4 pr-4 align-bottom">
-                      <Link href={`/products/${p.slug}`} className="text-h3 uppercase text-ink">
-                        {p.name}
-                      </Link>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <Row label="Standard" cells={PRODUCTS.map((p) => p.standard)} />
-                <Row label="Size (L x W x H)" cells={PRODUCTS.map((p) => formatDimensions(p))} />
-                <Row
-                  label="Strength"
-                  cells={PRODUCTS.map((p) =>
-                    p.nominalStrength
-                      ? `${p.nominalStrength.value} MPa`
-                      : (p.paverClass?.value ?? "Confirming"),
-                  )}
-                />
-                <Row
-                  label="Units per m²"
-                  cells={PRODUCTS.map((p) => unitsPerSquareMetre(p).toFixed(1))}
-                />
-                <Row
-                  label="Units per pallet"
-                  cells={PRODUCTS.map((p) => number(p.unitsPerPallet.value))}
-                />
-                <Row
-                  label="m² per pallet"
-                  cells={PRODUCTS.map((p) => squareMetresPerPallet(p).toFixed(1))}
-                />
-                <Row label="Mass per unit" cells={PRODUCTS.map((p) => `${p.massPerUnit.value} kg`)} />
-                <Row
-                  label="Minimum order"
-                  cells={PRODUCTS.map((p) => `${number(p.moq.value.qty)} ${p.moq.value.unit}`)}
-                />
-                <Row
-                  label="Lead time"
-                  cells={PRODUCTS.map((p) => `${p.leadTimeDays.value} working days`)}
-                />
-              </tbody>
-            </table>
-          </div>
-
-          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
-            Every figure above is a South African industry standard awaiting confirmation against
-            our own units and test certificates. Ask us for the certificate before you specify.
-            Coverage and pallet figures are derived from the unit size, so they move the moment a
-            dimension is confirmed.
-          </p>
-        </Wall>
-      </section>
-
-      {/* The four, in running bond. */}
-      <section className="border-t border-line py-[var(--section)]">
-        <Wall>
-          <CourseRule datum="03" label="The range" />
-        </Wall>
-
-        <Wall className="mt-14">
-          <div className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2">
-            {PRODUCTS.map((product, i) => (
-              <ProductBrick key={product.slug} product={product} index={i} />
-            ))}
-          </div>
-        </Wall>
-      </section>
 
       {/* Which one do I need */}
       <section className="border-t border-line py-[var(--section)]">
@@ -177,6 +96,108 @@ export default function ProductsPage() {
         </Wall>
       </section>
 
+      {/* The four, in running bond. */}
+      <section className="border-t border-line py-[var(--section)]">
+        <Wall>
+          <CourseRule datum="03" label="The range" />
+        </Wall>
+
+        <Wall className="mt-14">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2">
+            {PRODUCTS.map((product, i) => (
+              <ProductBrick key={product.slug} product={product} index={i} />
+            ))}
+          </div>
+
+          <div className="mt-16 max-w-[42ch]">
+            <CoverageTable />
+          </div>
+        </Wall>
+      </section>
+
+      {/* Comparison table. The money page for an undecided buyer. */}
+      <section className="border-t border-line py-[var(--section)]">
+        <Wall>
+          <CourseRule datum="02" label="Side by side" />
+
+          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
+            Everything on one table.
+          </h2>
+
+          <p className="mt-12 text-small text-ink-secondary md:hidden">
+            Swipe the table sideways to compare all four.
+          </p>
+
+          <div className="mt-4 w-full overflow-x-auto md:mt-12">
+            <table className="w-full min-w-[46rem] border-collapse text-left">
+              <caption className="sr-only">
+                Comparison of Stonecrete Bricks concrete products
+              </caption>
+              <thead>
+                <tr className="border-b border-line-strong">
+                  <th
+                    scope="col"
+                    className="sticky left-0 z-10 bg-ground py-5 pr-6 align-baseline text-datum uppercase text-ink-secondary"
+                  >
+                    Specification
+                  </th>
+                  {PRODUCTS.map((p) => (
+                    <th key={p.slug} scope="col" className="py-5 pr-6 align-baseline">
+                      <Link href={`/products/${p.slug}`} className="text-h3 uppercase text-ink">
+                        {p.name}
+                      </Link>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <Row label="Standard" cells={PRODUCTS.map((p) => p.standard)} />
+                <Row label="Size (L x W x H)" cells={PRODUCTS.map((p) => formatDimensions(p))} />
+                <Row
+                  label="Strength"
+                  cells={PRODUCTS.map((p) =>
+                    p.nominalStrength
+                      ? `${p.nominalStrength.value} MPa`
+                      : (p.paverClass?.value ?? "Confirming"),
+                  )}
+                />
+                <Row
+                  label="Units per m²"
+                  cells={PRODUCTS.map((p) => unitsPerSquareMetre(p).toFixed(1))}
+                />
+                <Row
+                  label="Units per pallet"
+                  cells={PRODUCTS.map((p) => number(p.unitsPerPallet.value))}
+                />
+                <Row
+                  label="m² per pallet"
+                  cells={PRODUCTS.map((p) => squareMetresPerPallet(p).toFixed(1))}
+                />
+                <Row label="Mass per unit" cells={PRODUCTS.map((p) => `${p.massPerUnit.value} kg`)} />
+                <Row
+                  label="Minimum order"
+                  cells={PRODUCTS.map(
+                    (p) =>
+                      `${number(p.moq.value.qty)} ${p.moq.value.unit} (${number(minimumInUnits(p))} units)`,
+                  )}
+                />
+                <Row
+                  label="Lead time"
+                  cells={PRODUCTS.map((p) => `${p.leadTimeDays.value} working days`)}
+                />
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
+            Every figure above is a South African industry standard awaiting confirmation against
+            our own units and test certificates. Ask us for the certificate before you specify.
+            Coverage and pallet figures are derived from the unit size, so they move the moment a
+            dimension is confirmed.
+          </p>
+        </Wall>
+      </section>
+
       {/* Custom */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
@@ -206,7 +227,10 @@ export default function ProductsPage() {
 function Row({ label, cells }: { label: string; cells: readonly string[] }) {
   return (
     <tr className="border-b border-line">
-      <th scope="row" className="py-5 pr-6 align-top text-small font-normal text-ink-secondary">
+      <th
+        scope="row"
+        className="sticky left-0 z-10 bg-ground py-5 pr-6 align-top text-small font-normal text-ink-secondary"
+      >
         {label}
       </th>
       {cells.map((cell, i) => (

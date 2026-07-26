@@ -83,11 +83,25 @@ export async function submitEnquiry(
   }
 
   const now = new Date();
-  const ref = reference(now, Math.floor(now.getTime() / 1000));
+  const ref = reference(now, now.getTime());
 
-  // 1. Record. Replace with durable storage before launch, see docs.
+  /*
+   * 1. Record.
+   *
+   * STILL OUTSTANDING: this writes to the log, not to storage. For a business
+   * whose only pipeline is this form, a dropped enquiry is the most expensive
+   * failure on the site, and a log line ages out. Provisioning a store is the
+   * client's call, so the guard below at least makes a misconfiguration loud
+   * rather than silent.
+   */
   const record = { ref, receivedAt: now.toISOString(), ...parsed.data };
   console.info("[enquiry]", JSON.stringify(record, null, 2));
+
+  if (process.env.NODE_ENV === "production" && !process.env.RESEND_API_KEY) {
+    console.error(
+      `[enquiry] CRITICAL ${ref} exists only in this log line. RESEND_API_KEY is unset in production, so nobody has been told about it.`,
+    );
+  }
 
   // 2. Notify.
   await notify(record);

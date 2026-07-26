@@ -54,8 +54,9 @@ export function SpecTable({
                     {row.value}
                     {row.unit ? <span className="font-normal text-ink-secondary"> {row.unit}</span> : null}
                     {row.assumed ? (
-                      <sup className="ml-1 text-datum font-normal text-ink-accent" aria-label="provisional">
-                        &dagger;
+                      <sup className="ml-1 text-datum font-normal text-ink-accent">
+                        <span aria-hidden>&dagger;</span>
+                        <span className="sr-only"> provisional</span>
                       </sup>
                     ) : null}
                   </>

@@ -55,7 +55,9 @@ export default function RootLayout({
         <OrganisationSchema />
         <SkipLink />
         <SiteHeader />
-        <main id="main">{children}</main>
+        <main id="main" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>

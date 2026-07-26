@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 style={{ animationDelay: "340ms" }}
               >
                 <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide">
-                  Get a quote
+                  Request a quote
                   <Arrow width={16} height={16} />
                 </ButtonLink>
                 <ButtonLink href="/quote#calculator" variant="outline">
@@ -233,8 +233,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </Stretcher>
             <Stretcher span="quarter">
               <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide">
-                Get a quote
-                <Arrow width={16} height={16} />
+                  Request a quote
+                  <Arrow width={16} height={16} />
               </ButtonLink>
             </Stretcher>
           </Course>
@@ -255,7 +255,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <h3 className="text-h3 uppercase text-ink">{other.name}</h3>
                 <p className="text-small text-ink-secondary">{other.positioning}</p>
                 <span className="mt-auto inline-flex items-center gap-2 pt-4 text-datum-strong uppercase text-ink-accent">
-                  View
+                  Specifications
                   <Arrow
                     width={16}
                     height={16}

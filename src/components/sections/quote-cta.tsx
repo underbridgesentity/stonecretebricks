@@ -6,7 +6,7 @@ import { COMPANY, telLink, whatsappLink } from "@/data/company";
 /** The closing course. One statement, three ways to act, nothing else. */
 export function QuoteCta({
   heading = "Tell us what you are building.",
-  body = "Send the quantity, the site address and the date you need it. A price, a lead time and a delivery cost come back together.",
+  body = "Send the quantity, the suburb and the date you need it. A price, a lead time and a delivery cost come back together.",
 }: {
   heading?: string;
   body?: string;
