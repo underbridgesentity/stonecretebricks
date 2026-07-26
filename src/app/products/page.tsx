@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHead } from "@/components/sections/page-head";
-import { CoverageTable } from "@/components/sections/calculator";
 import { ProductBrick } from "@/components/sections/product-wall";
 import { QuoteCta } from "@/components/sections/quote-cta";
 import { ButtonLink } from "@/components/ui/button";
@@ -25,30 +24,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products" },
 };
 
-/** The three routing questions, for buyers who do not know what they need. */
-const ROUTES = [
-  {
-    question: "Building a house or a boundary wall?",
-    answer: "Stock bricks. The default unit for general walling, and the cheapest per square metre.",
-    slug: "stock-bricks",
-  },
-  {
-    question: "Want the same walls up faster?",
-    answer: "Maxi bricks. A third fewer units to lay, and less mortar to mix and carry.",
-    slug: "maxi-bricks",
-  },
-  {
-    question: "Building something big, or something that needs to breathe?",
-    answer: "Hollow blocks. Lighter, cheaper per square metre, better thermally.",
-    slug: "hollow-blocks",
-  },
-  {
-    question: "Laying a driveway or a walkway?",
-    answer: "Paving bricks, graded on SANS 1058 rather than compressive strength.",
-    slug: "paving-bricks",
-  },
-];
-
 export default function ProductsPage() {
   return (
     <>
@@ -64,42 +39,10 @@ export default function ProductsPage() {
         }
       />
 
-      {/* Which one do I need */}
+            {/* The four, in running bond. */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="Not sure which one" />
-
-          <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
-            Four questions and you will know.
-          </h2>
-
-          <div className="mt-12 flex flex-col">
-            {ROUTES.map((route, i) => (
-              <Link
-                key={route.slug}
-                href={`/products/${route.slug}`}
-                className="group flex flex-col gap-2 border-t border-line py-6 transition-colors hover:bg-ground-2 md:flex-row md:items-baseline md:gap-8"
-              >
-                <span className="w-10 shrink-0 text-datum uppercase text-ink-secondary">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="flex-1 text-h2 uppercase text-ink">{route.question}</span>
-                <span className="flex-1 text-body text-ink-secondary">{route.answer}</span>
-                <Arrow
-                  width={20}
-                  height={20}
-                  className="shrink-0 text-ink-accent transition-transform group-hover:translate-x-1"
-                />
-              </Link>
-            ))}
-          </div>
-        </Wall>
-      </section>
-
-      {/* The four, in running bond. */}
-      <section className="border-t border-line py-[var(--section)]">
-        <Wall>
-          <CourseRule datum="03" label="The range" />
+          <CourseRule label="The range" />
         </Wall>
 
         <Wall className="mt-14">
@@ -108,17 +51,13 @@ export default function ProductsPage() {
               <ProductBrick key={product.slug} product={product} index={i} />
             ))}
           </div>
-
-          <div className="mt-16 max-w-[30ch]">
-            <CoverageTable />
-          </div>
         </Wall>
       </section>
 
       {/* Comparison table. The money page for an undecided buyer. */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="Side by side" />
+          <CourseRule label="Side by side" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Everything on one table.

@@ -32,7 +32,7 @@ export default function ContactPage() {
       {/* Channels */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="How to reach us" />
+          <CourseRule label="How to reach us" />
 
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2 lg:grid-cols-4">
             <Channel
@@ -73,7 +73,7 @@ export default function ContactPage() {
       {/* Hours */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="Trading hours" tone="oxide" />
+          <CourseRule label="Trading hours" tone="oxide" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -106,7 +106,7 @@ export default function ContactPage() {
       {/* Directions */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="Finding us" />
+          <CourseRule label="Finding us" />
 
           <Course className="mt-12 gap-y-8">
             <Stretcher span="half">

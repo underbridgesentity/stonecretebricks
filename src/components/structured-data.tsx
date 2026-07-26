@@ -70,7 +70,7 @@ export function OrganisationSchema() {
     alternateName: ["Stone Crete Bricks"],
     url: SITE_URL,
     logo: `${SITE_URL}/icon.svg`,
-    image: `${SITE_URL}/images/site/plant.jpg`,
+    image: `${SITE_URL}/images/site/blockwork.jpg`,
     description:
       "South African manufacturer of concrete stock bricks, maxi bricks, hollow blocks and paving bricks, made to SANS 1215 and SANS 1058.",
     areaServed: COMPANY.region.value

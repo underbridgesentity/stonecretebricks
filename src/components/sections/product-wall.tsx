@@ -45,14 +45,11 @@ export function ProductBrick({ product, index }: { product: Product; index: numb
         alt="A grey concrete unit photographed against a plain backdrop"
         sizes="(min-width: 1200px) 540px, (min-width: 640px) calc(50vw - 60px), calc(100vw - 48px)"
         ratio="wide"
-        className="extrude"
+        className="extrude border border-line"
       />
 
-      <div className="mt-6 flex items-baseline justify-between gap-4 border-t border-line pt-5">
+      <div className="mt-6 border-t border-line pt-5">
         <h3 className="text-h2 uppercase text-ink">{product.name}</h3>
-        <span className="text-datum uppercase text-ink-secondary">
-          {String(index + 1).padStart(2, "0")}
-        </span>
       </div>
 
       <p className="mt-3 max-w-[32ch] text-body text-ink-secondary">{product.positioning}</p>

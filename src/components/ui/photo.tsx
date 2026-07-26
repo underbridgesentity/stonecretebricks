@@ -7,15 +7,14 @@ import Image from "next/image";
  * `sizes` is REQUIRED, not optional. A wrong sizes value is the single biggest
  * cause of oversized downloads and it is invisible in review, so the type
  * system asks for it every time.
- *
- * The scrim is the only linear-gradient in the codebase.
+
  */
 
 const ratios = {
-  /** 3:1 on desktop, opening up on narrow screens. At a flat 3:1 these bands
-      render 107 to 138px tall on a phone, which is a sliver, and a 3:2 source
-      loses half its height to the crop. */
-  brick: "aspect-[3/2] sm:aspect-[2/1] lg:aspect-[3/1]",
+  /** 2:1 on phones so the band is not a 130px sliver, 3:1 from lg.
+      Never taller than the source: the 2:1 photograph cannot fill a 3:2 box
+      without the browser upscaling it, which it was doing by 1.26x. */
+  brick: "aspect-[2/1] lg:aspect-[3/1]",
   /** 16:9, for wide bands. */
   course: "aspect-[16/9]",
   /** 4:3, for product renders. */
@@ -39,7 +38,6 @@ export function Photo({
   ratio = "course",
   priority = false,
   quality,
-  scrim = false,
   className = "",
   imageClassName = "",
 }: {
@@ -50,7 +48,6 @@ export function Photo({
   priority?: boolean;
   /** Only for noisy textures where the default over-encodes. See next.config. */
   quality?: number;
-  scrim?: boolean;
   className?: string;
   imageClassName?: string;
 }) {
@@ -65,12 +62,6 @@ export function Photo({
         quality={quality}
         className={`object-cover ${imageClassName}`}
       />
-      {scrim ? (
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/30 to-transparent"
-        />
-      ) : null}
     </div>
   );
 }

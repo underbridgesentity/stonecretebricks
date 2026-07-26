@@ -57,7 +57,11 @@ const PAIRS = [
   ["--ink on graphite", LIMESTONE, GRAPHITE, 4.5],
   ["--ink-secondary on graphite", CEMENT, GRAPHITE, 4.5],
   ["--ink-accent on graphite", oxideLift, GRAPHITE, 4.5],
-  ["limestone on --oxide-deep (buttons)", LIMESTONE, oxideDeep, 4.5],
+  ["limestone on --oxide-deep (buttons, oxide field)", LIMESTONE, oxideDeep, 4.5],
+  // The oxide field has 0.21 of headroom, so an opacity modifier on text there
+  // fails immediately. These two prove it rather than leaving it to memory.
+  ["limestone/95 on --oxide-deep (must FAIL)", mix(LIMESTONE, oxideDeep, 95), oxideDeep, 0],
+  ["limestone/70 rule on --oxide-deep", mix(LIMESTONE, oxideDeep, 70), oxideDeep, 3.0],
   ["oxide rules on limestone", OXIDE, LIMESTONE, 3.0],
   ["oxide bars on graphite", OXIDE, GRAPHITE, 3.0],
   ["focus ring on limestone", OXIDE, LIMESTONE, 3.0],

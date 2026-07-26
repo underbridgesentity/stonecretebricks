@@ -31,16 +31,13 @@ export function Hero() {
         className="object-cover object-[62%_center]"
       />
 
-      {/* Two scrims, weighted left and low so the copy holds contrast while the
-          architecture stays legible. The photograph is the premium here, so it
-          is lit to be read rather than dimmed to a texture. */}
+      {/* One scrim, not two. Stacked, they multiplied to roughly 95% graphite
+          in the bottom left, exactly where the type sits, which dimmed the
+          photograph to a texture. A single diagonal holds the copy and lets
+          more of the building read. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/45 to-graphite/10"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-graphite/90 via-graphite/45 to-transparent"
+        className="absolute inset-0 bg-[linear-gradient(105deg,var(--graphite)_0%,color-mix(in_srgb,var(--graphite)_78%,transparent)_38%,color-mix(in_srgb,var(--graphite)_30%,transparent)_72%,transparent_100%)]"
       />
 
       <Wall className="relative pb-16 pt-20 sm:pt-28 md:pb-24 md:pt-40">

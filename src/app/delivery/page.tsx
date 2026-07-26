@@ -49,7 +49,7 @@ export default function DeliveryPage() {
       {/* Zones */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="Where we deliver" />
+          <CourseRule label="Where we deliver" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Zones, minimums and lead times.
@@ -86,7 +86,7 @@ export default function DeliveryPage() {
                   <tr key={zone.zone}>
                     <th
                       scope="row"
-                      className="py-4 pr-4 align-top text-body font-extrabold text-ink"
+                      className="sticky left-0 z-10 border-b border-r border-line bg-ground py-5 pr-6 align-top text-body font-extrabold text-ink"
                     >
                       {zone.zone}
                     </th>
@@ -116,7 +116,7 @@ export default function DeliveryPage() {
       {/* Loads */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="What fits on a load" tone="oxide" />
+          <CourseRule label="What fits on a load" tone="oxide" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -151,7 +151,7 @@ export default function DeliveryPage() {
       {/* Site requirements */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="What you need on site" />
+          <CourseRule label="What you need on site" />
 
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             {SITE_REQUIREMENTS.map((req) => (
@@ -167,7 +167,7 @@ export default function DeliveryPage() {
       {/* Breakage policy. Nobody publishes this. */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="05" label="If something goes wrong" />
+          <CourseRule label="If something goes wrong" />
 
           <Course className="mt-12 gap-y-8">
             <Stretcher span="half">

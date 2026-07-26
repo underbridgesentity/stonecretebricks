@@ -35,7 +35,7 @@ export default async function QuotePage({
   const calculatorSection = (
       <section id="calculator" className="scroll-mt-28 border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="Not sure how many" />
+          <CourseRule label="Not sure how many" />
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Work it out first.
           </h2>
@@ -53,7 +53,7 @@ export default async function QuotePage({
   const formSection = (
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="Your enquiry" />
+          <CourseRule label="Your enquiry" />
         </Wall>
 
         <Wall className="mt-10">
@@ -109,7 +109,7 @@ export default async function QuotePage({
     <>
       <PageHead
         eyebrow="Get a quote"
-        title="Tell us what you are building."
+        title="Send us the quantities."
         lead={`Send the quantity, the suburb and the date you need it. We come back with a price, a lead time and a delivery cost, within ${COMPANY.responseHours.value} business hours.`}
         aside={
           <div className="flex flex-col gap-3">

@@ -24,8 +24,6 @@ export function CourseRule({
   tone = "line",
   className = "",
 }: {
-  /** Retained so existing call sites keep compiling. Not rendered. */
-  datum?: string;
   label?: string;
   tone?: Tone;
   className?: string;

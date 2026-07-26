@@ -44,7 +44,7 @@ export default function QualityPage() {
       {/* The standards */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="The standards that apply" />
+          <CourseRule label="The standards that apply" />
 
           <div className="mt-12 flex flex-col">
             {STANDARDS.map((standard) => (
@@ -76,7 +76,7 @@ export default function QualityPage() {
       {/* The SABS correction. The highest-credibility copy on the site. */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="A note on wording" tone="oxide" />
+          <CourseRule label="A note on wording" tone="oxide" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -112,7 +112,7 @@ export default function QualityPage() {
       {/* Test regime */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="What we test" />
+          <CourseRule label="What we test" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -151,7 +151,7 @@ export default function QualityPage() {
       {/* Certificates and membership */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="05" label="Independent verification" />
+          <CourseRule label="Independent verification" />
 
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             <Module className="flex flex-col gap-4 p-8">

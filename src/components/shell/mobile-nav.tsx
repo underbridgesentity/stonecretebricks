@@ -30,6 +30,29 @@ export function MobileNav() {
   const tel = telLink();
   const wa = whatsappLink("Hi Stonecrete Bricks, I need a price on bricks.");
 
+  /*
+   * Close when the viewport crosses into the desktop breakpoint.
+   *
+   * The panel is `lg:hidden`, and nothing watched the viewport. Rotating an
+   * iPad from portrait to landscape crosses 768 to 1024 with the menu open,
+   * at which point the panel is display:none while body overflow is still
+   * hidden, header/main/footer are still inert, and the trigger is both
+   * lg:hidden and inside the inert header. Nothing scrolls, nothing is
+   * clickable, and only Escape or a reload recovers it. Same failure class as
+   * the inert bug, reached a different way.
+   */
+  useEffect(() => {
+    if (!open) return;
+    // Only the transition matters. Being open at lg on mount is unreachable,
+    // because the trigger that sets it is itself lg:hidden.
+    const desktop = window.matchMedia("(min-width: 64rem)");
+    const onChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
+    desktop.addEventListener("change", onChange);
+    return () => desktop.removeEventListener("change", onChange);
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
 

@@ -78,25 +78,3 @@ export function SpecTable({
   );
 }
 
-/** A large tabular figure over a datum caption. Used in proof strips. */
-export function Figure({
-  value,
-  unit,
-  label,
-  className = "",
-}: {
-  value: string;
-  unit?: string;
-  label: string;
-  className?: string;
-}) {
-  return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      <p className="text-figure text-ink" data-figure>
-        {value}
-        {unit ? <span className="text-h3 font-normal text-ink-secondary"> {unit}</span> : null}
-      </p>
-      <p className="text-datum uppercase text-ink-secondary">{label}</p>
-    </div>
-  );
-}

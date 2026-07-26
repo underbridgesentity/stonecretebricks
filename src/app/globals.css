@@ -45,6 +45,9 @@
 
   /* ---- Vertical rhythm. Sections breathe: this is most of the premium. */
   --section: clamp(5rem, 11vw, 9rem);
+  /* For a section carrying one idea. Expensive layouts vary the air with the
+     weight of the content; uniform padding is what reads as assembled. */
+  --section-tight: clamp(3rem, 6vw, 5rem);
 
   /* ---- Motion. House doctrine: 120 hover, 200 reveal, 300 sheet. */
   --dur-hover: 120ms;
@@ -84,13 +87,16 @@
 }
 
 /*
- * There is deliberately no [data-ground="oxide"].
+ * There is deliberately no [data-ground="oxide"], but there IS one oxide field.
  *
- * No text colour clears AA on a pure oxide field: limestone reaches 3.48:1 and
- * graphite only 4.36:1, both short of 4.5 for body copy. Rather than ship a
- * ground that is a trap, oxide stays structural, exactly as the design system
- * says: bars, rules, fills and the mark. Sections that need to shout invert to
- * graphite and carry oxide as pattern.
+ * No text colour clears AA on a PURE oxide ground: limestone reaches 3.48:1 and
+ * graphite only 4.36:1, both short of 4.5 for body copy. So pure --oxide stays
+ * structural: rules, arrows, the mark's lit face, the focus ring.
+ *
+ * --oxide-deep is the exception, at 4.71:1 with limestone. It carries the one
+ * section per page that is allowed to become a mass, because a brand colour
+ * that only ever appears as a 1px hairline is a brand colour nobody remembers.
+ * One field per page. Two would be a pattern, and patterns are retired here.
  */
 
 @theme inline {
@@ -352,6 +358,20 @@
     background: #ffffff !important;
   }
 
+  /*
+   * Oxide surfaces carry literal `text-limestone`, not a ground token, so the
+   * graphite remap above never reached them. Browsers drop background colour
+   * in print but always print colour, so the home page's largest statement and
+   * every primary button were printing near-white on white paper.
+   */
+  .bg-oxide-deep,
+  .bg-oxide,
+  .text-limestone {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    border-color: #cccccc !important;
+  }
+
   :root {
     --section: 1.5rem;
   }
@@ -376,16 +396,6 @@
     font-size: 10pt;
   }
 
-  a[href]::after {
-    content: " (" attr(href) ")";
-    font-size: 9pt;
-    color: #4a4a4a;
-  }
-
-  a[href^="#"]::after,
-  a[href^="/"]::after {
-    content: "";
-  }
 }
 
 @layer base {

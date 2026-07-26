@@ -97,7 +97,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   Request a quote
                   <Arrow width={16} height={16} />
                 </ButtonLink>
-                <ButtonLink href="/quote#calculator" variant="outline">
+                <ButtonLink href={`/quote?product=${product.slug}#calculator`} variant="outline">
                   Calculate quantity
                 </ButtonLink>
               </div>
@@ -119,7 +119,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Specification */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="01" label="Specification" />
+          <CourseRule label="Specification" />
 
           <Course className="mt-12 gap-y-12">
             <Stretcher span="half">
@@ -162,10 +162,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </Wall>
       </section>
 
-      {/* Applications */}
-      <section className="border-t border-line py-[var(--section)]">
+      {/* Applications. Tight: four chips do not justify a full band. */}
+      <section className="border-t border-line py-[var(--section-tight)]">
         <Wall>
-          <CourseRule datum="02" label="What it is for" />
+          <CourseRule label="What it is for" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Features */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="Why builders choose it" tone="oxide" />
+          <CourseRule label="Why builders choose it" tone="oxide" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Four reasons, spelled out.
@@ -215,7 +215,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Ordering */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="Ordering" />
+          <CourseRule label="Ordering" />
 
           <Course className="mt-12 items-end gap-y-8">
             <Stretcher span="half">
@@ -245,7 +245,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Related */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="05" label="The rest of the range" />
+          <CourseRule label="The rest of the range" />
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-3">
             {others.map((other) => (
               <Link

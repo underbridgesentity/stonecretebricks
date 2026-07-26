@@ -46,8 +46,8 @@ export default function AboutPage() {
       />
 
       <Photo
-        src="/images/site/built.jpg"
-        alt="A row of newly completed masonry houses in raking late afternoon light"
+        src="/images/site/blockwork.jpg"
+        alt="A modern house built in grey concrete masonry block, hard afternoon shadow across the wall"
         sizes="100vw"
         ratio="brick"
       />
@@ -55,7 +55,7 @@ export default function AboutPage() {
       {/* Why we started */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="Why we started" />
+          <CourseRule label="Why we started" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -81,7 +81,7 @@ export default function AboutPage() {
       {/* Vision */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="Our vision" tone="oxide" />
+          <CourseRule label="Our vision" tone="oxide" />
           <p className="mt-10 max-w-[22ch] text-display uppercase text-ink">
             To be the supplier a contractor phones first, because the specification is published,
             the load arrives on the day, and the certificate is in the file.
@@ -92,7 +92,7 @@ export default function AboutPage() {
       {/* Mission */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="What we hold ourselves to" />
+          <CourseRule label="What we hold ourselves to" />
 
           <div className="mt-12 flex flex-col">
             {MISSION.map((item, i) => (
@@ -120,7 +120,7 @@ export default function AboutPage() {
       {/* The people */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="05" label="The people" />
+          <CourseRule label="The people" />
 
           <Course className="mt-12 gap-y-8">
             <Stretcher span="half">

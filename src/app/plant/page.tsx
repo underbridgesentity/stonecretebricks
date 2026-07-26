@@ -4,7 +4,6 @@ import { PageHead } from "@/components/sections/page-head";
 import { QuoteCta } from "@/components/sections/quote-cta";
 import { CourseRule } from "@/components/ui/course-rule";
 import { Pending } from "@/components/ui/pending";
-import { Photo } from "@/components/ui/photo";
 import { Course, Stretcher, Wall } from "@/components/ui/wall";
 import { addressLine, PROCESS } from "@/data/company";
 
@@ -34,17 +33,28 @@ export default function PlantPage() {
         lead="Most brick suppliers will not show you the yard. We will. This is where your order gets batched, pressed, cured and stacked, and you are welcome to stand and watch it happen before you place one."
       />
 
-      <Photo
-        src="/images/site/plant.jpg"
-        alt="Stacks of cured concrete units on pallets inside the plant, lit by a shaft of daylight"
-        sizes="100vw"
-        ratio="brick"
-      />
+      {/* No photograph here on purpose. This page invites the reader to come
+          and inspect the yard, and illustrating that invitation with a stock
+          factory interior is exactly the kind of borrowed credibility the rest
+          of the site refuses. A Pending marker is more honest, and it is the
+          same device used for every other fact the client owes us. */}
+      <Wall className="pt-[var(--section-tight)]">
+        <div className="border border-line bg-ground-2 px-6 py-14 text-center md:py-20">
+          <p className="text-h3 uppercase text-ink">Photography of the yard</p>
+          <p className="mx-auto mt-3 max-w-[42ch] text-body text-ink-secondary">
+            We would rather show you nothing than show you someone else&rsquo;s plant. Real
+            photographs go here once the first batches are running.
+          </p>
+          <div className="mt-6 inline-block">
+            <Pending>Plant and yard photography</Pending>
+          </div>
+        </div>
+      </Wall>
 
       {/* Process */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="02" label="How a batch is made" />
+          <CourseRule label="How a batch is made" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Five steps, in order.
@@ -70,7 +80,7 @@ export default function PlantPage() {
       {/* Capacity */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule datum="03" label="Capacity" tone="oxide" />
+          <CourseRule label="Capacity" tone="oxide" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
@@ -109,7 +119,7 @@ export default function PlantPage() {
       {/* HSE */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="04" label="Health, safety and environment" />
+          <CourseRule label="Health, safety and environment" />
 
           <Course className="mt-12 gap-y-8">
             <Stretcher span="half">
@@ -132,7 +142,7 @@ export default function PlantPage() {
       {/* Visit */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
-          <CourseRule datum="05" label="Book a visit" />
+          <CourseRule label="Book a visit" />
 
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">

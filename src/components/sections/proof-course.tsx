@@ -77,10 +77,10 @@ export function ProofCourse() {
 
           <Stretcher span="half">
             <Photo
-              src="/images/site/plant.jpg"
-              alt="Stacks of cured concrete units on pallets inside a manufacturing plant, lit by a shaft of daylight"
+              src="/images/site/blockwork.jpg"
+              alt="A house built in grey concrete masonry block, the wall face lit by hard afternoon sun"
               sizes="(min-width: 768px) 50vw, 100vw"
-              ratio="portrait"
+              ratio="course"
             />
           </Stretcher>
         </Course>
