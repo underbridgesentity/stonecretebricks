@@ -28,6 +28,20 @@ The brand geometry now lives where it is felt rather than diagrammed: the isomet
 | `WallProgress` | A brick-masked progress bar is the same pattern by another name |
 | Section datum numbers (`01 /`) | Across a dozen sections a device stops reading as a system |
 | The home page calculator | Belongs on `/quote`, where someone has already decided to buy |
+| **Short decorative dashes** | The little oxide rule beside labels and links. Eight of them. An affordance is an arrow that moves; anything else is filler |
+
+The three unused keyframes and utilities that went with `BondPattern` and
+`WallProgress` are deleted too. If a utility is not used, it is not a utility.
+
+## 1b. Measure
+
+Every block of prose carries a **character measure**, not a pixel one: `max-w-[68ch]` on body, `62ch` on lead, `72ch` on small print, and a tighter `14ch` to `22ch` on display type.
+
+Two failures made this a rule rather than a preference. Body copy on `/plant` and `/quality` was running 75 to 85 characters a line at `max-w-2xl`, which at 1.72 leading loses the line return. And `max-w-[20ch]` on the page heading computed *wider* than the column that held it, so it never bound at all and headings ragged badly at 1440.
+
+**Check that a `ch` measure actually binds.** If it computes wider than its column it is decoration.
+
+`text-wrap: pretty` on prose and `balance` on headings handles widows and one-word last lines systemically, in the base layer, rather than by hand-tuning copy.
 
 ## 2. Colour
 
@@ -93,7 +107,12 @@ Montserrat, two weights only: 400 and 800. `--font-weight-*` is wiped, so a stra
 | Body | 1rem | 1.72 | 0 |
 | Small | 0.875rem | 1.62 | 0 |
 | Datum | 0.6875rem | 1 | **+0.16em** |
+| Label | 0.8125rem | 1.2 | +0.1em |
 | Figure | `clamp(1.375rem, 2.1vw, 1.75rem)` | 1.1 | -0.02em |
+
+**Datum versus label.** Datum is for eyebrows you glance at. `--text-label` is one step up and exists only for form labels and chips: 11px uppercase is fine to skim and too small to read and act on, on a phone, outdoors, in Limpopo sun. Buttons stay at datum, because their meaning is carried by size and fill as well as words.
+
+**Uppercase is for phrases, not prose.** Anything with a subordinate clause goes sentence case. Four mission statements set at 60 characters of uppercase extrabold were the hardest reading on the site.
 
 The ceiling is 3.75rem. If a headline needs to be bigger to have impact, the problem is the space around it, not the point size.
 

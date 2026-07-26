@@ -20,8 +20,11 @@ No animation library. Motion is CSS keyframes plus scroll-driven animations. No 
 - Every animation lives inside `@supports (animation-timeline: view())`. The authored CSS is always the finished state, so a browser without scroll timelines renders a complete page
 - Every product number carries a `confirmed` or `assumed` flag. Assumed values are South African industry standards, not invented, and the client signs them off before launch
 - SANS 1215 governs masonry units. SANS 1058 governs pavers, on tensile splitting and abrasion, never compressive MPa
+- **Verify every standards claim before publishing it.** SANS 10400-K deemed-to-satisfy is 3.0 MPa hollow and 4.0 MPa solid for single storey, 7.0 and 10 for the lower storey of a double. An earlier build published the wrong pair, which on a site selling on published specifications is the worst available error
+- Numbers in prose must agree with `src/data/products.ts`. Prefer deriving them. Two copy lines contradicted the table on their own page
 - No claimed projects, clients, testimonials or years in business. The company is new and the site says so
 - `sizes` is required on every Photo
+- Every prose block carries a character measure, and it must actually bind. Check it computes narrower than its column
 
 ## Conventions
 
