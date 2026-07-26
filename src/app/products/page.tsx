@@ -121,7 +121,7 @@ export default function ProductsPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-2xl text-small text-ink-secondary">
+          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
             Every figure above is a South African industry standard awaiting confirmation against
             our own units and test certificates. Ask us for the certificate before you specify.
             Coverage and pallet figures are derived from the unit size, so they move the moment a
@@ -183,7 +183,7 @@ export default function ProductsPage() {
           <Course className="items-end gap-y-8">
             <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Custom concrete products.</h2>
-              <p className="mt-5 max-w-xl text-body text-ink-secondary">
+              <p className="mt-5 max-w-[62ch] text-body text-ink-secondary">
                 Non-standard sizes, bespoke moulds and purpose-made units for a specific detail.
                 Tell us what the drawing calls for and we will tell you whether we can press it,
                 what the tooling costs and what the minimum run is.

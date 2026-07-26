@@ -26,10 +26,12 @@ export default function Home() {
       <Section>
         <Wall>
           <Split label="Stonecrete Bricks">
-            <p className="max-w-[26ch] text-mega uppercase text-ink">
+            {/* A heading, not a paragraph: it is visually and structurally the
+                heading of this section, and heading navigation needs it. */}
+            <h2 className="max-w-[18ch] text-mega uppercase text-ink">
               Every building starts with the material.
-            </p>
-            <p className="mt-10 max-w-xl text-lead text-ink-secondary">
+            </h2>
+            <p className="mt-10 max-w-[62ch] text-lead text-ink-secondary">
               A wall is only as good as the units in it. Inconsistent dimensions cost a bricklayer
               time and cost the client mortar. Units that have not cured properly fail under a
               trowel and fail under load. Solving that, consistently, is the whole business.

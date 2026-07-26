@@ -8,7 +8,18 @@ import { PRODUCTS } from "@/data/products";
  * noindex. /projects, /bulk-supply, /trade-accounts and /faq are not built
  * yet and are not listed, so there is no 404 churn when they land.
  */
-const STATIC = ["", "/products", "/quality", "/plant", "/delivery", "/about", "/contact", "/quote"];
+const STATIC = [
+  "",
+  "/products",
+  "/quality",
+  "/plant",
+  "/delivery",
+  "/trade",
+  "/about",
+  "/contact",
+  "/quote",
+  "/privacy",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

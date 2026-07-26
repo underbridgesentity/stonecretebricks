@@ -42,7 +42,7 @@ export function SiteHeader() {
           ))}
           <Link
             href="/quote"
-            className="inline-flex h-10 items-center border border-limestone/30 px-5 text-datum-strong uppercase text-limestone transition-colors hover:border-oxide hover:bg-oxide-deep"
+            className="inline-flex h-10 items-center border border-cement px-5 text-datum-strong uppercase text-limestone transition-colors hover:border-oxide hover:bg-oxide-deep"
           >
             Get a quote
           </Link>

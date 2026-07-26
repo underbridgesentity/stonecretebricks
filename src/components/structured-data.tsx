@@ -11,6 +11,28 @@ import { addressLine, COMPANY, SITE_URL } from "@/data/company";
  * Fields the client has not supplied are omitted rather than guessed. An
  * invented address in structured data is worse than a missing one.
  */
+const WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+/**
+ * schema.org wants DayOfWeek values, not a human range. Passing the display
+ * string straight through meant "Monday to Friday" was silently discarded and
+ * the opening hours never surfaced in search at all.
+ */
+function expandDays(label: string): string[] {
+  const range = label.match(/^(\w+)\s+to\s+(\w+)$/i);
+  if (range) {
+    const from = WEEK.indexOf(capitalise(range[1] ?? ""));
+    const to = WEEK.indexOf(capitalise(range[2] ?? ""));
+    if (from >= 0 && to >= from) return WEEK.slice(from, to + 1);
+  }
+  const single = capitalise(label.trim());
+  return WEEK.includes(single) ? [single] : [];
+}
+
+function capitalise(word: string): string {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
 export function OrganisationSchema() {
   const hours = COMPANY.hours.value ?? [];
 
@@ -19,13 +41,14 @@ export function OrganisationSchema() {
     "@type": "HomeAndConstructionBusiness",
     "@id": `${SITE_URL}/#organisation`,
     name: "Stonecrete Bricks",
-    alternateName: ["Stone Crete Bricks", "Stonecrete Bricks (Pty) Ltd"],
+    // No "(Pty) Ltd": the registration is still pending, and guessing a legal
+    // entity in machine-readable form is what the comment above forbids.
+    alternateName: ["Stone Crete Bricks"],
     url: SITE_URL,
     logo: `${SITE_URL}/icon.svg`,
-    image: `${SITE_URL}/images/site/yard.jpg`,
+    image: `${SITE_URL}/images/site/plant.jpg`,
     description:
       "South African manufacturer of concrete stock bricks, maxi bricks, hollow blocks and paving bricks, made to SANS 1215 and SANS 1058.",
-    priceRange: "$$",
     areaServed: COMPANY.region.value
       ? [{ "@type": "AdministrativeArea", name: COMPANY.region.value }]
       : undefined,
@@ -33,7 +56,7 @@ export function OrganisationSchema() {
       .filter((h) => h.opens && h.closes)
       .map((h) => ({
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: h.days,
+        dayOfWeek: expandDays(h.days),
         opens: h.opens,
         closes: h.closes,
       })),

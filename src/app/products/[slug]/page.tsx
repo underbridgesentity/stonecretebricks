@@ -71,15 +71,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {product.standard}
               </p>
 
+              {/* Mega, not display. At display the product name rendered the
+                  same size as its own section headings two screens below, so
+                  the page had no top of hierarchy. The names are short. */}
               <h1
-                className="animate-set text-display uppercase text-ink"
+                className="animate-set max-w-[14ch] text-mega uppercase text-ink"
                 style={{ animationDelay: "140ms" }}
               >
                 {product.name}
               </h1>
 
               <p
-                className="animate-set mt-6 max-w-xl text-lead text-ink-secondary"
+                className="animate-set mt-6 max-w-[62ch] text-lead text-ink-secondary"
                 style={{ animationDelay: "260ms" }}
               >
                 {product.positioning}

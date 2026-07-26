@@ -68,7 +68,7 @@ export default async function QuotePage({
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Work it out first.
           </h2>
-          <p className="mt-6 max-w-xl text-body text-ink-secondary">
+          <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
             Enter your wall and we give you the unit count, the wastage allowance, the pallets and
             the loads. Then carry that straight into the form below.
           </p>
@@ -100,7 +100,13 @@ export default async function QuotePage({
                     "You get the quotation, on WhatsApp, by phone or by email, whichever you chose.",
                   ].map((step, i) => (
                     <li key={step} className="flex gap-4 text-small text-ink-secondary">
-                      <span className="text-datum uppercase text-ink-accent">
+                      {/* aria-hidden: the ol already numbers these, so a screen
+                          reader was announcing "1, 01, You get a reference..." */}
+                      <span
+                        aria-hidden
+                        data-figure
+                        className="text-datum uppercase text-ink-accent"
+                      >
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {step}

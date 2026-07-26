@@ -41,13 +41,13 @@ export default function AboutPage() {
     <>
       <PageHead
         eyebrow="About"
-        title="Built on precision. Trusted for generations."
+        title="Built on precision, not on history."
         lead="Stonecrete Bricks manufactures concrete bricks, blocks and pavers for residential, commercial, industrial and infrastructure work in South Africa. We are new, we say so plainly, and we have built the business around publishing the things our industry usually hides."
       />
 
       <Photo
-        src="/images/site/wall.jpg"
-        alt="A newly built grey concrete block wall in raking late afternoon light"
+        src="/images/site/built.jpg"
+        alt="A row of newly completed masonry houses in raking late afternoon light"
         sizes="100vw"
         ratio="brick"
       />
@@ -82,9 +82,9 @@ export default function AboutPage() {
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
           <CourseRule datum="03" label="Our vision" tone="oxide" />
-          <p className="mt-10 max-w-4xl text-display uppercase text-ink">
-            To become a leading supplier of quality concrete masonry in South Africa, through
-            innovation, service and sustainable manufacture.
+          <p className="mt-10 max-w-[22ch] text-display uppercase text-ink">
+            To be the supplier a contractor phones first, because the specification is published,
+            the load arrives on the day, and the certificate is in the file.
           </p>
         </Wall>
       </section>
@@ -100,10 +100,17 @@ export default function AboutPage() {
                 key={item.ours}
                 className="animate-course-set flex flex-col gap-3 border-t border-line py-8 md:flex-row md:gap-12"
               >
-                <p className="text-datum uppercase text-ink-secondary md:w-16 md:shrink-0">
+                <p
+                  data-figure
+                  className="text-datum uppercase text-ink-secondary md:w-16 md:shrink-0"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <p className="max-w-3xl text-h2 uppercase text-ink">{item.ours}</p>
+                {/* Sentence case, not uppercase. These are full sentences with
+                    subordinate clauses; at 60 characters of uppercase extrabold
+                    they were the hardest reading on the site. Uppercase stays
+                    for phrases, not for prose. */}
+                <p className="max-w-[52ch] text-h1 text-ink">{item.ours}</p>
               </div>
             ))}
           </div>

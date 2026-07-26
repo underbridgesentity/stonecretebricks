@@ -4,7 +4,7 @@ import { Lockup } from "@/components/brand/wordmark";
 import { Mail, Phone, Pin, Whatsapp } from "@/components/ui/glyph";
 import { Pending } from "@/components/ui/pending";
 import { Wall } from "@/components/ui/wall";
-import { addressLine, COMPANY, NAV, telLink, whatsappLink } from "@/data/company";
+import { addressLine, COMPANY, LEGAL_NAV, NAV, telLink, whatsappLink } from "@/data/company";
 import { PRODUCTS } from "@/data/products";
 
 export function SiteFooter() {
@@ -30,26 +30,26 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Products" className="flex flex-col gap-4 md:col-span-3">
-            <h2 className="text-datum uppercase text-ink-secondary">Products</h2>
+          <nav aria-label="Products" className="flex flex-col gap-1 md:col-span-3">
+            <h2 className="mb-3 text-datum uppercase text-ink-secondary">Products</h2>
             {PRODUCTS.map((product) => (
               <Link
                 key={product.slug}
                 href={`/products/${product.slug}`}
-                className="text-small text-ink transition-colors hover:text-ink-accent"
+                className="-my-1 py-3 text-small text-ink transition-colors hover:text-ink-accent"
               >
                 {product.name}
               </Link>
             ))}
           </nav>
 
-          <nav aria-label="Company" className="flex flex-col gap-4 md:col-span-2">
-            <h2 className="text-datum uppercase text-ink-secondary">Company</h2>
-            {NAV.map((item) => (
+          <nav aria-label="Company" className="flex flex-col gap-1 md:col-span-2">
+            <h2 className="mb-3 text-datum uppercase text-ink-secondary">Company</h2>
+            {[...NAV, ...LEGAL_NAV].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-small text-ink transition-colors hover:text-ink-accent"
+                className="-my-1 py-3 text-small text-ink transition-colors hover:text-ink-accent"
               >
                 {item.label}
               </Link>
@@ -62,7 +62,7 @@ export function SiteFooter() {
             {tel ? (
               <a
                 href={tel}
-                className="inline-flex items-center gap-3 text-small text-ink transition-colors hover:text-ink-accent"
+                className="-my-1 inline-flex items-center gap-3 py-3 text-small text-ink transition-colors hover:text-ink-accent"
               >
                 <Phone width={15} height={15} className="text-oxide" />
                 {COMPANY.phone.value}
@@ -72,7 +72,7 @@ export function SiteFooter() {
             {wa ? (
               <a
                 href={wa}
-                className="inline-flex items-center gap-3 text-small text-ink transition-colors hover:text-ink-accent"
+                className="-my-1 inline-flex items-center gap-3 py-3 text-small text-ink transition-colors hover:text-ink-accent"
               >
                 <Whatsapp width={15} height={15} className="text-oxide" />
                 WhatsApp
@@ -81,7 +81,7 @@ export function SiteFooter() {
 
             <a
               href={`mailto:${COMPANY.email.value}`}
-              className="inline-flex items-center gap-3 break-all text-small text-ink transition-colors hover:text-ink-accent"
+              className="-my-1 inline-flex items-center gap-3 break-all py-3 text-small text-ink transition-colors hover:text-ink-accent"
             >
               <Mail width={15} height={15} className="text-oxide" />
               {COMPANY.email.value}

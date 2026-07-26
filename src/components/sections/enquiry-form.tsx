@@ -29,6 +29,7 @@ export function EnquiryForm({
   const [state, action, pending] = useActionState<EnquiryState, FormData>(submitEnquiry, {});
   const errors = state.errors ?? {};
   const startedAt = useRef<HTMLInputElement>(null);
+  const summary = useRef<HTMLDivElement>(null);
 
   // Stamped after mount, never during render: Date.now() in the render body is
   // impure and would mismatch between the server and client HTML. With
@@ -37,20 +38,62 @@ export function EnquiryForm({
     if (startedAt.current) startedAt.current.value = String(Date.now());
   }, []);
 
+  /*
+   * Move the user to the error.
+   *
+   * `products` is the only required field with no native validation, because
+   * checkbox groups have none. Everything else is caught by the browser, which
+   * scrolls to it. So a user who skipped the chips filled the whole form, hit
+   * send at roughly three screens down, and the error rendered off-screen above
+   * them with no feedback at all. That is the most expensive silent failure on
+   * the site, because it only fires on people who did all the work.
+   */
+  const errorKeys = Object.keys(errors).join(",");
+  useEffect(() => {
+    if (!errorKeys) return;
+    summary.current?.focus();
+    summary.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [errorKeys]);
+
+  const errorList = Object.entries(errors).filter(([key]) => key !== "form");
+
   return (
-    <form action={action} className="flex flex-col gap-10">
+    <form id="enquiry" action={action} className="flex flex-col gap-10 scroll-mt-28">
       {/* Honeypot plus a timing floor. No captcha: this audience is often on a
           poor mobile connection and a challenge would cost more than it saves. */}
       <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
       <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
         <label htmlFor="website">Leave this blank</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="nope" />
       </div>
 
-      {errors.form ? (
-        <p role="alert" className="border border-oxide bg-ground-2 p-4 text-body text-ink">
-          {errors.form}
-        </p>
+      {errors.form || errorList.length > 0 ? (
+        <div
+          ref={summary}
+          tabIndex={-1}
+          role="alert"
+          className="border-l-2 border-oxide bg-ground-2 p-5 outline-none"
+        >
+          <p className="text-h3 uppercase text-ink">
+            {errors.form ? "That did not send" : "Check these before sending"}
+          </p>
+          {errors.form ? (
+            <p className="mt-3 text-body text-ink-secondary">{errors.form}</p>
+          ) : (
+            <ul className="mt-3 flex flex-col gap-2">
+              {errorList.map(([key, message]) => (
+                <li key={key}>
+                  <a
+                    href={`#${key === "products" ? "products-stock-bricks" : key}`}
+                    className="text-body text-ink underline underline-offset-4"
+                  >
+                    {message}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       ) : null}
 
       <Step number="01" title="What do you need?">
@@ -103,11 +146,22 @@ export function EnquiryForm({
       </Step>
 
       <Step number="03" title="Where is it going?">
+        {/* The contact page advertises Saturday collections for exactly the
+            bakkie-and-trailer buyer, who previously had to invent a delivery
+            suburb or type "collecting" into a required field. */}
+        <fieldset className="mb-5">
+          <legend className="mb-3 text-label uppercase text-ink">How are you taking it?</legend>
+          <div className="flex flex-wrap gap-[var(--joint)]">
+            <Chip name="fulfilment" value="deliver" label="Deliver to site" type="radio" defaultChecked />
+            <Chip name="fulfilment" value="collect" label="I will collect" type="radio" />
+          </div>
+        </fieldset>
+
         <Field
-          label="Delivery suburb or town"
+          label="Suburb or town"
           htmlFor="suburb"
           required
-          hint="Delivery is the biggest variable in the price, so we ask early"
+          hint="Delivery is the biggest variable in the price, so we ask early. If you are collecting, tell us where you are based."
           error={errors.suburb}
         >
           <TextInput
@@ -127,7 +181,7 @@ export function EnquiryForm({
           </Field>
           <Field label="What are you building?" htmlFor="projectType">
             <Select id="projectType" name="projectType" defaultValue="">
-              <option value="">Select if it helps</option>
+              <option value="">Choose one, if you know</option>
               <option value="house">House or extension</option>
               <option value="boundary-wall">Boundary wall</option>
               <option value="housing-development">Housing development</option>
@@ -207,7 +261,11 @@ export function EnquiryForm({
           />
           <label htmlFor="consent" className="text-small text-ink-secondary">
             I agree that Stonecrete Bricks may contact me about this enquiry and store my details as
-            set out in the privacy notice.
+            set out in the{" "}
+            <a href="/privacy" className="text-ink underline underline-offset-4">
+              privacy notice
+            </a>
+            .
           </label>
         </div>
         {errors.consent ? (
@@ -237,7 +295,7 @@ function Step({
   return (
     <section className="flex flex-col gap-5 border-t border-line pt-8">
       <h2 className="flex items-baseline gap-4">
-        <span className="text-datum uppercase text-ink-secondary">{number}</span>
+        <span data-figure className="text-datum uppercase text-ink-secondary">{number}</span>
         <span className="text-h2 uppercase text-ink">{title}</span>
       </h2>
       {children}

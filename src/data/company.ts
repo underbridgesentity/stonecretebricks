@@ -152,12 +152,25 @@ export function outstandingFacts(): Array<{ path: string; source: string; blocki
 
 /* ------------------------------------------------------------------------ */
 
+/**
+ * "The yard" rather than "Our plant": the label should state the offer, not
+ * the subject. That page carries the open invitation to come and watch a batch
+ * being made, which is the one thing no established competitor offers, and it
+ * was previously reachable from exactly one card on the home page.
+ */
 export const NAV = [
   { href: "/products", label: "Products" },
   { href: "/quality", label: "Quality" },
+  { href: "/plant", label: "The yard" },
   { href: "/delivery", label: "Delivery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+] as const;
+
+/** Small print, footer only. */
+export const LEGAL_NAV = [
+  { href: "/privacy", label: "Privacy notice" },
+  { href: "/trade", label: "Trade accounts" },
 ] as const;
 
 /**

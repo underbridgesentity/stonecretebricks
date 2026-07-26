@@ -17,7 +17,7 @@ import { Course, Section, Stretcher, Wall } from "@/components/ui/wall";
 const CLAIMS = [
   {
     title: "Specifications",
-    body: "Every dimension, strength class and coverage figure sits on the product page, with the standard it was measured against.",
+    body: "Every dimension, strength class and coverage figure sits on the product page, with the standard it is manufactured to and a mark against anything not yet confirmed by test.",
   },
   {
     title: "Quantities",
@@ -42,19 +42,19 @@ export function SpecStrip() {
           </Stretcher>
         </Course>
 
-        <dl className="mt-20 flex flex-col">
+        {/* A div child of dl may contain only dt then dd. The hairline and the
+            reveal wrapper broke that chain, so the term-definition mapping was
+            never exposed. The rule now lives outside the list. */}
+        <dl className="mt-20 grid grid-cols-1 md:grid-cols-12">
           {CLAIMS.map((claim) => (
-            <div key={claim.title} className="animate-course-set">
-              <span
-                aria-hidden
-                className="block h-px w-full origin-left bg-line animate-course-lay"
-              />
-              <div className="grid grid-cols-1 gap-x-10 gap-y-4 py-10 md:grid-cols-12">
-                <dt className="text-h1 uppercase text-ink md:col-span-4">{claim.title}</dt>
-                <dd className="max-w-xl text-lead text-ink-secondary md:col-span-7">
-                  {claim.body}
-                </dd>
-              </div>
+            <div
+              key={claim.title}
+              className="animate-course-set col-span-full grid grid-cols-1 gap-x-10 gap-y-4 border-t border-line py-10 md:grid-cols-12"
+            >
+              <dt className="text-h1 uppercase text-ink md:col-span-4">{claim.title}</dt>
+              <dd className="max-w-[62ch] text-lead text-ink-secondary md:col-span-7">
+                {claim.body}
+              </dd>
             </div>
           ))}
         </dl>

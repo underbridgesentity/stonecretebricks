@@ -45,7 +45,7 @@ export function Hero() {
 
       <Wall className="relative pb-16 pt-32 md:pb-24 md:pt-40">
         <p
-          className="animate-set text-datum uppercase text-limestone/70"
+          className="animate-set text-datum uppercase text-limestone"
           style={{ animationDelay: "80ms" }}
         >
           Manufactured in {COMPANY.region.value}
@@ -59,7 +59,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="animate-set mt-7 max-w-lg text-lead text-limestone/75"
+          className="animate-set mt-7 max-w-[52ch] text-lead text-limestone"
           style={{ animationDelay: "260ms" }}
         >
           Stock bricks, maxi bricks, hollow blocks and pavers, cast and cured to the South African
@@ -77,7 +77,7 @@ export function Hero() {
 
           <Link
             href="/products"
-            className="group inline-flex items-center gap-2.5 text-datum-strong uppercase text-limestone transition-colors hover:text-oxide-lift"
+            className="group inline-flex items-center gap-2.5 text-datum-strong uppercase text-limestone"
           >
             See the range
             <Arrow

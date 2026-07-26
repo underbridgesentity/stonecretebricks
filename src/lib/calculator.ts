@@ -43,8 +43,12 @@ export type Quantity = {
   wastageFraction: number;
   unitsWithWastage: number;
   pallets: number;
-  /** Pallets times units per pallet. What you actually buy. */
+  /** Pallets times units per pallet, floored at the minimum order. */
   orderUnits: number;
+  /** True when the wall needs less than the published minimum order. */
+  belowMinimum: boolean;
+  /** The minimum order in units, for the explanatory line. */
+  minimumUnits: number;
   loads: number;
   /** Cubic metres, masonry only. Null for paving. */
   mortarCubicMetres: number | null;
@@ -79,7 +83,21 @@ function finish(
   const baseUnits = netArea * perM2;
   const unitsWithWastage = baseUnits * (1 + product.wastage);
   const perPallet = product.unitsPerPallet.value;
-  const pallets = perPallet > 0 ? Math.ceil(unitsWithWastage / perPallet) : 0;
+  const palletsNeeded = perPallet > 0 ? Math.ceil(unitsWithWastage / perPallet) : 0;
+
+  /*
+   * Floor the order at the published minimum.
+   *
+   * A pallet is smaller than the MOQ for three of the four products (stock
+   * 500 per pallet against a 1 000 minimum, maxi 250 against 500, hollow 90
+   * against 200). Rounding to whole pallets alone therefore returned an order
+   * below the minimum printed on the comparison table two clicks away. On a
+   * site whose entire argument is "we publish real minimum orders", the
+   * calculator contradicting the spec table is the worst possible bug.
+   */
+  const minimumUnits = minimumInUnits(product);
+  const orderUnits = Math.max(palletsNeeded * perPallet, minimumUnits);
+  const pallets = perPallet > 0 ? Math.ceil(orderUnits / perPallet) : 0;
 
   return {
     netArea,
@@ -88,10 +106,18 @@ function finish(
     wastageFraction: product.wastage,
     unitsWithWastage: Math.ceil(unitsWithWastage),
     pallets,
-    orderUnits: pallets * perPallet,
+    orderUnits,
+    belowMinimum: netArea > 0 && palletsNeeded * perPallet < minimumUnits,
+    minimumUnits,
     loads: Math.ceil(pallets / Math.max(1, product.palletsPerLoad.value)),
     mortarCubicMetres: mortar,
   };
+}
+
+/** The MOQ expressed in units, whatever unit the product states it in. */
+export function minimumInUnits(product: Product): number {
+  const { qty, unit } = product.moq.value;
+  return unit === "pallet" || unit === "pallets" ? qty * product.unitsPerPallet.value : qty;
 }
 
 /**

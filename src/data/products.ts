@@ -72,7 +72,7 @@ export const PRODUCTS: readonly Product[] = [
     joint: assumed(10, "standard mortar joint", "mm"),
     nominalStrength: assumed(
       7,
-      "National Building Regulations floor for solid units in single storey housing",
+      "common South African trade nominal for solid units. SANS 10400-K requires 4.0 MPa single storey, 10 MPa for the lower storey of a double storey",
       "MPa",
     ),
     paverClass: null,
@@ -94,7 +94,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "High compressive strength",
         expanded:
-          "Manufactured to a nominal 7.0 MPa and tested to SANS 1215. Suitable for load bearing masonry in single and double storey work.",
+          "Manufactured to a nominal 7.0 MPa and tested to SANS 1215. That clears the SANS 10400-K floor for single-storey load-bearing masonry with margin. For the lower storey of a double storey the rule calls for 10 MPa solid units, so ask us before you specify it there.",
       },
       {
         label: "Consistent dimensions",
@@ -102,12 +102,12 @@ export const PRODUCTS: readonly Product[] = [
           "Dimensional tolerance held inside the limits set by SANS 1215, so your courses run true and your mortar consumption stays predictable.",
       },
       {
-        label: "Cost-effective",
+        label: "Lowest cost per square metre",
         expanded:
           "The lowest cost per square metre in the range for general walling, which is why it remains the default unit on most sites.",
       },
       {
-        label: "Durable and reliable",
+        label: "Cured before it leaves the yard",
         expanded:
           "Cured to full strength before dispatch. No green units leave the yard, so nothing arrives that crumbles under a bricklayer's trowel.",
       },
@@ -115,9 +115,9 @@ export const PRODUCTS: readonly Product[] = [
     calculatorMode: "wall",
     image: "/images/products/stock-bricks.jpg",
     seo: {
-      title: "Stock bricks",
+      title: "Concrete stock bricks in Polokwane",
       description:
-        "Concrete stock bricks manufactured to SANS 1215. Dimensions, strength, coverage and pallet quantities published. Delivered to site.",
+        "Concrete stock bricks manufactured in Polokwane to SANS 1215. Dimensions, strength, coverage and pallet quantities published. Delivered across Limpopo.",
     },
   },
   {
@@ -134,7 +134,7 @@ export const PRODUCTS: readonly Product[] = [
     joint: assumed(10, "standard mortar joint", "mm"),
     nominalStrength: assumed(
       7,
-      "National Building Regulations floor for solid units in single storey housing",
+      "common South African trade nominal for solid units. SANS 10400-K requires 4.0 MPa single storey, 10 MPa for the lower storey of a double storey",
       "MPa",
     ),
     paverClass: null,
@@ -156,7 +156,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Faster construction",
         expanded:
-          "One maxi covers the wall area of roughly three stock bricks, so a team lays the same square metres in materially less time.",
+          "A square metre of single skin takes 33 maxis where stock bricks take 52, so a team lays the same area with a third fewer units to handle and place.",
       },
       {
         label: "Reduced mortar consumption",
@@ -169,7 +169,7 @@ export const PRODUCTS: readonly Product[] = [
           "A 140 mm unit gives a single skin wall that carries load without a second leaf, which is why it dominates subsidised and affordable housing.",
       },
       {
-        label: "Economical building solution",
+        label: "Cheaper once labour is counted",
         expanded:
           "Lower installed cost per square metre once labour and mortar are counted, even where the unit price is higher than a stock brick.",
       },
@@ -177,9 +177,9 @@ export const PRODUCTS: readonly Product[] = [
     calculatorMode: "wall",
     image: "/images/products/maxi-bricks.jpg",
     seo: {
-      title: "Maxi bricks",
+      title: "Concrete maxi bricks in Polokwane",
       description:
-        "Concrete maxi bricks manufactured to SANS 1215. Coverage per square metre, pallet quantities and lead times published.",
+        "Concrete maxi bricks manufactured in Polokwane to SANS 1215. Coverage per square metre, pallet quantities and lead times published. Delivered across Limpopo.",
     },
   },
   {
@@ -197,7 +197,7 @@ export const PRODUCTS: readonly Product[] = [
     joint: assumed(10, "standard mortar joint", "mm"),
     nominalStrength: assumed(
       3.5,
-      "National Building Regulations nominal for hollow units in single storey housing",
+      "common South African trade nominal for hollow units. SANS 10400-K requires 3.0 MPa single storey, 7.0 MPa for the lower storey of a double storey",
       "MPa",
     ),
     paverClass: null,
@@ -206,7 +206,7 @@ export const PRODUCTS: readonly Product[] = [
     massPerUnit: assumed(15, "typical for a 390 x 190 x 190 hollow block", "kg"),
     unitsPerPallet: assumed(90, "common South African pallet configuration"),
     palletsPerLoad: assumed(5, "derived from an 8 000 kg payload"),
-    moq: assumed({ qty: 200, unit: "units" }, "typical trade minimum"),
+    moq: assumed({ qty: 180, unit: "units" }, "two full pallets. A part-pallet minimum contradicts the whole-pallet rounding we publish"),
     leadTimeDays: assumed(5, "typical, hollow is often made to order"),
     wastage: 0.05,
     suitableFor: [
@@ -224,7 +224,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Reduced construction costs",
         expanded:
-          "The face is 390 x 190, so 13 units cover a square metre against 52 stock bricks. Fewer units, fewer joints, less labour.",
+          "The face is 390 x 190, so a square metre takes 12.5 blocks against 51.9 stock bricks. Four times fewer units, four times fewer joints, less labour.",
       },
       {
         label: "Improved thermal performance",
@@ -232,7 +232,7 @@ export const PRODUCTS: readonly Product[] = [
           "The voids break the conductive path through the wall, so the building holds temperature better than a solid single skin.",
       },
       {
-        label: "Easy installation",
+        label: "Cores take reinforcement",
         expanded:
           "Cores can be reinforced and filled where the design calls for it, which makes the same unit work for boundary walls and retaining structures.",
       },
@@ -240,9 +240,9 @@ export const PRODUCTS: readonly Product[] = [
     calculatorMode: "wall",
     image: "/images/products/hollow-blocks.jpg",
     seo: {
-      title: "Hollow blocks",
+      title: "Concrete hollow blocks in Polokwane",
       description:
-        "Concrete hollow blocks manufactured to SANS 1215. Coverage, mass, pallet quantities and applications published.",
+        "Concrete hollow blocks manufactured in Polokwane to SANS 1215. Coverage, mass, pallet quantities and applications published. Delivered across Limpopo.",
     },
   },
   {
@@ -250,7 +250,7 @@ export const PRODUCTS: readonly Product[] = [
     name: "Paving bricks",
     shortName: "Paving",
     positioning:
-      "Driveways, walkways and parking that survive a delivery truck.",
+      "Driveways, walkways and parking. 50 mm for foot traffic and cars, 60 or 80 mm where trucks and forklifts run.",
     standard: "SANS 1058",
     dimensions: assumed(
       { l: 200, w: 100, h: 50 },
@@ -276,7 +276,7 @@ export const PRODUCTS: readonly Product[] = [
     suitableFor: ["Driveways", "Walkways", "Parking areas", "Landscaping projects"],
     features: [
       {
-        label: "Attractive finishes",
+        label: "Three patterns, one unit",
         expanded:
           "Laid in stretcher, herringbone or basketweave from the same unit, so the pattern does the design work without a premium product.",
       },
@@ -288,7 +288,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Weather resistant",
         expanded:
-          "Water absorption is held inside the SANS 1058 limit, so the surface does not spall through a Highveld winter.",
+          "Water absorption is held inside the SANS 1058 limit, so the surface does not spall through a Limpopo winter frost.",
       },
       {
         label: "Low maintenance",
@@ -299,9 +299,9 @@ export const PRODUCTS: readonly Product[] = [
     calculatorMode: "paving",
     image: "/images/products/paving-bricks.jpg",
     seo: {
-      title: "Paving bricks",
+      title: "Concrete paving bricks in Polokwane",
       description:
-        "Concrete paving bricks manufactured to SANS 1058. Coverage per square metre, pallet quantities and thickness options published.",
+        "Concrete paving bricks manufactured in Polokwane to SANS 1058. Coverage per square metre, pallet quantities and coverage published. Delivered across Limpopo.",
     },
   },
 ];

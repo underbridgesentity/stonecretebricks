@@ -22,7 +22,7 @@ export function QuoteCta({
         <Course className="items-end">
           <Stretcher span="measure">
             <h2 className="max-w-[18ch] text-display uppercase text-ink">{heading}</h2>
-            <p className="mt-7 max-w-md text-lead text-ink-secondary">{body}</p>
+            <p className="mt-7 max-w-[52ch] text-lead text-ink-secondary">{body}</p>
           </Stretcher>
 
           <Stretcher span="quarter" className="md:col-start-10">

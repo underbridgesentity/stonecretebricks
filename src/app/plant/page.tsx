@@ -9,7 +9,7 @@ import { Course, Stretcher, Wall } from "@/components/ui/wall";
 import { addressLine, PROCESS } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Our plant",
+  title: "The yard",
   description:
     "How Stonecrete Bricks makes concrete bricks and blocks: batching, pressing, curing and dispatch. Come and inspect the yard before you order.",
   alternates: { canonical: "/plant" },
@@ -29,14 +29,14 @@ export default function PlantPage() {
   return (
     <>
       <PageHead
-        eyebrow="Our plant"
+        eyebrow="The yard"
         title="Come and watch us make them."
         lead="Most brick suppliers will not show you the yard. We will. This is where your order gets batched, pressed, cured and stacked, and you are welcome to stand and watch it happen before you place one."
       />
 
       <Photo
-        src="/images/site/yard.jpg"
-        alt="Stacks of grey cement bricks on pallets in a manufacturing yard under an overcast sky"
+        src="/images/site/plant.jpg"
+        alt="Stacks of cured concrete units on pallets inside the plant, lit by a shaft of daylight"
         sizes="100vw"
         ratio="brick"
       />
@@ -60,7 +60,7 @@ export default function PlantPage() {
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="text-h2 uppercase text-ink md:w-72 md:shrink-0">{stage.step}</h3>
-                <p className="max-w-2xl text-body text-ink-secondary">{stage.body}</p>
+                <p className="max-w-[68ch] text-body text-ink-secondary">{stage.body}</p>
               </div>
             ))}
           </div>
@@ -75,7 +75,7 @@ export default function PlantPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">What we can actually make.</h2>
-              <p className="mt-6 max-w-xl text-body text-ink-secondary">
+              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
                 Running out of bricks stops a site, so the honest answer to &ldquo;can you supply
                 this&rdquo; matters more than an optimistic one. These figures are published so you
                 can check them against your programme before you commit.
@@ -139,10 +139,10 @@ export default function PlantPage() {
               <h2 className="text-display uppercase text-ink">
                 Bring your quantity surveyor.
               </h2>
-              <p className="mt-6 max-w-xl text-body text-ink-secondary">
+              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
                 Pick a morning, come to the yard, and watch a batch go through. Ask for the mix
-                design, ask to see the curing area, ask what happens to units that fail. We would
-                rather you checked than took our word for it.
+                design, ask to see the curing area, ask what happens to units that fail. Nothing on
+                this page means much until you have seen it yourself.
               </p>
               <p className="mt-6 text-body text-ink-secondary">
                 {address ? (

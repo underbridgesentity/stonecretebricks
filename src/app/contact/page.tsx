@@ -38,7 +38,7 @@ export default function ContactPage() {
             <Channel
               icon={<Whatsapp width={22} height={22} />}
               label="WhatsApp"
-              value={COMPANY.whatsapp.value}
+              value={COMPANY.phone.value}
               href={wa}
               pendingLabel="WhatsApp number"
               note="Fastest answer"
@@ -78,7 +78,7 @@ export default function ContactPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">Open on Saturday.</h2>
-              <p className="mt-6 max-w-xl text-body text-ink-secondary">
+              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
                 Trade buys on a Saturday morning, so the yard is open for collections. Deliveries
                 run on weekdays.
               </p>
@@ -113,7 +113,7 @@ export default function ContactPage() {
               <h2 className="text-h1 uppercase text-ink">Directions, including for a truck.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 Delivery vehicles and visitors use separate gates. If you are collecting with a
-                trailer or a bakkie, come to the visitors gate and someone will direct you to the
+                trailer or a bakkie, come to the visitors&rsquo; gate and someone will direct you to the
                 loading area.
               </p>
               <div className="mt-6">

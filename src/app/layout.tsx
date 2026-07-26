@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     default: `Stonecrete Bricks, concrete bricks and blocks in ${COMPANY.suburb.value}`,
     template: "%s | Stonecrete Bricks",
   },
-  description: `Concrete stock bricks, maxi bricks, hollow blocks and pavers, manufactured in ${COMPANY.suburb.value} to SANS 1215 and SANS 1058. Specifications, coverage and lead times published. Delivered to site across ${COMPANY.region.value}.`,
+  description: `Concrete stock bricks, maxi bricks, hollow blocks and pavers, made in ${COMPANY.suburb.value} to SANS 1215 and SANS 1058. Specs and coverage published. Delivered across ${COMPANY.region.value}.`,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

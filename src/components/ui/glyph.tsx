@@ -91,6 +91,15 @@ export function Courses(props: GlyphProps) {
   );
 }
 
+/** The only indicator a select has, since appearance is reset. */
+export function Chevron(props: GlyphProps) {
+  return (
+    <Glyph {...props}>
+      <path d="m5 9 7 7 7-7" />
+    </Glyph>
+  );
+}
+
 export function Close(props: GlyphProps) {
   return (
     <Glyph {...props}>

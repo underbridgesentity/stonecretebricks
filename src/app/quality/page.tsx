@@ -56,16 +56,18 @@ export default function QualityPage() {
                   <h2 className="text-h1 uppercase text-ink">{standard.code}</h2>
                   <p className="mt-2 text-datum uppercase text-ink-secondary">{standard.covers}</p>
                 </div>
-                <p className="max-w-2xl text-body text-ink-secondary">{standard.body}</p>
+                <p className="max-w-[68ch] text-body text-ink-secondary">{standard.body}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-12 border-l-2 border-oxide pl-6">
-            <p className="max-w-2xl text-body text-ink">
-              The National Building Regulations set the floor for single storey housing: a nominal
-              3.5 MPa for hollow units and 7.0 MPa for solid units. Every masonry product we make is
-              specified at or above that floor.
+            <p className="max-w-[68ch] text-body text-ink">
+              SANS 10400-K, the deemed-to-satisfy rules under the National Building Regulations,
+              sets the floor at an average 3.0 MPa for hollow units and 4.0 MPa for solid units in
+              single-storey work. For the lower storey of a double storey it rises to 7.0 MPa hollow
+              and 10 MPa solid. Our hollow blocks are specified at 3.5 MPa and our solid units at
+              7.0 MPa, both above the single-storey floor.
             </p>
           </div>
         </Wall>
@@ -115,7 +117,7 @@ export default function QualityPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">How often, and what for.</h2>
-              <p className="mt-6 max-w-xl text-body text-ink-secondary">
+              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
                 Sampling frequency and the measured results come from our own production records and
                 an independent laboratory. Both are published here once the first full batches are
                 through.

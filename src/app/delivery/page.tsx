@@ -31,7 +31,7 @@ const SITE_REQUIREMENTS = [
   },
   {
     title: "Standing time",
-    body: "The first thirty minutes on site are included. Beyond that a standing charge applies, because the vehicle is not doing its next drop.",
+    body: "The first 30 minutes on site are included. Beyond that a standing charge applies, because the vehicle is not doing its next drop.",
   },
 ];
 
@@ -98,8 +98,8 @@ export default function DeliveryPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-2xl text-small text-ink-secondary">
-            <span className="text-ink-accent">&dagger;</span> Zones are measured from the plant, so
+          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
+            Zones are measured from the plant, so
             the exact suburb list is confirmed once the yard address is published. Delivery is
             charged per load and quoted with the product, never added afterwards.
           </p>
@@ -114,7 +114,7 @@ export default function DeliveryPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">One load, in units.</h2>
-              <p className="mt-6 max-w-xl text-body text-ink-secondary">
+              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
                 Loads are limited by mass, not by volume, so a load of hollow blocks carries far
                 fewer units than a load of stock bricks. These are the figures the calculator uses
                 when it tells you how many trips your order takes.

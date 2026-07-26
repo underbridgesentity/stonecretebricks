@@ -23,8 +23,8 @@ const PROOF = [
     href: "/quality",
   },
   {
-    title: "Independently tested",
-    body: "Crush test results from an independent laboratory, published with the lab name and the date of test.",
+    title: "Independent test certificates",
+    body: "Crush test results come from an independent laboratory, published with the laboratory name and the date of test. The first certificates land as the first full batches come through.",
     href: "/quality",
   },
   {
@@ -44,31 +44,35 @@ export function ProofCourse() {
             <h2 className="mt-6 max-w-[18ch] text-display uppercase text-ink">
               New company. Proven standards.
             </h2>
-            <p className="mt-7 max-w-md text-body text-ink-secondary">
+            <p className="mt-7 max-w-[58ch] text-body text-ink-secondary">
               We do not have a twenty year history to sell you, so we will give you something more
               useful: the standard we manufacture to, the results that prove it, and an open
               invitation to come and watch us make them.
             </p>
 
-            <dl className="mt-12 flex flex-col">
+            {/* A list of links, not a glossary. It was a <dl> with the anchor
+                as a direct child, which is not permitted content and left the
+                dt/dd pairs with no term-definition relationship at all. */}
+            <ul className="mt-12 flex flex-col">
               {PROOF.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="group flex flex-col gap-2 border-t border-line py-6 transition-colors hover:border-oxide"
-                >
-                  <dt className="flex items-center justify-between gap-4 text-h3 uppercase text-ink">
-                    {item.title}
-                    <Arrow
-                      width={16}
-                      height={16}
-                      className="shrink-0 text-oxide transition-transform group-hover:translate-x-1"
-                    />
-                  </dt>
-                  <dd className="max-w-md text-small text-ink-secondary">{item.body}</dd>
-                </Link>
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    className="group flex flex-col gap-2 border-t border-line py-6 transition-colors hover:border-oxide"
+                  >
+                    <h3 className="flex items-center justify-between gap-4 text-h3 uppercase text-ink">
+                      {item.title}
+                      <Arrow
+                        width={16}
+                        height={16}
+                        className="shrink-0 text-oxide transition-transform group-hover:translate-x-1"
+                      />
+                    </h3>
+                    <span className="max-w-[64ch] text-small text-ink-secondary">{item.body}</span>
+                  </Link>
+                </li>
               ))}
-            </dl>
+            </ul>
           </Stretcher>
 
           <Stretcher span="half">

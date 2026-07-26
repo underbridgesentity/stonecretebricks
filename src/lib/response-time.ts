@@ -61,9 +61,20 @@ export function respondByLabel(from: Date): string {
   return dateTime(respondBy(from));
 }
 
-/** RFQ-2026-0417. A reference materially raises perceived legitimacy. */
+/**
+ * RFQ-2026-8K3F2M. A reference materially raises perceived legitimacy.
+ *
+ * The first version was `epochSeconds % 10000`, which repeats every 2.78 hours,
+ * so two enquiries in a year would almost certainly collide. If the reference
+ * ever becomes an operational key, that is a real problem. Base36 over the full
+ * timestamp plus randomness gives a collision-free reference that is still
+ * short enough to read down a phone.
+ */
 export function reference(now: Date, seed: number): string {
   const year = now.getFullYear();
-  const n = String(seed % 10000).padStart(4, "0");
-  return `RFQ-${year}-${n}`;
+  const stamp = Math.abs(Math.trunc(seed)).toString(36).toUpperCase().slice(-5);
+  const salt = Math.floor(Math.random() * 36)
+    .toString(36)
+    .toUpperCase();
+  return `RFQ-${year}-${stamp}${salt}`;
 }
