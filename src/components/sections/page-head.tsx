@@ -45,7 +45,7 @@ export function PageHead({
               {title}
             </h1>
             <p
-              className="animate-set mt-8 max-w-[62ch] text-lead text-ink-secondary"
+              className="animate-set mt-8 max-w-[45ch] text-lead text-ink-secondary"
               style={{ animationDelay: "240ms" }}
             >
               {lead}

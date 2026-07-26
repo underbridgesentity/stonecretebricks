@@ -31,7 +31,7 @@ export default function Home() {
             <h2 className="max-w-[18ch] text-mega uppercase text-ink">
               Every building starts with the material.
             </h2>
-            <p className="mt-10 max-w-[62ch] text-lead text-ink-secondary">
+            <p className="mt-10 max-w-[45ch] text-lead text-ink-secondary">
               A wall is only as good as the units in it. Inconsistent dimensions cost a bricklayer
               time and cost the client mortar. Units that have not cured properly fail under a
               trowel and fail under load. Solving that, consistently, is the whole business.
@@ -45,6 +45,7 @@ export default function Home() {
         alt="Raking light across a precisely laid concrete block wall, every mortar joint reading as a sharp shadow line"
         sizes="100vw"
         ratio="brick"
+        quality={50}
       />
 
       <ProductWall />

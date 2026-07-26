@@ -91,7 +91,7 @@ export default function PrivacyPage() {
           <Wall>
             <Split label={section.heading}>
               {section.body.map((paragraph) => (
-                <p key={paragraph} className="mb-6 max-w-[68ch] text-body text-ink-secondary last:mb-0">
+                <p key={paragraph} className="mb-6 max-w-[49ch] text-body text-ink-secondary last:mb-0">
                   {paragraph}
                 </p>
               ))}
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
       <Section divider>
         <Wall>
           <Split label="Contact us">
-            <p className="max-w-[68ch] text-body text-ink-secondary">
+            <p className="max-w-[49ch] text-body text-ink-secondary">
               Stonecrete Bricks
               <br />
               {address ? (

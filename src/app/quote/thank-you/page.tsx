@@ -54,7 +54,7 @@ export default async function ThankYouPage({
             ) : null}
 
             <p
-              className="animate-set mt-8 max-w-[62ch] text-lead text-ink-secondary"
+              className="animate-set mt-8 max-w-[45ch] text-lead text-ink-secondary"
               style={{ animationDelay: "340ms" }}
             >
               We will come back to you before <strong className="text-ink">{by}</strong> with a

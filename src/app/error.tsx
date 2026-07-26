@@ -25,7 +25,7 @@ export default function Error({
               Something broke
             </p>
             <h1 className="text-display uppercase text-ink">That did not load.</h1>
-            <p className="mt-6 max-w-[62ch] text-lead text-ink-secondary">
+            <p className="mt-6 max-w-[45ch] text-lead text-ink-secondary">
               Try again. If it keeps happening, WhatsApp us and we will take the enquiry that way
               instead, so nothing waits on the website.
             </p>

@@ -12,8 +12,10 @@ import Image from "next/image";
  */
 
 const ratios = {
-  /** 3:1, the brick's own face. */
-  brick: "aspect-[3/1]",
+  /** 3:1 on desktop, opening up on narrow screens. At a flat 3:1 these bands
+      render 107 to 138px tall on a phone, which is a sliver, and a 3:2 source
+      loses half its height to the crop. */
+  brick: "aspect-[3/2] sm:aspect-[2/1] lg:aspect-[3/1]",
   /** 16:9, for wide bands. */
   course: "aspect-[16/9]",
   /** 4:3, for product renders. */
@@ -36,6 +38,7 @@ export function Photo({
   sizes,
   ratio = "course",
   priority = false,
+  quality,
   scrim = false,
   className = "",
   imageClassName = "",
@@ -45,6 +48,8 @@ export function Photo({
   sizes: string;
   ratio?: Ratio;
   priority?: boolean;
+  /** Only for noisy textures where the default over-encodes. See next.config. */
+  quality?: number;
   scrim?: boolean;
   className?: string;
   imageClassName?: string;
@@ -57,6 +62,7 @@ export function Photo({
         fill
         sizes={sizes}
         priority={priority}
+        quality={quality}
         className={`object-cover ${imageClassName}`}
       />
       {scrim ? (

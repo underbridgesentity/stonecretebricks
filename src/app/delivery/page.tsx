@@ -55,41 +55,48 @@ export default function DeliveryPage() {
             Zones, minimums and lead times.
           </h2>
 
-          <div className="mt-12 w-full overflow-x-auto">
-            <table className="w-full min-w-[40rem] border-collapse text-left">
+          <p className="mt-12 text-small text-ink-secondary md:hidden">
+            Swipe the table sideways to see minimums and lead times.
+          </p>
+
+          <div className="mt-4 w-full overflow-x-auto md:mt-12">
+            <table className="w-full min-w-[40rem] border-separate border-spacing-0 text-left">
               <caption className="sr-only">Delivery zones, minimum loads and lead times</caption>
               <thead>
-                <tr className="border-b border-line-strong">
-                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
+                <tr>
+                  <th
+                    scope="col"
+                    className="sticky left-0 z-10 border-b border-r border-line-strong bg-ground py-5 pr-6 text-datum uppercase text-ink-secondary"
+                  >
                     Zone
                   </th>
-                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
+                  <th scope="col" className="border-b border-line-strong py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Area
                   </th>
-                  <th scope="col" className="py-5 pr-6 text-datum uppercase text-ink-secondary">
+                  <th scope="col" className="border-b border-line-strong py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Minimum
                   </th>
-                  <th scope="col" className="py-4 text-datum uppercase text-ink-secondary">
+                  <th scope="col" className="border-b border-line-strong py-5 pr-6 text-datum uppercase text-ink-secondary">
                     Lead time
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {zones.map((zone) => (
-                  <tr key={zone.zone} className="border-b border-line">
+                  <tr key={zone.zone}>
                     <th
                       scope="row"
                       className="py-4 pr-4 align-top text-body font-extrabold text-ink"
                     >
                       {zone.zone}
                     </th>
-                    <td className="py-4 pr-4 align-top text-body text-ink-secondary">
+                    <td className="border-b border-line py-5 pr-6 align-top text-body text-ink-secondary">
                       {zone.radius}
                     </td>
-                    <td className="py-4 pr-4 align-top text-body text-ink" data-figure>
+                    <td className="border-b border-line py-5 pr-6 align-top text-body text-ink" data-figure>
                       {zone.minimum}
                     </td>
-                    <td className="py-4 align-top text-body text-ink" data-figure>
+                    <td className="border-b border-line py-5 align-top text-body text-ink" data-figure>
                       {zone.lead}
                     </td>
                   </tr>
@@ -98,7 +105,7 @@ export default function DeliveryPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
+          <p className="mt-6 max-w-[52ch] text-small text-ink-secondary">
             Zones are measured from the plant, so
             the exact suburb list is confirmed once the yard address is published. Delivery is
             charged per load and quoted with the product, never added afterwards.
@@ -114,7 +121,7 @@ export default function DeliveryPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">One load, in units.</h2>
-              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Loads are limited by mass, not by volume, so a load of hollow blocks carries far
                 fewer units than a load of stock bricks. These are the figures the calculator uses
                 when it tells you how many trips your order takes.

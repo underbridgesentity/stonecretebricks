@@ -56,13 +56,13 @@ export default function QualityPage() {
                   <h2 className="text-h1 uppercase text-ink">{standard.code}</h2>
                   <p className="mt-2 text-datum uppercase text-ink-secondary">{standard.covers}</p>
                 </div>
-                <p className="max-w-[68ch] text-body text-ink-secondary">{standard.body}</p>
+                <p className="max-w-[49ch] text-body text-ink-secondary">{standard.body}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-12 border-l-2 border-oxide pl-6">
-            <p className="max-w-[68ch] text-body text-ink">
+            <p className="max-w-[49ch] text-body text-ink">
               SANS 10400-K, the deemed-to-satisfy rules under the National Building Regulations,
               sets the floor at an average 3.0 MPa for hollow units and 4.0 MPa for solid units in
               single-storey work. For the lower storey of a double storey it rises to 7.0 MPa hollow
@@ -117,7 +117,7 @@ export default function QualityPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">How often, and what for.</h2>
-              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Sampling frequency and the measured results come from our own production records and
                 an independent laboratory. Both are published here once the first full batches are
                 through.

@@ -107,7 +107,7 @@ export function MobileNav() {
           data-ground="graphite"
           className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-ground lg:hidden"
         >
-          <div className="flex h-[var(--header-h)] shrink-0 items-center justify-end px-6">
+          <div className="sticky top-0 z-10 flex h-[var(--header-h)] shrink-0 items-center justify-end bg-ground px-6">
             <button
               type="button"
               onClick={() => {

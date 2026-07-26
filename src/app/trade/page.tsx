@@ -89,7 +89,7 @@ export default function TradePage() {
                 className="animate-course-set col-span-full grid grid-cols-1 gap-x-10 gap-y-3 border-t border-line py-10 md:grid-cols-12"
               >
                 <dt className="text-h2 uppercase text-ink md:col-span-4">{term.title}</dt>
-                <dd className="max-w-[62ch] text-body text-ink-secondary md:col-span-7">
+                <dd className="max-w-[45ch] text-body text-ink-secondary md:col-span-7">
                   {term.body}
                 </dd>
               </div>
@@ -107,7 +107,7 @@ export default function TradePage() {
               <h2 className="mt-6 max-w-[20ch] text-display uppercase text-ink">
                 What one pallet covers.
               </h2>
-              <p className="mt-7 max-w-[52ch] text-lead text-ink-secondary">
+              <p className="mt-7 max-w-[38ch] text-lead text-ink-secondary">
                 Useful when you are working out shelf space, yard space and what to quote a walk-in
                 customer. Coverage is for a single skin wall.
               </p>
@@ -156,13 +156,13 @@ export default function TradePage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="text-h2 uppercase text-ink md:w-64 md:shrink-0">{item.step}</h3>
-                <p className="max-w-[62ch] text-body text-ink-secondary">{item.body}</p>
+                <p className="max-w-[45ch] text-body text-ink-secondary">{item.body}</p>
               </li>
             ))}
           </ol>
 
           <div className="mt-12 border-l-2 border-oxide pl-6">
-            <p className="max-w-[62ch] text-body text-ink">
+            <p className="max-w-[45ch] text-body text-ink">
               Credit terms, the minimum monthly volume and the trade price list are confirmed per
               account.
             </p>

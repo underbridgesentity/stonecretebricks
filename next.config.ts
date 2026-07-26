@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const YEAR = 31536000;
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // A stray package-lock.json in the home directory makes Turbopack infer the
@@ -9,7 +11,15 @@ const nextConfig: NextConfig = {
     // Every file is local in public/. No remotePatterns, nothing to allowlist.
     // AVIF first: worth the encode cost for a small fixed set with a long cache.
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000,
+    minimumCacheTTL: YEAR,
+    /*
+     * Next 16 defaults this to [75] and returns HTTP 400 for anything else, so
+     * a per-image quality override silently breaks unless it is declared here.
+     * 50 exists for the masonry band: it is a noisy texture where AVIF at 75
+     * actually encodes larger than the JPEG it replaces, because the encoder
+     * spends its bits reproducing film grain.
+     */
+    qualities: [50, 75],
   },
   async headers() {
     return [
@@ -20,6 +30,16 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
+      },
+      {
+        /*
+         * Raw files under public/ were served with max-age=0, so anything
+         * linking them directly refetched every time. The JSON-LD image is the
+         * live case: crawlers were pulling a 390 KB photograph on every visit.
+         * These are content-addressed by hand, so a year is safe.
+         */
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: `public, max-age=${YEAR}, immutable` }],
       },
     ];
   },

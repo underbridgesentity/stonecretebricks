@@ -167,7 +167,7 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
 
                 {openings.map((o, i) => (
                   <div key={o.id} className="flex items-end gap-3">
-                    <div className="flex-1">
+                    <div className="min-w-0 flex-1">
                       <label
                         htmlFor={`calc-open-w-${o.id}`}
                         className="mb-1 block text-small text-ink-secondary"
@@ -185,7 +185,7 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
                         }
                       />
                     </div>
-                    <div className="flex-1">
+                    <div className="min-w-0 flex-1">
                       <label
                         htmlFor={`calc-open-h-${o.id}`}
                         className="mb-1 block text-small text-ink-secondary"
@@ -243,7 +243,7 @@ export function Calculator({ compact = false }: { compact?: boolean }) {
             <p className="text-h2 uppercase text-ink">
               {paving ? "Enter your area" : "Enter your wall"}
             </p>
-            <p className="mt-4 max-w-[42ch] text-body text-ink-secondary">
+            <p className="mt-4 max-w-[30ch] text-body text-ink-secondary">
               Put a length and a {paving ? "width" : "height"} in metres on the left and we will
               work out the units, the wastage, the pallets and the loads.
             </p>

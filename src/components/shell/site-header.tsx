@@ -30,7 +30,7 @@ export function SiteHeader() {
           <Lockup orientation="horizontal" variant="on-dark" />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-6 xl:gap-9 lg:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}

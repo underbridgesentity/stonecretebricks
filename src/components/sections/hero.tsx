@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       data-ground="graphite"
-      className="relative flex min-h-[84vh] items-end overflow-hidden bg-graphite"
+      className="relative flex min-h-[84svh] items-end overflow-hidden bg-graphite"
     >
       <Image
         src="/images/site/hero.jpg"
@@ -43,7 +43,7 @@ export function Hero() {
         className="absolute inset-0 bg-gradient-to-r from-graphite/90 via-graphite/45 to-transparent"
       />
 
-      <Wall className="relative pb-16 pt-32 md:pb-24 md:pt-40">
+      <Wall className="relative pb-16 pt-20 sm:pt-28 md:pb-24 md:pt-40">
         <p
           className="animate-set text-datum uppercase text-limestone"
           style={{ animationDelay: "80ms" }}
@@ -59,7 +59,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="animate-set mt-7 max-w-[52ch] text-lead text-limestone"
+          className="animate-set mt-7 max-w-[38ch] text-lead text-limestone"
           style={{ animationDelay: "260ms" }}
         >
           Stock bricks, maxi bricks, hollow blocks and pavers, cast and cured to the South African

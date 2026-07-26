@@ -60,7 +60,7 @@ export default function PlantPage() {
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="text-h2 uppercase text-ink md:w-72 md:shrink-0">{stage.step}</h3>
-                <p className="max-w-[68ch] text-body text-ink-secondary">{stage.body}</p>
+                <p className="max-w-[49ch] text-body text-ink-secondary">{stage.body}</p>
               </div>
             ))}
           </div>
@@ -75,7 +75,7 @@ export default function PlantPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">What we can actually make.</h2>
-              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Running out of bricks stops a site, so the honest answer to &ldquo;can you supply
                 this&rdquo; matters more than an optimistic one. These figures are published so you
                 can check them against your programme before you commit.
@@ -139,7 +139,7 @@ export default function PlantPage() {
               <h2 className="text-display uppercase text-ink">
                 Bring your quantity surveyor.
               </h2>
-              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Pick a morning, come to the yard, and watch a batch go through. Ask for the mix
                 design, ask to see the curing area, ask what happens to units that fail. Nothing on
                 this page means much until you have seen it yourself.

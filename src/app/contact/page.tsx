@@ -78,7 +78,7 @@ export default function ContactPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">Open on Saturday.</h2>
-              <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Trade buys on a Saturday morning, so the yard is open for collections. Deliveries
                 run on weekdays.
               </p>

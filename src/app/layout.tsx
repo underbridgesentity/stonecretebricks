@@ -15,15 +15,17 @@ import "./globals.css";
  * used. Naming explicit weights makes next/font fetch static instances, which
  * is lighter here than the 100-900 axis.
  *
- * display: swap plus next/font's computed fallback metrics is the CLS control.
- * `optional` would risk shipping the fold in Arial, and the ExtraBold is the brand.
+ * display: swap is the CLS control, paired with the hand-declared
+ * "Montserrat Fallback" face in globals.css. next/font is supposed to emit an
+ * adjusted fallback itself and does not, so we declare it. `optional` would
+ * risk shipping the fold in Arial, and the ExtraBold is the brand.
  */
 const sans = Montserrat({
   variable: "--font-sans-face",
   subsets: ["latin"],
   weight: ["400", "800"],
   display: "swap",
-  fallback: ["system-ui", "Arial", "sans-serif"],
+  fallback: ["Montserrat Fallback", "system-ui", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {

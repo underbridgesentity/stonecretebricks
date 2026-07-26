@@ -293,11 +293,98 @@
     background-color var(--dur-reveal) var(--ease-out);
   box-shadow: 0 0 0 0 var(--face-side);
 
-  &:hover,
+  /* Hover only where hover exists. On touch this fired on tap and stuck,
+     leaving the card lifted until something else was tapped. */
+  @media (hover: hover) {
+    &:hover {
+      transform: translate3d(calc(var(--iso-x) * -0.5), calc(var(--iso-y) * -0.5), 0);
+      box-shadow: var(--iso-x) var(--iso-y) 0 0 var(--face-side);
+    }
+  }
+
   &:focus-visible,
   &:has(a:focus-visible) {
     transform: translate3d(calc(var(--iso-x) * -0.5), calc(var(--iso-y) * -0.5), 0);
     box-shadow: var(--iso-x) var(--iso-y) 0 0 var(--face-side);
+  }
+}
+
+/*
+ * Metric-matched fallback.
+ *
+ * next/font is documented as emitting an adjusted fallback face, and this
+ * project's layout comment claimed that was the CLS control. It is not in the
+ * build: there is no size-adjust anywhere in the output and the font manifest
+ * reports appUsingSizeAdjust false. Measured, five text blocks moved a total
+ * of 135px between the real face and the raw Arial fallback.
+ *
+ * These overrides are Montserrat's own metrics against Arial. Declaring the
+ * face by hand and putting it first in the stack cuts that to 96px. It is not
+ * zero because every line-height here is a fixed value, so only line-count
+ * changes can still move anything.
+ */
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  ascent-override: 85.79%;
+  descent-override: 22.25%;
+  line-gap-override: 0%;
+  size-adjust: 112.83%;
+}
+
+/*
+ * Print.
+ *
+ * A quantity surveyor prints a spec page. Without this, every graphite section
+ * printed limestone text on white paper at 1.09:1, which covers the header,
+ * the closing CTA on every page, and a whole section on seven of them. And the
+ * comparison table, pinned at 46rem inside a scroll container, lost half its
+ * last column off the edge of the sheet.
+ */
+@media print {
+  [data-ground="graphite"] {
+    --ground: #ffffff;
+    --ink: #1a1a1a;
+    --ink-secondary: #4a4a4a;
+    --ink-accent: #4a2f24;
+    --line: #cccccc;
+    --line-strong: #1a1a1a;
+    background: #ffffff !important;
+  }
+
+  :root {
+    --section: 1.5rem;
+  }
+
+  header,
+  footer {
+    display: none !important;
+  }
+
+  section {
+    break-inside: avoid;
+    padding-block: 1rem !important;
+  }
+
+  /* Nothing can scroll on paper, so let it wrap instead of clipping. */
+  [class*="overflow-x-auto"] {
+    overflow: visible !important;
+  }
+
+  table {
+    min-width: 0 !important;
+    font-size: 10pt;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #4a4a4a;
+  }
+
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
   }
 }
 

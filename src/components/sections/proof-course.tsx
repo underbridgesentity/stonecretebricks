@@ -44,7 +44,7 @@ export function ProofCourse() {
             <h2 className="mt-6 max-w-[18ch] text-display uppercase text-ink">
               New company. Proven standards.
             </h2>
-            <p className="mt-7 max-w-[58ch] text-body text-ink-secondary">
+            <p className="mt-7 max-w-[30ch] text-body text-ink-secondary">
               We do not have a twenty year history to sell you, so we will give you something more
               useful: the standard we manufacture to, the results that prove it, and an open
               invitation to come and watch us make them.
@@ -68,7 +68,7 @@ export function ProofCourse() {
                         className="shrink-0 text-oxide transition-transform group-hover:translate-x-1"
                       />
                     </h3>
-                    <span className="max-w-[64ch] text-small text-ink-secondary">{item.body}</span>
+                    <span className="max-w-[46ch] text-small text-ink-secondary">{item.body}</span>
                   </Link>
                 </li>
               ))}

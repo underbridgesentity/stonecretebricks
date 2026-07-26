@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </h1>
 
               <p
-                className="animate-set mt-6 max-w-[62ch] text-lead text-ink-secondary"
+                className="animate-set mt-6 max-w-[45ch] text-lead text-ink-secondary"
                 style={{ animationDelay: "260ms" }}
               >
                 {product.positioning}
@@ -107,7 +107,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <Photo
                 src={product.image}
                 alt={`A ${product.name.toLowerCase().replace(/s$/, "")}, grey concrete, photographed against a plain backdrop`}
-                sizes="(min-width: 768px) 560px, 100vw"
+                sizes="(min-width: 1024px) 450px, (min-width: 768px) 34vw, calc(100vw - 48px)"
                 ratio="wide"
                 priority
               />

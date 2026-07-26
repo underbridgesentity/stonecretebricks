@@ -52,7 +52,7 @@ export function SpecStrip() {
               className="animate-course-set col-span-full grid grid-cols-1 gap-x-10 gap-y-4 border-t border-line py-10 md:grid-cols-12"
             >
               <dt className="text-h1 uppercase text-ink md:col-span-4">{claim.title}</dt>
-              <dd className="max-w-[62ch] text-lead text-ink-secondary md:col-span-7">
+              <dd className="max-w-[45ch] text-lead text-ink-secondary md:col-span-7">
                 {claim.body}
               </dd>
             </div>

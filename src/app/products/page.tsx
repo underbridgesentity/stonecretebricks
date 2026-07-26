@@ -109,7 +109,7 @@ export default function ProductsPage() {
             ))}
           </div>
 
-          <div className="mt-16 max-w-[42ch]">
+          <div className="mt-16 max-w-[30ch]">
             <CoverageTable />
           </div>
         </Wall>
@@ -129,20 +129,20 @@ export default function ProductsPage() {
           </p>
 
           <div className="mt-4 w-full overflow-x-auto md:mt-12">
-            <table className="w-full min-w-[46rem] border-collapse text-left">
+            <table className="w-full min-w-[43rem] border-separate border-spacing-0 text-left">
               <caption className="sr-only">
                 Comparison of Stonecrete Bricks concrete products
               </caption>
               <thead>
-                <tr className="border-b border-line-strong">
+                <tr>
                   <th
                     scope="col"
-                    className="sticky left-0 z-10 bg-ground py-5 pr-6 align-baseline text-datum uppercase text-ink-secondary"
+                    className="sticky left-0 z-10 border-b border-r border-line-strong bg-ground py-5 pr-6 align-baseline text-datum uppercase text-ink-secondary"
                   >
                     Specification
                   </th>
                   {PRODUCTS.map((p) => (
-                    <th key={p.slug} scope="col" className="py-5 pr-6 align-baseline">
+                    <th key={p.slug} scope="col" className="border-b border-line-strong py-5 pr-6 align-baseline">
                       <Link href={`/products/${p.slug}`} className="text-h3 uppercase text-ink">
                         {p.name}
                       </Link>
@@ -176,9 +176,10 @@ export default function ProductsPage() {
                 <Row label="Mass per unit" cells={PRODUCTS.map((p) => `${p.massPerUnit.value} kg`)} />
                 <Row
                   label="Minimum order"
-                  cells={PRODUCTS.map(
-                    (p) =>
-                      `${number(p.moq.value.qty)} ${p.moq.value.unit} (${number(minimumInUnits(p))} units)`,
+                  cells={PRODUCTS.map((p) =>
+                    p.moq.value.unit === "units"
+                      ? `${number(p.moq.value.qty)} units`
+                      : `${number(p.moq.value.qty)} ${p.moq.value.unit} (${number(minimumInUnits(p))} units)`,
                   )}
                 />
                 <Row
@@ -189,7 +190,7 @@ export default function ProductsPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-[72ch] text-small text-ink-secondary">
+          <p className="mt-6 max-w-[52ch] text-small text-ink-secondary">
             Every figure above is a South African industry standard awaiting confirmation against
             our own units and test certificates. Ask us for the certificate before you specify.
             Coverage and pallet figures are derived from the unit size, so they move the moment a
@@ -204,7 +205,7 @@ export default function ProductsPage() {
           <Course className="items-end gap-y-8">
             <Stretcher span="half">
               <h2 className="text-h1 uppercase text-ink">Custom concrete products.</h2>
-              <p className="mt-5 max-w-[62ch] text-body text-ink-secondary">
+              <p className="mt-5 max-w-[45ch] text-body text-ink-secondary">
                 Non-standard sizes, bespoke moulds and purpose-made units for a specific detail.
                 Tell us what the drawing calls for and we will tell you whether we can press it,
                 what the tooling costs and what the minimum run is.
@@ -226,15 +227,19 @@ export default function ProductsPage() {
 
 function Row({ label, cells }: { label: string; cells: readonly string[] }) {
   return (
-    <tr className="border-b border-line">
+    <tr>
       <th
         scope="row"
-        className="sticky left-0 z-10 bg-ground py-5 pr-6 align-top text-small font-normal text-ink-secondary"
+        className="sticky left-0 z-10 border-b border-r border-line bg-ground py-5 pr-6 align-top text-small font-normal text-ink-secondary"
       >
         {label}
       </th>
       {cells.map((cell, i) => (
-        <td key={i} className="py-5 pr-6 align-top text-body font-extrabold text-ink" data-figure>
+        <td
+          key={i}
+          className="border-b border-line py-5 pr-6 align-top text-body font-extrabold text-ink"
+          data-figure
+        >
           {cell}
         </td>
       ))}

@@ -43,7 +43,7 @@ export function ProductBrick({ product, index }: { product: Product; index: numb
       <Photo
         src={product.image}
         alt="A grey concrete unit photographed against a plain backdrop"
-        sizes="(min-width: 640px) 50vw, 100vw"
+        sizes="(min-width: 1200px) 540px, (min-width: 640px) calc(50vw - 60px), calc(100vw - 48px)"
         ratio="wide"
         className="extrude"
       />
@@ -55,7 +55,7 @@ export function ProductBrick({ product, index }: { product: Product; index: numb
         </span>
       </div>
 
-      <p className="mt-3 max-w-[44ch] text-body text-ink-secondary">{product.positioning}</p>
+      <p className="mt-3 max-w-[32ch] text-body text-ink-secondary">{product.positioning}</p>
 
       <span className="mt-5 inline-flex items-center gap-2.5 text-datum-strong uppercase text-ink transition-colors group-hover:text-ink-accent">
         Specifications

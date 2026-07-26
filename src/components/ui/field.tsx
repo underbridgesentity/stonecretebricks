@@ -16,8 +16,13 @@ import { Chevron } from "./glyph";
  * someone starts typing, and this audience fills forms on a phone on a site.
  */
 
+/*
+ * min-w-0 is load-bearing. An input's intrinsic min-width is the UA `size=20`
+ * default, around 194px, so a two-up field row needed ~404px inside a 222px
+ * panel at 320px and pushed the whole document sideways.
+ */
 const control =
-  "w-full min-h-12 border border-line-strong bg-ground px-4 py-3 text-body text-ink placeholder:text-ink-secondary";
+  "w-full min-w-0 min-h-12 border border-line-strong bg-ground px-4 py-3 text-body text-ink placeholder:text-ink-secondary";
 
 /**
  * Field owns the accessible wiring, not just the visual arrangement.
@@ -150,7 +155,7 @@ export function Chip({
       />
       <label
         htmlFor={id}
-        className="inline-flex min-h-12 cursor-pointer items-center gap-2 border border-line-strong px-4 text-label uppercase text-ink transition-colors hover:bg-ground-2 peer-checked:border-oxide-deep peer-checked:bg-oxide-deep peer-checked:text-limestone peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus [&>svg]:hidden peer-checked:[&>svg]:block"
+        className="inline-flex min-h-12 cursor-pointer items-center gap-2 border border-line-strong px-4 text-label uppercase text-ink transition-colors hover:bg-ground-2 peer-checked:border-oxide-deep peer-checked:bg-oxide-deep peer-checked:text-limestone peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus [&>svg]:invisible peer-checked:[&>svg]:visible"
       >
         <svg
           viewBox="0 0 24 24"

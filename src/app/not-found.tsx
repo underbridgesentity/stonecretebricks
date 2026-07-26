@@ -13,7 +13,7 @@ export default function NotFound() {
               404
             </p>
             <h1 className="text-display uppercase text-ink">That page is not here.</h1>
-            <p className="mt-6 max-w-[62ch] text-lead text-ink-secondary">
+            <p className="mt-6 max-w-[45ch] text-lead text-ink-secondary">
               The link may be old or mistyped. Everything we make is on the products page, and the
               quote form is two clicks away.
             </p>

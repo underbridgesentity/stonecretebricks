@@ -55,7 +55,7 @@ export function SpecTable({
                     {row.unit ? <span className="font-normal text-ink-secondary"> {row.unit}</span> : null}
                     {row.assumed ? (
                       <sup className="ml-1 text-datum font-normal text-ink-accent">
-                        <span aria-hidden>&dagger;</span>
+                        <span aria-hidden>*</span>
                         <span className="sr-only"> provisional</span>
                       </sup>
                     ) : null}
@@ -69,7 +69,7 @@ export function SpecTable({
 
       {anyAssumed ? (
         <p className="mt-4 text-small text-ink-secondary">
-          <span className="text-ink-accent">&dagger;</span> Industry standard figure, pending
+          <span className="text-ink-accent">*</span> Industry standard figure, pending
           confirmation against our own test certificates. Ask us for the certificate before you
           specify.
         </p>
