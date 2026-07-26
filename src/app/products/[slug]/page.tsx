@@ -9,6 +9,7 @@ import { Arrow } from "@/components/ui/glyph";
 import { Photo } from "@/components/ui/photo";
 import { SpecTable, type SpecRow } from "@/components/ui/spec-table";
 import { Course, Stretcher, Wall } from "@/components/ui/wall";
+import { compact } from "@/components/structured-data";
 import { COMPANY, SITE_URL } from "@/data/company";
 import {
   formatDimensions,
@@ -55,7 +56,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema(product)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(compact(productSchema(product))) }}
       />
 
       {/* Hero */}

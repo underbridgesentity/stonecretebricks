@@ -14,6 +14,30 @@ import { addressLine, COMPANY, SITE_URL } from "@/data/company";
 const WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 /**
+ * Strip nullish values before serialising.
+ *
+ * JSON.stringify drops `undefined` but keeps `null`, so a pending fact such as
+ * the street address was being published as `"streetAddress": null`. An absent
+ * field is neutral; a null field is a broken field.
+ */
+export function compact<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.filter((v) => v != null).map((v) => compact(v)) as unknown as T;
+  }
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [key, v] of Object.entries(value)) {
+      if (v == null) continue;
+      const cleaned = compact(v);
+      if (Array.isArray(cleaned) && cleaned.length === 0) continue;
+      out[key] = cleaned;
+    }
+    return out as T;
+  }
+  return value;
+}
+
+/**
  * schema.org wants DayOfWeek values, not a human range. Passing the display
  * string straight through meant "Monday to Friday" was silently discarded and
  * the opening hours never surfaced in search at all.
@@ -81,7 +105,7 @@ export function OrganisationSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(compact(schema)) }}
     />
   );
 }
