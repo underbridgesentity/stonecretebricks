@@ -110,13 +110,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 sizes="(min-width: 1024px) 450px, (min-width: 768px) 34vw, calc(100vw - 48px)"
                 ratio="wide"
                 priority
+                className="border border-line"
               />
             </Stretcher>
           </Course>
         </Wall>
       </section>
 
-      {/* Specification */}
+      {/*
+        The sheet. This was three bands: Specification, then a full band whose
+        entire content was four one-word chips under a display heading, then an
+        Ordering band carrying three facts and a repeat of the hero's quote
+        button. Seven bands on a page about one brick, and the two thin ones
+        were padding wearing the costume of structure.
+        A real spec sheet puts the physical table, what the unit is for, how it
+        covers and how you buy it on one sheet, because a buyer reads them
+        together. So it is one band: the table and its applications left, the
+        derived figures and the commercial terms right.
+      */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule label="Specification" />
@@ -124,6 +135,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <Course className="mt-12 gap-y-12">
             <Stretcher span="half">
               <SpecTable rows={specRows(product)} caption={`${product.name} to ${product.standard}`} />
+
+              <p className="mt-10 text-datum uppercase text-ink-secondary">Suitable for</p>
+              <ul className="mt-4 flex flex-wrap gap-[var(--joint)]">
+                {product.suitableFor.map((use) => (
+                  <li
+                    key={use}
+                    className="border border-line-strong px-4 py-3 text-datum-strong uppercase text-ink"
+                  >
+                    {use}
+                  </li>
+                ))}
+              </ul>
             </Stretcher>
 
             <Stretcher span="complement" className="md:pl-8">
@@ -157,29 +180,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   {wallThickness(product)} mm wall.
                 </p>
               ) : null}
-            </Stretcher>
-          </Course>
-        </Wall>
-      </section>
 
-      {/* Applications. Tight: four chips do not justify a full band. */}
-      <section className="border-t border-line py-[var(--section-tight)]">
-        <Wall>
-          <CourseRule label="What it is for" />
-
-          <Course className="mt-12 gap-y-10">
-            <Stretcher span="measure">
-              <h2 className="text-display uppercase text-ink">Where it goes.</h2>
-              <ul className="mt-8 flex flex-wrap gap-[var(--joint)]">
-                {product.suitableFor.map((use) => (
-                  <li
-                    key={use}
-                    className="border border-line-strong px-4 py-3 text-datum-strong uppercase text-ink"
-                  >
-                    {use}
-                  </li>
-                ))}
-              </ul>
+              <h2 className="mt-14 text-h3 uppercase text-ink">Ordering</h2>
+              <dl className="mt-6 flex flex-col">
+                <CoverageRow
+                  label="Minimum order"
+                  value={`${number(product.moq.value.qty)} ${product.moq.value.unit}`}
+                />
+                <CoverageRow
+                  label="Lead time"
+                  value={`${product.leadTimeDays.value} working days`}
+                />
+                <CoverageRow label="Delivery" value={COMPANY.region.value ?? "On request"} />
+              </dl>
             </Stretcher>
           </Course>
         </Wall>
@@ -194,15 +207,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             Four reasons, spelled out.
           </h2>
 
+          {/* The numerals here were 01 02 03 04 over an unordered grid of
+              benefits. There is no first reason. Numbering a set that has no
+              sequence is decoration pretending to be information, and it is
+              one of the loudest tells of a page laid out by pattern rather
+              than by argument. The string line above each stays: it is the
+              site's own device and it does not claim an order. */}
           <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
-            {product.features.map((feature, i) => (
+            {product.features.map((feature) => (
               <div key={feature.label} className="animate-course-set">
-                <p className="text-datum uppercase text-ink-secondary">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
                 <span
                   aria-hidden
-                  className="mt-4 block h-px w-full origin-left bg-line-strong animate-course-lay"
+                  className="block h-px w-full origin-left bg-line-strong animate-course-lay"
                 />
                 <h3 className="mt-6 text-h2 uppercase text-ink">{feature.label}</h3>
                 <p className="mt-3 text-body text-ink-secondary">{feature.expanded}</p>
@@ -212,40 +228,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </Wall>
       </section>
 
-      {/* Ordering */}
-      <section className="border-t border-line py-[var(--section)]">
-        <Wall>
-          <CourseRule label="Ordering" />
-
-          <Course className="mt-12 items-end gap-y-8">
-            <Stretcher span="half">
-              <h2 className="text-h1 uppercase text-ink">How to buy it.</h2>
-              <dl className="mt-8 flex flex-col">
-                <CoverageRow
-                  label="Minimum order"
-                  value={`${number(product.moq.value.qty)} ${product.moq.value.unit}`}
-                />
-                <CoverageRow
-                  label="Lead time"
-                  value={`${product.leadTimeDays.value} working days`}
-                />
-                <CoverageRow label="Delivery" value={COMPANY.region.value ?? "On request"} />
-              </dl>
-            </Stretcher>
-            <Stretcher span="quarter">
-              <ButtonLink href={`/quote?product=${product.slug}`} variant="oxide">
-                  Request a quote
-                  <Arrow width={16} height={16} />
-              </ButtonLink>
-            </Stretcher>
-          </Course>
-        </Wall>
-      </section>
-
       {/* Related */}
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule label="The rest of the range" />
+
+          {/* The only band on the page with no headline, which left its three
+              product h3s nesting under "Four reasons, spelled out" two bands
+              up. No level is skipped, so an outline checker passes it, but a
+              reader navigating by heading hears the other products announced
+              as part of this product's features. */}
+          <h2 className="mt-12 text-h1 uppercase text-ink">Also in the range.</h2>
+
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-3">
             {others.map((other) => (
               <Link

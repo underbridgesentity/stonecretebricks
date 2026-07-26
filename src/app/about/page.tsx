@@ -98,26 +98,25 @@ export default function AboutPage() {
         <Wall>
           <CourseRule label="What we hold ourselves to" />
 
-          <div className="mt-12 flex flex-col">
-            {MISSION.map((item, i) => (
-              <div
-                key={item.ours}
-                className="animate-course-set flex flex-col gap-3 border-t border-line py-8 md:flex-row md:gap-12"
-              >
-                <p
-                  data-figure
-                  className="text-datum uppercase text-ink-secondary md:w-16 md:shrink-0"
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </p>
+          {/* A list, so a <ul>, but not a sequence, so no numerals. These are
+              commitments that all hold at once: there is no first one and
+              nothing follows from anything. The 01 02 03 they used to carry
+              claimed an order the content does not have, and cost a 64px
+              column on desktop to say nothing. Numerals survive on this site
+              only where the steps genuinely happen in that order: the plant
+              process, opening a trade account, what happens after you send an
+              enquiry. */}
+          <ul className="mt-12 flex flex-col">
+            {MISSION.map((item) => (
+              <li key={item.ours} className="animate-course-set border-t border-line py-8">
                 {/* Sentence case, not uppercase. These are full sentences with
                     subordinate clauses; at 60 characters of uppercase extrabold
                     they were the hardest reading on the site. Uppercase stays
                     for phrases, not for prose. */}
                 <p className="max-w-[52ch] text-h1 text-ink">{item.ours}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Wall>
       </section>
 

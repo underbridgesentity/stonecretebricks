@@ -12,31 +12,28 @@ import type { ReactNode } from "react";
  * blurs its shadow or nudges translateY(-2px).
  */
 
-const faces = {
-  ground: "bg-ground border-line",
-  ground2: "bg-ground-2 border-line",
-  graphite: "bg-graphite border-graphite text-limestone",
-  oxide: "bg-oxide-deep border-oxide-deep text-limestone",
-} as const;
-
-type Face = keyof typeof faces;
-
+/*
+ * There was a `face` prop offering ground2, graphite and oxide alongside the
+ * default. Three of the four were never passed by any call site, which is the
+ * usual outcome of building variants before there is a second case: the map
+ * looks like a system and is really a guess. A module that needs a dark ground
+ * can say so in className, and if a second real case appears the prop comes
+ * back with two known users instead of one imagined one.
+ */
 export function Module({
-  face = "ground",
   extrude = false,
   reveal = false,
   href,
   children,
   className = "",
 }: {
-  face?: Face;
   extrude?: boolean;
   reveal?: boolean;
   href?: string;
   children: ReactNode;
   className?: string;
 }) {
-  const classes = `border ${faces[face]} ${extrude ? "extrude" : ""} ${
+  const classes = `border border-line bg-ground ${extrude ? "extrude" : ""} ${
     reveal ? "animate-course-set" : ""
   } ${className}`;
 

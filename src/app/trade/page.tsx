@@ -82,16 +82,23 @@ export default function TradePage() {
             </h2>
           </Split>
 
-          <dl className="mt-16 grid grid-cols-1 md:grid-cols-12">
+          {/*
+            This was a stack of full-width hairline rows, title left and body
+            right, which is the same device the three steps below it use. Two
+            of them on one page, separated only by a dark band, read as one
+            long list that someone happened to interrupt.
+            The distinction is real, so the shapes should differ: four terms
+            that hold simultaneously are a block of four, while three steps
+            that happen in order are a stack. Four courses laid two by two.
+          */}
+          <dl className="mt-16 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             {TERMS.map((term) => (
               <div
                 key={term.title}
-                className="animate-course-set col-span-full grid grid-cols-1 gap-x-10 gap-y-3 border-t border-line py-10 md:grid-cols-12"
+                className="animate-course-set flex flex-col gap-4 border border-line p-8 md:p-10"
               >
-                <dt className="text-h2 uppercase text-ink md:col-span-4">{term.title}</dt>
-                <dd className="max-w-[45ch] text-body text-ink-secondary md:col-span-7">
-                  {term.body}
-                </dd>
+                <dt className="text-h3 uppercase text-ink">{term.title}</dt>
+                <dd className="max-w-[45ch] text-body text-ink-secondary">{term.body}</dd>
               </div>
             ))}
           </dl>
