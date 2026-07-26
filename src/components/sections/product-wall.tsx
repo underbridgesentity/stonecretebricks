@@ -17,10 +17,18 @@ export function ProductWall() {
   return (
     <Section>
       <Wall>
+        {/*
+          This heading used to be the verbatim string /products carries above
+          the verbatim same grid rendered by the verbatim same component, one
+          click away. A visitor going home to products met the identical block
+          twice and the first two screens of /products earned nothing.
+          They have different jobs, so they now look different: this is the
+          teaser, name and line and photograph only, and /products is the
+          datasheet, same cards carrying the size and the class so the page can
+          be compared before the table below it is read.
+        */}
         <Split label="The range">
-          <h2 className="text-display uppercase text-ink">
-            Four products, each made to a published standard.
-          </h2>
+          <h2 className="text-display uppercase text-ink">Everything we make.</h2>
         </Split>
 
         <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2">

@@ -201,10 +201,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Features */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule label="Why builders choose it" tone="oxide" />
+          {/*
+            The label said "Why builders choose it". No builder has chosen it;
+            the company has not sold a brick. That was the plainest past track
+            record implication on the site and it appeared on all four product
+            pages.
+            The heading said "Four reasons, spelled out.", which is numeral,
+            noun, comma, past participle: the same grammar as "Five steps, in
+            order." on /plant and "Three steps." on /trade. Three pages landing
+            on one sentence shape is a template, not a voice. And a heading
+            whose only content is how many items follow tells a reader nothing
+            they cannot get by counting.
+            The rule keeps its oxide hairline because that is the band's only
+            accent on graphite. It just stops carrying a string that the
+            heading below now says better, and per product rather than once for
+            all four.
+          */}
+          <CourseRule tone="oxide" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
-            Four reasons, spelled out.
+            Why a {product.name.toLowerCase().replace(/s$/, "")} and not something else.
           </h2>
 
           {/* The numerals here were 01 02 03 04 over an unordered grid of
@@ -265,7 +281,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <QuoteCta
         heading={`Need a price on ${product.name.toLowerCase()}?`}
-        body="Send us the quantity, the site address and the date you need it. We will come back with a price, a lead time and a delivery cost."
+        body="Tell us how many and where the site is. If the date is tight, say so on the form and we will tell you straight away whether we can hit it."
       />
     </>
   );
@@ -370,7 +386,12 @@ function productSchema(product: Product) {
     offers: {
       "@type": "Offer",
       priceCurrency: "ZAR",
-      availability: "https://schema.org/InStock",
+      /* Was InStock, on all four products, while /plant renders "Stock held on
+         the ground" as a Pending marker because there is none yet. The human
+         readable pages are careful about this and the machine readable one was
+         asserting the opposite to Google. PreOrder is the honest code and it
+         costs nothing in the rich result. */
+      availability: "https://schema.org/PreOrder",
       url: `${SITE_URL}/products/${product.slug}`,
       eligibleQuantity: {
         "@type": "QuantitativeValue",

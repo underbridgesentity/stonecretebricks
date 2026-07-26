@@ -4,7 +4,6 @@ import { PageHead } from "@/components/sections/page-head";
 import { QuoteCta } from "@/components/sections/quote-cta";
 import { CourseRule } from "@/components/ui/course-rule";
 import { Pending } from "@/components/ui/pending";
-import { Photo } from "@/components/ui/photo";
 import { Course, Stretcher, Wall } from "@/components/ui/wall";
 import { COMPANY } from "@/data/company";
 
@@ -42,15 +41,25 @@ export default function AboutPage() {
       <PageHead
         eyebrow="About"
         title="Built on precision, not on history."
-        lead="Stonecrete Bricks manufactures concrete bricks, blocks and pavers for residential, commercial, industrial and infrastructure work in South Africa. We are new, we say so plainly, and we have built the business around publishing the things our industry usually hides."
+        lead="Stonecrete Bricks manufactures concrete bricks, blocks and pavers for residential, commercial, industrial and infrastructure work in South Africa. We are new, we say so plainly, and we have built the business around publishing our specifications instead of quoting them over the phone."
       />
 
-      <Photo
-        src="/images/site/blockwork.jpg"
-        alt="A modern house built in grey concrete masonry block, hard afternoon shadow across the wall"
-        sizes="100vw"
-        ratio="brick"
-      />
+      {/*
+        The full-bleed strip that was here has gone, and this is the one place
+        on the site where removing a photograph is the right answer.
+
+        It was blockwork.jpg, which is now the home page hero, so anybody
+        walking home to about met the same frame twice. And of the two site
+        photographs it was the wrong one to put here: a modest block house,
+        printed full width, directly under the words "Built on precision, not
+        on history", is exactly the image a reader assumes the company built.
+        Nothing captioned it as theirs, and nothing needed to.
+
+        This page argues that the company is new and says so. An anonymous
+        building above that argument adds nothing to it and quietly undercuts
+        it. Real yard, plant and team photography goes here when the client
+        sends it, and it is on the outstanding list in company.ts.
+      */}
 
       {/* Why we started */}
       <section className="border-t border-line py-[var(--section-tight)]">

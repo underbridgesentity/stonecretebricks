@@ -163,15 +163,21 @@ export const NAV = [
   { href: "/quality", label: "Quality" },
   { href: "/plant", label: "The yard" },
   { href: "/delivery", label: "Delivery" },
+  /*
+   * Trade sat in LEGAL_NAV, next to the privacy notice, under a comment
+   * reading "Small print, footer only". It is the highest lifetime value buyer
+   * on the list: a hardware store places a standing order every month for
+   * years, where a contractor buys once. A whole page was written for them,
+   * and the only way to reach it was to scroll past everything and read the
+   * legal links.
+   */
+  { href: "/trade", label: "Trade" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
 /** Small print, footer only. */
-export const LEGAL_NAV = [
-  { href: "/privacy", label: "Privacy notice" },
-  { href: "/trade", label: "Trade accounts" },
-] as const;
+export const LEGAL_NAV = [{ href: "/privacy", label: "Privacy notice" }] as const;
 
 /**
  * Delivery zones. Structure is right, values are assumed: they depend entirely

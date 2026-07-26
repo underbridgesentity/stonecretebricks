@@ -58,8 +58,8 @@ export default async function ThankYouPage({
               style={{ animationDelay: "340ms" }}
             >
               We will come back to you before <strong className="text-ink">{by}</strong> with a
-              price, a lead time and a delivery cost. That is {COMPANY.responseHours.value} business
-              hours, counted from now, not a vague window.
+              priced quotation. That is {COMPANY.responseHours.value} business hours from now,
+              counted on trading hours, not a vague window.
             </p>
 
             <div

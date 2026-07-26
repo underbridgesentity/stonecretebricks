@@ -59,14 +59,50 @@ export function EnquiryForm({
 
   const errorList = Object.entries(errors).filter(([key]) => key !== "form");
 
+  /*
+   * Restoring the buyer's answers after a validation error.
+   *
+   * The text inputs already read state.values. The chips, the radios and the
+   * three selects did not: they were pinned to a hardcoded default, so one bad
+   * email address silently reset the products, the fulfilment choice, the
+   * contact preference, the project type and, worst of all, the quantity unit.
+   *
+   * That last one is not an annoyance, it is a wrong order. "8000" and
+   * "Pallets" came back as "8000" and "Units" while the error summary talked
+   * only about the email. On paving that is 8 000 pavers where the buyer asked
+   * for 4 800 000, and nothing on the page said the unit had changed.
+   *
+   * The server has always returned these in state.values; nothing read them.
+   * With JavaScript on, React re-renders in place and none of this shows,
+   * which is why it survived: it only bites the buyer on a slow phone who
+   * submits before hydration, who is the buyer this site is built for.
+   */
+  const restore = (key: string, fallback: string) => state.values?.[key] || fallback;
+
+  const chosenProducts = (state.values?.products ?? "").split(",").filter(Boolean);
+  const chosen = (slug: string) =>
+    chosenProducts.length > 0 ? chosenProducts.includes(slug) : defaultProduct === slug;
+
   return (
     <form id="enquiry" action={action} className="flex flex-col gap-10 scroll-mt-28">
       {/* Honeypot plus a timing floor. No captcha: this audience is often on a
           poor mobile connection and a challenge would cost more than it saves. */}
       <input ref={startedAt} type="hidden" name="startedAt" defaultValue="" />
+      {/* The trap field was called "website". Password managers fill by name
+          heuristic and website / url is a standard field on a saved login, so
+          the one field on this form guaranteed to be filled by a machine was
+          the one that flagged you as a machine. It has a name nothing autofills
+          now, and tripping it no longer discards the enquiry: see the comment
+          in actions/enquiry.ts. */}
       <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
-        <label htmlFor="website">Leave this blank</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="nope" />
+        <label htmlFor="confirm-order">Leave this blank</label>
+        <input
+          id="confirm-order"
+          name="confirm-order"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       {errors.form || errorList.length > 0 ? (
@@ -108,14 +144,14 @@ export function EnquiryForm({
                 name="products"
                 value={p.slug}
                 label={p.name}
-                defaultChecked={defaultProduct === p.slug}
+                defaultChecked={chosen(p.slug)}
               />
             ))}
             <Chip
               name="products"
               value="custom"
               label="Custom units"
-              defaultChecked={defaultProduct === "custom"}
+              defaultChecked={chosen("custom")}
             />
           </div>
           {errors.products ? (
@@ -128,17 +164,22 @@ export function EnquiryForm({
 
       <Step number="02" title="How much?">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field label="Quantity" htmlFor="quantity" hint="Leave blank if you are not sure yet">
+          <Field
+            label="Quantity"
+            htmlFor="quantity"
+            hint="Leave blank if you are not sure yet"
+            error={errors.quantity}
+          >
             <TextInput
               id="quantity"
               name="quantity"
               inputMode="numeric"
-              defaultValue={defaultQuantity ?? state.values?.quantity}
+              defaultValue={state.values?.quantity ?? defaultQuantity}
               placeholder="5000"
             />
           </Field>
           <Field label="Measured in" htmlFor="quantityUnit">
-            <Select id="quantityUnit" name="quantityUnit" defaultValue="units">
+            <Select id="quantityUnit" name="quantityUnit" defaultValue={restore("quantityUnit", "units")}>
               <option value="units">Units</option>
               <option value="square-metres">Square metres</option>
               <option value="pallets">Pallets</option>
@@ -154,8 +195,20 @@ export function EnquiryForm({
         <fieldset className="mb-5">
           <legend className="mb-3 text-label uppercase text-ink">How are you taking it?</legend>
           <div className="flex flex-wrap gap-[var(--joint)]">
-            <Chip name="fulfilment" value="deliver" label="Deliver to site" type="radio" defaultChecked />
-            <Chip name="fulfilment" value="collect" label="I will collect" type="radio" />
+            <Chip
+              name="fulfilment"
+              value="deliver"
+              label="Deliver to site"
+              type="radio"
+              defaultChecked={restore("fulfilment", "deliver") === "deliver"}
+            />
+            <Chip
+              name="fulfilment"
+              value="collect"
+              label="I will collect"
+              type="radio"
+              defaultChecked={restore("fulfilment", "deliver") === "collect"}
+            />
           </div>
         </fieldset>
 
@@ -182,7 +235,7 @@ export function EnquiryForm({
             <TextInput id="needed" name="needed" type="date" defaultValue={state.values?.needed} />
           </Field>
           <Field label="What are you building?" htmlFor="projectType">
-            <Select id="projectType" name="projectType" defaultValue={defaultProjectType ?? ""}>
+            <Select id="projectType" name="projectType" defaultValue={restore("projectType", defaultProjectType ?? "")}>
               <option value="">Choose one, if you know</option>
               <option value="house">House or extension</option>
               <option value="boundary-wall">Boundary wall</option>
@@ -238,7 +291,7 @@ export function EnquiryForm({
         </div>
 
         <Field label="How should we reach you?" htmlFor="contactPreference" className="mt-4">
-          <Select id="contactPreference" name="contactPreference" defaultValue="whatsapp">
+          <Select id="contactPreference" name="contactPreference" defaultValue={restore("contactPreference", "whatsapp")}>
             <option value="whatsapp">WhatsApp</option>
             <option value="call">Phone call</option>
             <option value="email">Email</option>
@@ -247,7 +300,12 @@ export function EnquiryForm({
       </Step>
 
       <Step number="06" title="Anything else?">
-        <Field label="Notes" htmlFor="notes" hint="Access, offloading, programme dates, anything unusual">
+        <Field
+          label="Notes"
+          htmlFor="notes"
+          hint="Access, offloading, programme dates, anything unusual"
+          error={errors.notes}
+        >
           <TextArea id="notes" name="notes" defaultValue={state.values?.notes} />
         </Field>
       </Step>

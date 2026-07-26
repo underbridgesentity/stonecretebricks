@@ -12,7 +12,7 @@ import { COMPANY, telLink, whatsappLink } from "@/data/company";
 export const metadata: Metadata = {
   title: "Get a quote",
   description:
-    "Request a price on concrete bricks, blocks or pavers. Tell us the quantity, the site and the date, and we come back with a price, a lead time and a delivery cost.",
+    "Request a price on concrete bricks, blocks or pavers from Stonecrete Bricks in Polokwane. Send the quantity and the suburb and we answer with a priced quotation.",
   alternates: { canonical: "/quote" },
 };
 
@@ -110,7 +110,7 @@ export default async function QuotePage({
       <PageHead
         eyebrow="Get a quote"
         title="Send us the quantities."
-        lead={`Send the quantity, the suburb and the date you need it. We come back with a price, a lead time and a delivery cost, within ${COMPANY.responseHours.value} business hours.`}
+        lead={`A quantity and a suburb is enough to price it. You get a reference number the moment you send, and the quotation inside ${COMPANY.responseHours.value} business hours.`}
         aside={
           <div className="flex flex-col gap-3">
             {wa ? (

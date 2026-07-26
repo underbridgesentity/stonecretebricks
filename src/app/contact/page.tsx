@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import { PageHead } from "@/components/sections/page-head";
+import { ButtonLink } from "@/components/ui/button";
 import { CourseRule } from "@/components/ui/course-rule";
-import { Mail, Phone, Pin, Whatsapp } from "@/components/ui/glyph";
+import { Arrow, Mail, Phone, Pin, Whatsapp } from "@/components/ui/glyph";
 import { Module } from "@/components/ui/module";
 import { Pending } from "@/components/ui/pending";
 import { Course, Stretcher, Wall } from "@/components/ui/wall";
@@ -23,10 +24,22 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* The lead told the buyer to use the quote form and this page carried
+          no link to it. PageHead.lead is typed string so it cannot hold one,
+          and the header's quote button is desktop only, which left a phone
+          visitor to find the hamburger. This is a likely landing page for
+          somebody who searched for brick prices, so the aside now carries the
+          action the sentence asks for. */}
       <PageHead
         eyebrow="Contact"
         title="Talk to us."
         lead="We answer WhatsApp fastest. For a formal quotation use the quote form instead, so we get the quantities right first time."
+        aside={
+          <ButtonLink href="/quote" variant="oxide">
+            Request a quote
+            <Arrow width={16} height={16} />
+          </ButtonLink>
+        }
       />
 
       {/* Channels */}

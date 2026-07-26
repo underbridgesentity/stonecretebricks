@@ -69,10 +69,23 @@ export function Calculator({
   const totals = result;
   const paving = unit.calculatorMode === "paving";
   const empty = totals.netArea <= 0;
+  /*
+   * Openings can swallow the whole wall, which is a different problem from
+   * having entered nothing, and needs a different message.
+   *
+   * grossArea alone was not enough to tell them apart. It is the raw product
+   * of two parsed numbers, so a length of -5 and a height of -2.4 multiply to
+   * a positive 12 while the clamped net area is 0. The panel then said "the
+   * doors and windows you have added come to the whole wall area" to somebody
+   * who had added no openings at all, pointing them at a control they had
+   * never touched. There has to actually be an opening for that to be the
+   * explanation.
+   */
   const grossArea = (Number.parseFloat(length) || 0) * (Number.parseFloat(height) || 0);
-  // Openings can swallow the whole wall, which is a different problem from
-  // having entered nothing, and needs a different message.
-  const overDeducted = empty && grossArea > 0;
+  const hasOpening = openings.some(
+    (o) => (Number.parseFloat(o.width) || 0) > 0 && (Number.parseFloat(o.height) || 0) > 0,
+  );
+  const overDeducted = empty && grossArea > 0 && hasOpening;
 
   /**
    * Hand the result to the form instead of navigating.
@@ -109,11 +122,29 @@ export function Calculator({
     const unitSelect = form.querySelector<HTMLSelectElement>("#quantityUnit");
     if (unitSelect) unitSelect.value = "units";
 
+    /*
+     * The note is the estimator's only sanity check on the quantity, so it has
+     * to describe THIS calculation.
+     *
+     * The guard used to be `if (notes && !notes.value)`, meaning only the first
+     * carry ever wrote. Change the wall from 24 m² to 144 m², or switch from
+     * stock bricks to hollow blocks, carry again, and the quantity updated
+     * while the note stayed at "Calculated for 24.0 m² of single skin wall".
+     * The email reaching the yard then read 1 890 hollow blocks against a note
+     * describing 24 m², which is about 315. The one field that exists to catch
+     * a wrong order was the field disagreeing with it, by six times.
+     *
+     * So a note this component wrote is now replaced, and a note the buyer
+     * typed is never touched. The marker makes the difference checkable rather
+     * than guessed at from the text.
+     */
     const notes = form.querySelector<HTMLTextAreaElement>("#notes");
-    if (notes && !notes.value) {
-      notes.value = `Calculated for ${number(totals.netArea, 1)} m² of ${
-        paving ? "paving" : `${skin} skin wall`
-      }.`;
+    const line = `Calculated for ${number(totals.netArea, 1)} m² of ${
+      paving ? "paving" : `${skin} skin wall`
+    }.`;
+    if (notes && (!notes.value || notes.dataset.fromCalculator === "true")) {
+      notes.value = line;
+      notes.dataset.fromCalculator = "true";
     }
 
     setCarried(
@@ -273,11 +304,15 @@ export function Calculator({
           </div>
         ) : (
           <>
-            <p className="text-datum uppercase text-ink-secondary" aria-live="polite">
+            {/* The live region used to sit on the area line alone, so a screen
+                reader changing the wall length heard "144.0 m² of wall" and
+                never heard the number they came for. It wraps the figures now.
+                Polite, not assertive: these update on every keystroke. */}
+            <p className="text-datum uppercase text-ink-secondary">
               {number(totals.netArea, 1)} m&sup2; of {paving ? "paving" : "wall"}
             </p>
 
-            <dl className="mt-6 flex flex-col">
+            <dl className="mt-6 flex flex-col" aria-live="polite">
               <Row
                 label={`${unit.name} needed`}
                 value={number(totals.baseUnits)}
@@ -296,7 +331,7 @@ export function Calculator({
               <Row
                 label="What you order"
                 value={number(totals.orderUnits)}
-                note={`${totals.loads} ${totals.loads === 1 ? "load" : "loads"}`}
+                note={`${number(totals.loads)} ${totals.loads === 1 ? "load" : "loads"}`}
                 emphasis
               />
               {totals.mortarCubicMetres !== null ? (
@@ -316,9 +351,14 @@ export function Calculator({
             ) : null}
 
             <p className="mt-6 text-small text-ink-secondary">
+              {/* This asserted "exclude VAT" while company.ts has VAT status
+                  pending and /about correctly renders it as a Pending marker.
+                  Whether the price carries VAT changes every figure a buyer
+                  writes into a bill of quantities, so it is not something to
+                  guess at on the one screen where they are doing sums. */}
               You buy by the pallet, so the order rounds up to a whole pallet. We show the figure
-              before wastage as well, so you can see nothing is being padded. Prices are quoted per
-              load and exclude VAT.
+              before wastage as well, so you can see nothing is being padded. Delivery is charged
+              per load and quoted with the price, and the quotation states whether VAT applies.
             </p>
 
             <button

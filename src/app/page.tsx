@@ -27,7 +27,7 @@ export default function Home() {
       <SpecStrip />
       <ProofCourse />
       <QuoteCta
-        body={`Send the quantity, the suburb and the date you need it. A price, a lead time and a delivery cost come back together, within ${COMPANY.responseHours.value} business hours.`}
+        body={`Give us the suburb and roughly how many you need. The price and the delivery come back on one quote, inside ${COMPANY.responseHours.value} business hours.`}
       />
     </>
   );

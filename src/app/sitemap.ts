@@ -5,8 +5,10 @@ import { PRODUCTS } from "@/data/products";
 
 /**
  * Routes that exist but are deliberately excluded: /quote/thank-you is
- * noindex. /projects, /bulk-supply, /trade-accounts and /faq are not built
- * yet and are not listed, so there is no 404 churn when they land.
+ * noindex. /projects, /bulk-supply and /faq are not built yet and are not
+ * listed, so there is no 404 churn when they land. (/trade-accounts was in
+ * that list while /trade sat nine lines below it in STATIC: the page had been
+ * built and the comment never caught up.)
  */
 const STATIC = [
   "",

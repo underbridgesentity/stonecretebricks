@@ -30,7 +30,7 @@ export default function PlantPage() {
       <PageHead
         eyebrow="The yard"
         title="Come and watch us make them."
-        lead="Most brick suppliers will not show you the yard. We will. This is where your order gets batched, pressed, cured and stacked, and you are welcome to stand and watch it happen before you place one."
+        lead="You are welcome to come and stand in the yard. This is where your order gets batched, pressed, cured and stacked, and you can watch it happen before you place one. There are no photographs on this page yet, because we would rather show you nothing than show you someone else's plant."
       />
 
       {/* Process */}
@@ -38,8 +38,11 @@ export default function PlantPage() {
         <Wall>
           <CourseRule label="How a batch is made" />
 
+          {/* "Five steps, in order." announced nothing but the length of the
+              list beneath it, in the same grammar as two other headings on two
+              other pages. The <ol> already says it is ordered. */}
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
-            Five steps, in order.
+            Raw material to pallet.
           </h2>
 
           <ol className="mt-12 flex flex-col">
@@ -71,10 +74,18 @@ export default function PlantPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">What we can actually make.</h2>
+              {/* This said the figures "are published so you can check them
+                  against your programme", above four rows that are all Pending
+                  markers. Present tense, promising the one thing the four rows
+                  underneath then admit they cannot do, on the page written for
+                  a quantity surveyor. The promise is real, the tense was not:
+                  say when. */}
               <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
                 Running out of bricks stops a site, so the honest answer to &ldquo;can you supply
-                this&rdquo; matters more than an optimistic one. These figures are published so you
-                can check them against your programme before you commit.
+                this&rdquo; matters more than an optimistic one. These are the figures we will
+                publish, and until the press is commissioned and running we would rather show you
+                the blanks than a number we cannot stand behind. Ask us and we will tell you where
+                we are.
               </p>
             </Stretcher>
 
@@ -109,7 +120,11 @@ export default function PlantPage() {
 
           <Course className="mt-12 gap-y-8">
             <Stretcher span="half">
-              <h2 className="text-h1 uppercase text-ink">Safe practice, responsible process.</h2>
+              {/* Was "Safe practice, responsible process." Adjective noun, adjective
+                  noun, no verb, nothing a reader could check or disagree with.
+                  That is "commitment to excellence" in overalls, and it sat under
+                  a label that had already said health, safety and environment. */}
+              <h2 className="text-h1 uppercase text-ink">Nobody gets hurt loading your order.</h2>
               <p className="mt-6 text-body text-ink-secondary">
                 Concrete manufacture is dusty, heavy work with moving plant, so safe working
                 practice is a condition of operating rather than a policy statement. We run
@@ -150,17 +165,14 @@ export default function PlantPage() {
                 )}
               </p>
 
-              {/* We would rather show you nothing than show you someone else's
-                  plant, so there is no photograph on this page until there is
-                  a real one. Stated here as a line, not as a band: the absence
-                  should not be more prominent than any fact. */}
-              <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
-                There are no photographs on this page yet. We would rather show you nothing than
-                show you someone else&rsquo;s plant.
-              </p>
-              <div className="mt-4">
-                <Pending>Plant and yard photography</Pending>
-              </div>
+              {/* The "no photographs yet" line has moved up into the page lead.
+                  Buried down here in the fifth section, a reader met four
+                  screens of type on a page about a yard before being told why
+                  there were no pictures of one, so until then the page read as
+                  one that had failed to load its images rather than one making
+                  a point. Said first, it is a position. The Pending chip that
+                  sat under it was for the client's build list, not the reader,
+                  and the same fact is already on that list in company.ts. */}
             </Stretcher>
           </Course>
         </Wall>

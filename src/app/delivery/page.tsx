@@ -38,6 +38,16 @@ const SITE_REQUIREMENTS = [
 export default function DeliveryPage() {
   const zones = DELIVERY_ZONES.value ?? [];
 
+  /* Derived, not written down. The two extremes of what fits on a truck are
+     the illustration, and if the client confirms a different pallet
+     configuration the sentence follows the table instead of contradicting it. */
+  const perLoad = PRODUCTS.map((p) => ({
+    name: p.name,
+    units: p.unitsPerPallet.value * p.palletsPerLoad.value,
+  }));
+  const fewestPerLoad = perLoad.reduce((a, b) => (b.units < a.units ? b : a));
+  const mostPerLoad = perLoad.reduce((a, b) => (b.units > a.units ? b : a));
+
   return (
     <>
       <PageHead
@@ -59,9 +69,31 @@ export default function DeliveryPage() {
             Swipe the table sideways to see minimums and lead times.
           </p>
 
-          <div className="mt-4 w-full overflow-x-auto md:mt-12">
+          {/* tabIndex, role and a label, because a scroll container with no
+              focusable child cannot be reached or scrolled by keyboard at all.
+              This table is min-w-[40rem] inside a viewport that is narrower than
+              that on a phone, at 200% zoom, or in a split window, so the
+              Minimum and Lead time columns were simply unreachable without a
+              mouse. WCAG 2.1.1. role=region plus a label is what makes a
+              screen reader announce it as something you can move around in
+              rather than a stray tab stop. */}
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Delivery zones table, scrollable"
+            className="mt-4 w-full overflow-x-auto md:mt-12"
+          >
             <table className="w-full min-w-[40rem] border-separate border-spacing-0 text-left">
-              <caption className="sr-only">Delivery zones, minimum loads and lead times</caption>
+              {/* Visible, and carrying the provisional marker, so the footnote
+                  below has something to refer to. This matches how SpecTable
+                  captions its own provisional figures. */}
+              <caption className="mb-4 text-left text-datum uppercase text-ink-secondary">
+                Delivery zones, minimum loads and lead times
+                <sup className="ml-1 text-ink-accent">
+                  <span aria-hidden>*</span>
+                  <span className="sr-only"> provisional</span>
+                </sup>
+              </caption>
               <thead>
                 <tr>
                   <th
@@ -105,11 +137,46 @@ export default function DeliveryPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-[52ch] text-small text-ink-secondary">
-            Zones are measured from the plant, so
-            the exact suburb list is confirmed once the yard address is published. Delivery is
-            charged per load and quoted with the product, never added afterwards.
-          </p>
+          {/*
+            Three things this footnote now has to do, because the site was
+            silently contradicting itself on all three.
+
+            One. The zone minimum is quoted in loads and the product pages
+            quote a minimum order in units. A Polokwane buyer read "1 000
+            units" on the stock brick page and "1 load", which is 2 000 units,
+            here. Two different minimums for the same brick on the same site,
+            on a site whose whole argument is that it publishes the things
+            other suppliers make you phone for. They are two separate floors
+            and the larger one binds, so say that.
+
+            Two. Every lead time on a product page is production time and every
+            lead time in this table is door to door, and nothing said whether
+            they stack. Mokopane read as 5, or 7, or 12.
+
+            Three. This table is flagged assumed in the data, and rendered as
+            fact. /products carries a provisional footnote over exactly the
+            same class of unconfirmed figure. Same site, same problem, opposite
+            treatment.
+          */}
+          <div className="mt-6 flex max-w-[54ch] flex-col gap-3 text-small text-ink-secondary">
+            <p>
+              The minimum in this table is the delivery minimum. Each product also carries its own
+              minimum order, and where the two differ the larger one applies. Delivery is charged
+              per load and quoted with the product, never added afterwards.
+            </p>
+            <p>
+              Lead times here are door to door and already include the production time quoted on the
+              product pages. They do not add together.
+            </p>
+            <p>
+              <sup className="text-ink-accent">
+                <span aria-hidden>*</span>
+                <span className="sr-only">Provisional. </span>
+              </sup>
+              Zones, minimums and lead times are provisional until the yard address is published.
+              They are measured from the plant, so the suburb list settles when the address does.
+            </p>
+          </div>
         </Wall>
       </section>
 
@@ -121,10 +188,23 @@ export default function DeliveryPage() {
           <Course className="mt-12 gap-y-10">
             <Stretcher span="measure">
               <h2 className="text-display uppercase text-ink">One load, in units.</h2>
+              {/*
+                The word "load" carried the minimum on the zone table, the
+                pallets-per-load figure on every product page, the trip count
+                in the calculator and the delivery charge basis, and the site
+                never once said what one was. A contractor needs the vehicle
+                before he can tell you whether it will reach his site.
+                The old line also said loads are limited by mass rather than
+                volume, which is true, and then published four loads weighing
+                6 750, 7 000, 7 500 and 7 920 kg. The reason is pallets: you
+                carry whole ones, so the last pallet is what leaves the gap.
+              */}
               <p className="mt-6 max-w-[45ch] text-body text-ink-secondary">
-                Loads are limited by mass, not by volume, so a load of hollow blocks carries far
-                fewer units than a load of stock bricks. These are the figures the calculator uses
-                when it tells you how many trips your order takes.
+                A load is one truck carrying up to 8 000 kg. Mass fills it long before volume does,
+                so a load is {number(fewestPerLoad.units)} {fewestPerLoad.name.toLowerCase()} against{" "}
+                {number(mostPerLoad.units)} {mostPerLoad.name.toLowerCase()}. You carry whole
+                pallets, so the last pallet is what leaves the gap under the 8 000. These are the
+                figures the calculator uses when it works out how many trips your order takes.
               </p>
             </Stretcher>
 
@@ -153,6 +233,13 @@ export default function DeliveryPage() {
         <Wall>
           <CourseRule label="What you need on site" />
 
+          {/* CourseRule renders a <p>, not a heading, so without this the four
+              requirement h3s below nested under "One load, in units." and a
+              reader navigating by heading heard truck access and offloading
+              announced as part of the load capacity section. Same defect, and
+              same fix, as the related products band on a product page. */}
+          <h2 className="mt-12 text-h1 uppercase text-ink">Before the truck arrives.</h2>
+
           <div className="mt-12 grid grid-cols-1 gap-[var(--joint)] md:grid-cols-2">
             {SITE_REQUIREMENTS.map((req) => (
               <Module key={req.title} reveal className="flex flex-col gap-3 p-6 md:p-8">
@@ -179,9 +266,9 @@ export default function DeliveryPage() {
                 scheduled run to your area, at no charge.
               </p>
               <p className="mt-6 text-body text-ink-secondary">
-                We publish this because nobody else does, and because knowing the policy before you
-                order is worth more than discovering it afterwards. The exact allowance and claim
-                window are confirmed on your quotation.
+                We publish this because knowing the policy before you order is worth more than
+                discovering it afterwards. The exact allowance and the claim window are confirmed on
+                your quotation.
               </p>
             </Stretcher>
           </Course>
@@ -190,7 +277,7 @@ export default function DeliveryPage() {
 
       <QuoteCta
         heading={`Tell us where the site is.`}
-        body={`Give us the suburb and the date, and the delivery cost and lead time come back in the same quote as the price. We deliver across ${COMPANY.region.value}.`}
+        body={`Name the suburb and we will tell you which zone it falls in and what the delivery costs, before you commit to anything. We go anywhere in ${COMPANY.region.value}, and further if you ask.`}
       />
     </>
   );

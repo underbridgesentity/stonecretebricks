@@ -13,7 +13,7 @@ import { PRODUCTS, squareMetresPerPallet } from "@/data/products";
 export const metadata: Metadata = {
   title: "Trade accounts",
   description:
-    `Stonecrete Bricks supplies hardware stores, builders merchants and building supply yards across ${COMPANY.region.value} on trade terms, with pallet pricing and agreed restocking.`,
+    `Stonecrete Bricks is opening trade accounts for hardware stores and building supply yards across ${COMPANY.region.value}. Pallet pricing, an agreed delivery day and documented supply.`,
   alternates: { canonical: "/trade" },
 };
 
@@ -36,7 +36,8 @@ const TERMS = [
   },
   {
     title: "Documented supply",
-    body: "Every delivery carries a note stating product, quantity and batch. Tax invoices are issued against your account. Test certificates are available on request for any batch you have taken.",
+    // "any batch you have taken" presupposed a trading relationship nobody has.
+    body: "Every delivery carries a note stating product, quantity and batch, and a tax invoice is raised against your account. Ask for the test certificate on any batch and we will send it.",
   },
   {
     title: "Point of sale support",
@@ -65,7 +66,13 @@ export default function TradePage() {
       <PageHead
         eyebrow="Trade accounts"
         title="Stock our bricks. Sell them at your margin."
-        lead={`We supply hardware stores, builders merchants and building supply yards across ${COMPANY.region.value} on trade terms, with pallet pricing, an agreed delivery day and reliable restocking.`}
+        /* Was "We supply hardware stores, builders merchants and building
+           supply yards across Limpopo", present indicative, three customer
+           categories, on the site of a company that has supplied nobody. Also
+           "builders merchants" is British: South African trade says hardware
+           stores or building supply yards, and the sentence already used both
+           of the right terms. */
+        lead={`We are set up to supply hardware stores and building supply yards across ${COMPANY.region.value} on trade terms: pallet and load pricing, a fixed delivery day, and restocking agreed in advance. We are opening the first accounts now.`}
         aside={
           <ButtonLink href="/quote?projectType=resale" variant="oxide">
             Open a trade account
@@ -146,7 +153,7 @@ export default function TradePage() {
       <Section divider>
         <Wall>
           <Split label="Opening an account">
-            <h2 className="max-w-[20ch] text-display uppercase text-ink">Three steps.</h2>
+            <h2 className="max-w-[20ch] text-display uppercase text-ink">How to open one.</h2>
           </Split>
 
           <ol className="mt-16 flex flex-col">

@@ -25,8 +25,8 @@ export function SiteFooter() {
               <Lockup orientation="horizontal" variant="on-dark" />
             </Link>
             <p className="max-w-xs text-small text-ink-secondary">
-              Concrete bricks, blocks and pavers, cast and cured to the South African standard.
-              Delivered to site across {COMPANY.address.province.value}.
+              Concrete bricks, blocks and pavers, pressed and cured in {COMPANY.suburb.value} to
+              SANS 1215 and SANS 1058. Delivered to site across {COMPANY.address.province.value}.
             </p>
           </div>
 

@@ -13,7 +13,10 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "brand:icons": "node scripts/brand/build-icons.mjs",
-    "specs:audit": "node --experimental-strip-types --no-warnings scripts/specs-audit.mjs"
+    "specs:audit": "node --experimental-strip-types --no-warnings scripts/specs-audit.mjs",
+    "check:contrast": "node scripts/contrast-check.mjs",
+    "check:response": "node scripts/response-time-check.mjs",
+    "check": "pnpm typecheck && pnpm lint && pnpm check:contrast && pnpm check:response && pnpm specs:audit"
   },
   "dependencies": {
     "next": "16.2.11",

@@ -40,14 +40,25 @@ export function ProofCourse() {
       <Wall>
         <Course className="items-start">
           <Stretcher span="half">
+            {/*
+              Three marketing devices were stacked here: an eyebrow, a
+              two-word-noun-phrase antithesis ("New company. Proven
+              standards."), and then a sentence built as "not X, so instead
+              something more useful: A, B and C". That last shape, the
+              antithesis with a colon and a three limb list hanging off it, is
+              the single most recognisable machine-written construction in
+              English, and it sat immediately under the best written section on
+              the site. It also promised "the results that prove it" when there
+              are no results yet, which is the same false past tense /quality
+              had.
+            */}
             <p className="text-datum uppercase text-ink-secondary">A new supplier</p>
             <h2 className="mt-6 max-w-[18ch] text-display uppercase text-ink">
-              New company. Proven standards.
+              Check us before you order.
             </h2>
-            <p className="mt-7 max-w-[30ch] text-body text-ink-secondary">
-              We do not have a twenty year history to sell you, so we will give you something more
-              useful: the standard we manufacture to, the results that prove it, and an open
-              invitation to come and watch us make them.
+            <p className="mt-7 max-w-[34ch] text-body text-ink-secondary">
+              There is no twenty year history to point at, so we have built the business so that you
+              do not need one. Everything below is checkable before you spend a rand.
             </p>
 
             {/* A list of links, not a glossary. It was a <dl> with the anchor
@@ -76,11 +87,19 @@ export function ProofCourse() {
           </Stretcher>
 
           <Stretcher span="half">
+            {/* Swapped with the hero. This frame is 1.778:1 against a 16:9
+                box, so it crops nothing at all here, and beside a section
+                arguing "check us before you order" an image of exacting cast
+                concrete is a statement about the material rather than a claim
+                about work this company has done. Nobody reads a monumental
+                civic hall as the output of a new Polokwane brickmaker, which
+                is exactly why it is safe here and the block house is not. */}
             <Photo
-              src="/images/site/blockwork.jpg"
-              alt="A house built in grey concrete masonry block, the wall face lit by hard afternoon sun"
+              src="/images/site/hero.jpg"
+              alt="Cast concrete architecture in hard raking sun, deep shadow across a coffered panel"
               sizes="(min-width: 768px) 50vw, 100vw"
               ratio="course"
+              className="border border-line"
             />
           </Stretcher>
         </Course>

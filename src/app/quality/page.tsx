@@ -38,7 +38,12 @@ export default function QualityPage() {
       <PageHead
         eyebrow="Quality"
         title="Standards and testing."
-        lead="Anyone can say their bricks are strong. Here is the standard each product is manufactured to, how it is tested, and what the results were."
+        /* This said "and what the results were". Past tense, on a page that
+           twelve lines later says the results are published once the first
+           full batches are through, and renders a Pending marker where the
+           laboratory name goes. The page's opening sentence promised the one
+           thing the page then admits it cannot do yet. */
+        lead="Anyone can say their bricks are strong. Here is the standard each product is made to, what we test for, and where the certificate goes when the first batches are through."
       />
 
       {/* The standards */}

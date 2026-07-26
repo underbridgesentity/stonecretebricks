@@ -102,9 +102,21 @@ export const PRODUCTS: readonly Product[] = [
           "Dimensional tolerance held inside the limits set by SANS 1215, so your courses run true and your mortar consumption stays predictable.",
       },
       {
-        label: "Lowest cost per square metre",
+        /*
+         * This said "lowest cost per square metre", the maxi says "lower
+         * installed cost per square metre", and the hollow positioning said
+         * "lower cost per square metre". Three of the four products claimed to
+         * be the cheapest, on one comparison page, with no price published
+         * anywhere on the site. Read in sequence they cancel out, and an
+         * unsubstantiated pricing comparison is a misleading representation
+         * under section 41 of the Consumer Protection Act.
+         * They can all be true if they are precise about which cost: material
+         * per unit here, installed cost including labour on the maxi, unit
+         * count on the hollow.
+         */
+        label: "Lowest unit price",
         expanded:
-          "The lowest cost per square metre in the range for general walling, which is why it remains the default unit on most sites.",
+          "The cheapest unit in the range, which is why it stays the default for general walling. It is not the cheapest wall once a bricklayer's day is priced in: that is the maxi brick, which covers the same square metre in a third of the units.",
       },
       {
         label: "Cured before it leaves the yard",
@@ -186,8 +198,7 @@ export const PRODUCTS: readonly Product[] = [
     slug: "hollow-blocks",
     name: "Hollow blocks",
     shortName: "Hollow",
-    positioning:
-      "Lighter walls, better thermal performance, lower cost per square metre.",
+    positioning: "Lighter walls that hold temperature better, and a quarter of the units to lay.",
     standard: "SANS 1215",
     dimensions: assumed(
       { l: 390, w: 190, h: 190 },
@@ -224,7 +235,7 @@ export const PRODUCTS: readonly Product[] = [
       {
         label: "Reduced construction costs",
         expanded:
-          "The face is 390 x 190, so a square metre takes 12.5 blocks against 51.9 stock bricks. Four times fewer units, four times fewer joints, less labour.",
+          "The face is 390 x 190, so a square metre takes 12.5 blocks against 51.9 stock bricks. A quarter of the units, a quarter of the joints, and the bricklaying that goes with them.",
       },
       {
         label: "Improved thermal performance",
@@ -249,8 +260,20 @@ export const PRODUCTS: readonly Product[] = [
     slug: "paving-bricks",
     name: "Paving bricks",
     shortName: "Paving",
+    /*
+     * This used to read "50 mm for foot traffic and cars, 60 or 80 mm where
+     * trucks and forklifts run", while the spec table published exactly one
+     * unit: 50 mm in Class 30/2.0. Under SANS 1058 that is the residential and
+     * light duty class. Industrial paving under a forklift is conventionally
+     * Class 40/2.6. So the sentence sold heavy duty off a light duty sheet, and
+     * every downstream figure, mass, pallet count, load and coverage, is the
+     * 50 mm figure: a buyer who took the 80 mm on offer would have had all four
+     * wrong by more than half.
+     * The positioning now claims only what the table can carry. The thicker
+     * units go back on the list the client confirms.
+     */
     positioning:
-      "Driveways, walkways and parking. 50 mm for foot traffic and cars, 60 or 80 mm where trucks and forklifts run.",
+      "Driveways, walkways and parking. 50 mm in Class 30/2.0, the residential and light vehicle class under SANS 1058.",
     standard: "SANS 1058",
     dimensions: assumed(
       { l: 200, w: 100, h: 50 },
@@ -281,9 +304,9 @@ export const PRODUCTS: readonly Product[] = [
           "Laid in stretcher, herringbone or basketweave from the same unit, so the pattern does the design work without a premium product.",
       },
       {
-        label: "Durable surface",
+        label: "Graded for the duty it is sold for",
         expanded:
-          "Graded on tensile splitting strength and abrasion resistance under SANS 1058, which is the property that actually matters underfoot and under a wheel.",
+          "Class 30/2.0 to SANS 1058: 2.0 MPa average tensile splitting strength, 1.5 MPa on any single unit. That is the residential and light vehicle class. If you are paving where trucks or forklifts run, ask us, because that wants a thicker unit in a higher class and we will tell you straight whether we press one.",
       },
       {
         label: "Weather resistant",

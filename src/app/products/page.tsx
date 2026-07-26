@@ -72,7 +72,20 @@ export default function ProductsPage() {
             Swipe the table sideways to compare all four.
           </p>
 
-          <div className="mt-4 w-full overflow-x-auto md:mt-12">
+          {/* tabIndex, role and a label, because a scroll container with no
+              focusable child cannot be reached or scrolled by keyboard at all.
+              This table is min-w-[43rem] inside a viewport that is narrower than
+              that on a phone, at 200% zoom, or in a split window, so the
+              Minimum and Lead time columns were simply unreachable without a
+              mouse. WCAG 2.1.1. role=region plus a label is what makes a
+              screen reader announce it as something you can move around in
+              rather than a stray tab stop. */}
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Product comparison table, scrollable"
+            className="mt-4 w-full overflow-x-auto md:mt-12"
+          >
             <table className="w-full min-w-[43rem] border-separate border-spacing-0 text-left">
               <caption className="sr-only">
                 Comparison of Stonecrete Bricks concrete products
