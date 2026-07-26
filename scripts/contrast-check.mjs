@@ -48,8 +48,13 @@ const inkSecondaryLight = mix(GRAPHITE, LIMESTONE, 68);
 const oxideLift = mix(OXIDE, LIMESTONE, 88);
 const oxideDeep = mix(OXIDE, GRAPHITE, 80);
 
-// [name, foreground, background, minimum]. 4.5 for body text, 3.0 for
-// non-text and text at 24px or 18.66px bold and above.
+// [name, foreground, background, minimum, mustFail?]. 4.5 for body text, 3.0
+// for non-text and text at 24px or 18.66px bold and above.
+//
+// mustFail inverts the assertion: the pair is expected to be BELOW the floor,
+// and the check fails if it ever climbs above it. That is how a rule like "no
+// opacity modifier on the oxide field" stays enforced instead of being a
+// comment someone deletes.
 const PAIRS = [
   ["--ink on limestone", GRAPHITE, LIMESTONE, 4.5],
   ["--ink-secondary on limestone", inkSecondaryLight, LIMESTONE, 4.5],
@@ -60,22 +65,28 @@ const PAIRS = [
   ["limestone on --oxide-deep (buttons, oxide field)", LIMESTONE, oxideDeep, 4.5],
   // The oxide field has 0.21 of headroom, so an opacity modifier on text there
   // fails immediately. These two prove it rather than leaving it to memory.
-  ["limestone/95 on --oxide-deep (must FAIL)", mix(LIMESTONE, oxideDeep, 95), oxideDeep, 0],
+  ["limestone/95 on --oxide-deep must NOT reach AA", mix(LIMESTONE, oxideDeep, 95), oxideDeep, 4.5, true],
   ["limestone/70 rule on --oxide-deep", mix(LIMESTONE, oxideDeep, 70), oxideDeep, 3.0],
   ["oxide rules on limestone", OXIDE, LIMESTONE, 3.0],
   ["oxide bars on graphite", OXIDE, GRAPHITE, 3.0],
   ["focus ring on limestone", OXIDE, LIMESTONE, 3.0],
   ["focus ring on graphite", OXIDE, GRAPHITE, 3.0],
+  // Latent: an oxide field does not set --focus, so a focusable child would get
+  // an oxide ring on oxide-deep. Neither field has one. If that changes, the
+  // field must set --focus to limestone.
+  ["focus ring inside an oxide field must NOT be used", OXIDE, oxideDeep, 3.0, true],
 ];
 
 let failures = 0;
 
-for (const [name, fg, bg, min] of PAIRS) {
+for (const [name, fg, bg, min, mustFail] of PAIRS) {
   const r = ratio(fg, bg);
-  const pass = r >= min;
+  const pass = mustFail ? r < min : r >= min;
   if (!pass) failures += 1;
   console.log(
-    `${pass ? "PASS" : "FAIL"}  ${name.padEnd(38)} ${r.toFixed(2).padStart(6)}  min ${min}`,
+    `${pass ? "PASS" : "FAIL"}  ${name.padEnd(44)} ${r.toFixed(2).padStart(6)}  ${
+      mustFail ? `must stay under ${min}` : `min ${min}`
+    }`,
   );
 }
 

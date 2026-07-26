@@ -15,10 +15,16 @@
   --cement: #8e8e8e;
 
   /* Derived, never invented: mixes of the five, so the palette stays closed.
-     Ratios are measured, see docs/design-system.md section 2. */
-  --limestone-2: color-mix(in srgb, var(--limestone) 92%, var(--graphite));
-  --graphite-2: color-mix(in srgb, var(--graphite) 92%, var(--limestone));
-  --oxide-lift: color-mix(in srgb, var(--oxide) 88%, var(--limestone));
+     Written as literals, not as color-mix(). Tailwind wraps color-mix in an
+     @supports guard and its fallback substitutes the FIRST colour whole, so on
+     Safari below 16.4 and Chrome below 111 every one of these silently became
+     something else. --oxide-deep fell back to pure --oxide, which is 3.48:1
+     with limestone: the exact trap the note below says we avoid, on the two
+     largest blocks on the site. The derivation stays in the comment; the value
+     ships as a hex so it cannot degrade. */
+  --limestone-2: #e1ded9; /* limestone 92% + graphite */
+  --graphite-2: #2b2b2b; /* graphite 92% + limestone */
+  --oxide-lift: #d76c41; /* oxide 88% + limestone */
 
   /* Fired Oxide as a fill BEHIND SMALL TEXT.
      Limestone on pure --oxide is 3.48:1, which clears the 3:1 non-text floor
@@ -26,7 +32,7 @@
      this instead: 80% oxide over graphite, 4.71:1, still unmistakably the
      brand orange. Pure --oxide stays for bars, rules, the mark and display
      type, where 3:1 is the bar that applies. */
-  --oxide-deep: color-mix(in srgb, var(--oxide) 80%, var(--graphite));
+  --oxide-deep: #ae4d27; /* oxide 80% + graphite */
 
   /* ---- The isometric constant. Every angled move on the site reads this.
      32.36 degrees, measured off the logo master, not the textbook 30.
@@ -63,9 +69,9 @@
   --face-top: var(--oxide); /* the lit face of the mark */
   --face-side: var(--graphite); /* the extruded face */
   --ink: var(--graphite);
-  --ink-secondary: color-mix(in srgb, var(--graphite) 68%, var(--limestone)); /* 5.65:1 */
+  --ink-secondary: #5f5e5d; /* graphite 68% + limestone, 5.64:1 */
   --ink-accent: var(--umber); /* 10.63:1, the only small accent text on light */
-  --line: color-mix(in srgb, var(--graphite) 22%, var(--limestone));
+  --line: #c2c0bc; /* graphite 22% + limestone */
   --line-strong: var(--graphite);
   --focus: var(--oxide); /* 3.48:1, clears the non-text 3:1 floor */
   --on-oxide: var(--limestone);
@@ -82,7 +88,7 @@
   --ink: var(--limestone);
   --ink-secondary: var(--cement); /* 5.32:1 on graphite */
   --ink-accent: var(--oxide-lift); /* 5.07:1 on graphite */
-  --line: color-mix(in srgb, var(--limestone) 20%, var(--graphite));
+  --line: #454544; /* limestone 20% + graphite */
   --line-strong: var(--cement);
 }
 
@@ -364,12 +370,24 @@
    * in print but always print colour, so the home page's largest statement and
    * every primary button were printing near-white on white paper.
    */
-  .bg-oxide-deep,
-  .bg-oxide,
-  .text-limestone {
+  [class*="bg-oxide"],
+  [class*="text-limestone"] {
     background: #ffffff !important;
     color: #1a1a1a !important;
     border-color: #cccccc !important;
+  }
+
+  /* A checked chip is the only thing on a printed form that says which products
+     were selected, and colour alone cannot carry it once the fill is dropped. */
+  input:checked + label {
+    outline: 2px solid #1a1a1a !important;
+    font-weight: 800 !important;
+  }
+
+  /* The hero text elements are block-level, so the rule above painted opaque
+     white bars across the photograph underneath them. */
+  section:has(> img) [class*="text-limestone"] {
+    background: transparent !important;
   }
 
   :root {

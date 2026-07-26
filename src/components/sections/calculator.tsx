@@ -6,7 +6,7 @@ import { Field, Select, TextInput } from "@/components/ui/field";
 import { Arrow } from "@/components/ui/glyph";
 import { calculatePaving, calculateWall, showWorking } from "@/lib/calculator";
 import { number } from "@/lib/format";
-import { PRODUCTS, unitsPerSquareMetre } from "@/data/products";
+import { PRODUCTS } from "@/data/products";
 
 /**
  * How many do I need.
@@ -368,35 +368,3 @@ function Row({
   );
 }
 
-/** Static coverage reference. Rendered on the products page. */
-export function CoverageTable() {
-  return (
-    <table className="w-full border-collapse text-left">
-      <caption className="mb-4 text-left text-datum uppercase text-ink-secondary">
-        Coverage per square metre, single skin
-      </caption>
-      <thead>
-        <tr className="border-b border-line-strong">
-          <th scope="col" className="py-3 text-datum uppercase text-ink-secondary">
-            Product
-          </th>
-          <th scope="col" className="py-3 text-right text-datum uppercase text-ink-secondary">
-            Units per m&sup2;
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {PRODUCTS.map((p) => (
-          <tr key={p.slug} className="border-b border-line last:border-b-0">
-            <th scope="row" className="py-3 text-body font-normal text-ink">
-              {p.name}
-            </th>
-            <td className="py-3 text-right text-body font-extrabold text-ink" data-figure>
-              {unitsPerSquareMetre(p).toFixed(1)}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}

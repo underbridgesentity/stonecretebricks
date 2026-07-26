@@ -12,14 +12,6 @@ const nextConfig: NextConfig = {
     // AVIF first: worth the encode cost for a small fixed set with a long cache.
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: YEAR,
-    /*
-     * Next 16 defaults this to [75] and returns HTTP 400 for anything else, so
-     * a per-image quality override silently breaks unless it is declared here.
-     * 50 exists for the masonry band: it is a noisy texture where AVIF at 75
-     * actually encodes larger than the JPEG it replaces, because the encoder
-     * spends its bits reproducing film grain.
-     */
-    qualities: [50, 75],
   },
   async headers() {
     return [

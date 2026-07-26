@@ -42,9 +42,9 @@ export default function PlantPage() {
             Five steps, in order.
           </h2>
 
-          <div className="mt-12 flex flex-col">
+          <ol className="mt-12 flex flex-col">
             {PROCESS.map((stage, i) => (
-              <div
+              <li
                 key={stage.step}
                 className="animate-course-set flex flex-col gap-4 border-t border-line py-8 md:flex-row md:gap-12"
               >
@@ -57,9 +57,9 @@ export default function PlantPage() {
                 </p>
                 <h3 className="text-h2 uppercase text-ink md:w-72 md:shrink-0">{stage.step}</h3>
                 <p className="max-w-[49ch] text-body text-ink-secondary">{stage.body}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </Wall>
       </section>
 

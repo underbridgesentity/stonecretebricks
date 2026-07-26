@@ -43,6 +43,10 @@ export default function ProductsPage() {
       <section className="border-t border-line py-[var(--section)]">
         <Wall>
           <CourseRule label="The range" />
+
+          <h2 className="mt-12 max-w-[22ch] text-display uppercase text-ink">
+            Four products, each made to a published standard.
+          </h2>
         </Wall>
 
         <Wall className="mt-14">
@@ -58,7 +62,7 @@ export default function ProductsPage() {
           tonal event on a page that was otherwise four limestone bands deep. */}
       <section data-ground="graphite" className="bg-graphite py-[var(--section)]">
         <Wall>
-          <CourseRule label="Side by side" />
+          <CourseRule label="Side by side" tone="oxide" />
 
           <h2 className="mt-12 max-w-[24ch] text-display uppercase text-ink">
             Everything on one table.

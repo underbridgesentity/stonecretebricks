@@ -37,7 +37,6 @@ export function Photo({
   sizes,
   ratio = "course",
   priority = false,
-  quality,
   className = "",
   imageClassName = "",
 }: {
@@ -46,8 +45,6 @@ export function Photo({
   sizes: string;
   ratio?: Ratio;
   priority?: boolean;
-  /** Only for noisy textures where the default over-encodes. See next.config. */
-  quality?: number;
   className?: string;
   imageClassName?: string;
 }) {
@@ -59,7 +56,6 @@ export function Photo({
         fill
         sizes={sizes}
         priority={priority}
-        quality={quality}
         className={`object-cover ${imageClassName}`}
       />
     </div>

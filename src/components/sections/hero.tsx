@@ -31,13 +31,24 @@ export function Hero() {
         className="object-cover object-[62%_center]"
       />
 
-      {/* One scrim, not two. Stacked, they multiplied to roughly 95% graphite
-          in the bottom left, exactly where the type sits, which dimmed the
-          photograph to a texture. A single diagonal holds the copy and lets
-          more of the building read. */}
+      {/*
+        Two problems, one fix.
+        Gradient stops are box-relative, and this box is portrait on a phone and
+        landscape on a desktop. A single 105deg scrim spans 560px of gradient
+        line at 390x709, where one paragraph of copy crosses 59% of it, against
+        1587px at 1440x756 where the same copy crosses 24%. So a diagonal tuned
+        for desktop put 7% of the mobile lead below 4.5:1.
+        And rgb() with alpha rather than color-mix: Tailwind guards color-mix
+        behind @supports and its fallback substituted opaque graphite for every
+        transparent stop, painting the first 72% of the hero solid black on
+        Safari below 16.4.
+        Phones get a bottom-weighted vertical scrim, which cannot collapse
+        because the copy sits at the bottom whatever the box shape. The diagonal
+        returns from md, where the box is landscape and it reads.
+      */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(105deg,var(--graphite)_0%,color-mix(in_srgb,var(--graphite)_78%,transparent)_38%,color-mix(in_srgb,var(--graphite)_30%,transparent)_72%,transparent_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,26,26,1)_0%,rgba(26,26,26,0.92)_38%,rgba(26,26,26,0.55)_70%,rgba(26,26,26,0.25)_100%)] md:bg-[linear-gradient(105deg,rgba(26,26,26,1)_0%,rgba(26,26,26,0.82)_38%,rgba(26,26,26,0.35)_72%,rgba(26,26,26,0)_100%)]"
       />
 
       <Wall className="relative pb-16 pt-20 sm:pt-28 md:pb-24 md:pt-40">
