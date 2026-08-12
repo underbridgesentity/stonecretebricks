@@ -178,6 +178,23 @@ function flatten(raw: Record<string, unknown>): Record<string, string> {
   return out;
 }
 
+/*
+ * Receiving is enabled on this domain, which means Resend holds its MX. Mail
+ * addressed here does not reach a mailbox: it is accepted by Resend, raised as
+ * an email.received event, and posted to whatever webhook is configured.
+ *
+ * That matters because COMPANY.email is info@stonecretebricks.co.za, and it is
+ * the fallback below when ENQUIRY_TO is unset. So a production deploy that
+ * forgets one environment variable does not fail loudly, it quietly posts every
+ * lead into a webhook. Measured on the live account: an enquiry sent at
+ * 17:35:39 was back in Resend's inbound list at 17:35:42.
+ *
+ * The published contact address on the site stays info@, because that is the
+ * address customers should use. This constant is only about where the site
+ * sends its own notifications.
+ */
+const RECEIVING_DOMAIN = "stonecretebricks.co.za";
+
 async function notify(record: Record<string, unknown> & { ref: string }, suspectedBot = false) {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_TO ?? COMPANY.email.value;
@@ -187,6 +204,15 @@ async function notify(record: Record<string, unknown> & { ref: string }, suspect
       `[enquiry] ${record.ref} not emailed: set RESEND_API_KEY and ENQUIRY_TO to deliver enquiries.`,
     );
     return;
+  }
+
+  if (to.toLowerCase().endsWith(`@${RECEIVING_DOMAIN}`)) {
+    // Loud rather than silent, and it still sends: the message is recorded
+    // above and in Resend's inbound list either way, so refusing would remove
+    // a path without saving anything. What must not happen is nobody knowing.
+    console.error(
+      `[enquiry] CRITICAL ${record.ref} is addressed to ${to}, and Resend holds the MX for ${RECEIVING_DOMAIN}. This will not reach a mailbox, it will come back to /api/inbound. Point ENQUIRY_TO at an address on another domain.`,
+    );
   }
 
   try {
